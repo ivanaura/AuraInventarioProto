@@ -1,0 +1,47 @@
+﻿@model List<AuraInventarioProto.Models.UsuariosModels>
+@{
+    ViewBag.Title = "Ingreso de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ingreso de Usuarios</h2>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Ingreso</legend>
+        <div class="form-group">
+            <label for="inputfname" class="col-lg-2 control-label">Nombres</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputfname" placeholder="Nombres">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputlname" class="col-lg-2 control-label">Apellidos</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputlname" placeholder="Apellidos">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Correo</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputobra" class="col-lg-2 control-label">Obra</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputobra" placeholder="Obra">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Cancelar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

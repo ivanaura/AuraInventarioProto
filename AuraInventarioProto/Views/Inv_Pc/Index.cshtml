@@ -1,0 +1,54 @@
+﻿@model List<AuraInventarioProto.Models.Inv_PcModels>
+@{
+    ViewBag.Title = "Inventarios PC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Inventario PC</h2>
+@if (!Model.Any()) {
+    <text>No hay Inventarios.</text>
+} else {
+    <table class="table table-striped table-hover " title="Usuarios">
+        <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Modelo</th>
+                <th>Marca</th>
+                <th>Tipo</th>
+                <th>Estado</th>
+                <th>Fecha Adquisicion</th>
+                <th>Estado Office</th>
+                <th>Estado Windows</th>
+                <th>Estado Registros</th>
+                <th>Sgi Software</th>
+                <th>Sgi Res</th>
+                <th>Fecha Ultima Mantencion</th>
+                <th>Devuelto</th>
+                <th>Asignado Devuelto</th>
+                <th>Obra</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inv_pc in Model) {
+                <tr>
+                    <td>@Html.ActionLink(inv_pc.Serial, "Detalles", "Inv_Pc", new { id = inv_pc.Serial }, null)</td>
+                    <td>@inv_pc.Modelo</td>
+                    <td>@inv_pc.Marca</td>
+                    <td>@inv_pc.Tipo</td>
+                    <td>@inv_pc.Estado</td>
+                    <td>@inv_pc.Fecha_Adq</td>
+                    <td>@inv_pc.Est_Of</td>
+                    <td>@inv_pc.Est_Wn</td>
+                    <td>@inv_pc.Est_Reg</td>
+                    <td>@inv_pc.Sgi_Sw</td>
+                    <td>@inv_pc.Sgi_Res</td>
+                    <td>@inv_pc.F_Ul_Man</td>
+                    <td>@inv_pc.Devu</td>
+                    <td>@inv_pc.Asign_Devu</td>
+                    <td>@inv_pc.Obra</td>                
+                </tr>
+            }
+        </tbody>
+    </table>
+}

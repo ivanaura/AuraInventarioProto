@@ -1,0 +1,113 @@
+﻿@model List<AuraInventarioProto.Models.UsuariosModels>
+@{
+    ViewBag.Title = "Ingreso de Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ingreso de PC</h2>
+
+<form>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Ingreso Masivo de PC</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Todo.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form-horizontal">
+    <fieldset>
+        <legend>Ingreso</legend>
+        <div class="form-group">
+            <label for="inputSerial" class="col-lg-2 control-label">Serial</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputSerial" placeholder="Serial">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputMarca" class="col-lg-2 control-label">Marca</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputMarca" placeholder="Marca">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputModelo" class="col-lg-2 control-label">Modelo</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputModelo" placeholder="Modelo">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Tipo</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="select">
+                    <option>Notebook</option>
+                    <option>All in One</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Estado</label>
+            <div class="col-lg-10">
+                <select class="form-control" id="select">
+                    <option>Operacional</option>
+                    <option>Malo</option>
+                    <option>De Baja</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputFechaADQ" class="col-lg-2 control-label">Fecha de Adquisicion</label>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" id="inputFechaADQ" placeholder="Fecha de Adquisicion">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label class="col-lg-2 control-label">Estado de Mantenciones:</label>
+                <label><input type="checkbox" id="est_tw"> TeamViewer</label>
+                <label><input type="checkbox" id="est_cc"> Ccleaner</label>
+                <label><input type="checkbox" id="est_av"> Anti Virus</label>
+                <label><input type="checkbox" id="est_pd"> PDF</label><br />
+
+                <label><input type="checkbox" id="est_reg"> Registros</label>
+                <label><input type="checkbox" id="est_of"> Licencia Office</label>
+                <label><input type="checkbox" id="est_wn"> Licencia Windows</label><br /><br />
+
+                <label class="col-lg-2 control-label">Cumplimiento SGI-P30:</label>
+                <label><input type="checkbox" id="sgi_sw"> Cumple SGI-P30 Sofware</label><br />
+                <label><input type="checkbox" id="sgi_res"> Cumple SGI-P30 Restricciones</label><br />
+                
+            </div>
+        </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">Observaciones</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea"></textarea>
+                    <span class="help-block">Observaciones.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+</fieldset>
+</form>
