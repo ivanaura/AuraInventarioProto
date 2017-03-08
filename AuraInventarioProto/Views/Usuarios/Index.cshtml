@@ -18,11 +18,12 @@
                 <th>Une</th>
             </tr>
         </thead>
+        
         <tbody>
             @foreach (var usuario in Model) {
                 <tr>
-                    <td>@usuario.Id</td>
-                    <td>@Html.ActionLink(usuario.Nombre, "Detalles", "Usuarios", new { id = usuario.Id }, null)</td>
+                    <td>@Html.ActionLink(usuario.Rut, "Detalles", "Usuarios", new { rut = (usuario.Rut) }, null)</td>
+                    <td>@usuario.Nombre</td>
                     <td>@usuario.Correo</td>
                     <td>@usuario.Une</td>
                 </tr>

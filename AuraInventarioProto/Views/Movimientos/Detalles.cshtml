@@ -1,0 +1,17 @@
+﻿@model List<AuraInventarioProto.Models.UsuariosModels>
+@{
+    ViewBag.Title = "Detalles de Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    foreach (var usuario in Model) {
+        <h2>@usuario.Nombre</h2>
+        <div class="col-sm-1">Rut:</div><div class="col-sm-11">@usuario.Rut</div>
+        <div class="clearfix"></div>
+        <div class="col-sm-1">Correo:</div><div class="col-sm-11">@usuario.Correo</div>
+        <div class="clearfix"></div>
+        <div class="col-sm-1">Une:</div><div class="col-sm-11">@usuario.Une</div>
+    }
+}
+

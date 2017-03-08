@@ -25,7 +25,7 @@ namespace AuraInventarioProto.Controllers {
                         while (ins.sqldr.Read()) {
                             var movimientos = new MovimientosModels();
                             movimientos.Id = Convert.ToInt32(ins.sqldr["ID"]);
-                            movimientos.Id_Usuario = Convert.ToInt32(ins.sqldr["ID_USUARIO"]);
+                            movimientos.Rut_Usuario = ins.sqldr["RUT_USUARIO"].ToString();
                             movimientos.Id_Pc = ins.sqldr["ID_PC"].ToString();
                             movimientos.Tipo_Mov = ins.sqldr["TIPO_MOV"].ToString();
                             movimientos.Fecha_As = ins.sqldr["FECHA_AS"].ToString();

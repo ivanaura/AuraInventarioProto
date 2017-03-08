@@ -1,0 +1,34 @@
+﻿@model List<AuraInventarioProto.Models.Inv_PcModels>
+@{
+    ViewBag.Title = "Detalles de PC";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    foreach (var inv_pc in Model) {
+        <h2>Serial: @inv_pc.Serial</h2>
+
+        <div class="col-sm-3">Modelo:</div><div class="col-sm-9">@inv_pc.Modelo</div><div class="clearfix"></div>
+        <div class="col-sm-3">Marca:</div><div class="col-sm-9">@inv_pc.Marca</div><div class="clearfix"></div>
+        <div class="col-sm-3">Tipo:</div><div class="col-sm-9">@inv_pc.Tipo</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado:</div><div class="col-sm-9">@inv_pc.Estado</div><div class="clearfix"></div>
+        <div class="col-sm-3">Observaciones:</div><div class="col-sm-9">@inv_pc.Obs</div><div class="clearfix"></div>
+        <div class="col-sm-3">Fecha de adquisicion:</div><div class="col-sm-9">@inv_pc.Fecha_Adq</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Teamviewer:</div><div class="col-sm-9">@inv_pc.Est_Tw</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Ccleaner:</div><div class="col-sm-9">@inv_pc.Est_Cc</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Antivirus:</div><div class="col-sm-9">@inv_pc.Est_Av</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado PDF:</div><div class="col-sm-9">@inv_pc.Est_Pd</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Licencia Office:</div><div class="col-sm-9">@inv_pc.Est_Of</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Licencia Windows:</div><div class="col-sm-9">@inv_pc.Est_Wn</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado Registros:</div><div class="col-sm-9">@inv_pc.Est_Reg</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado SGI-P30 Software:</div><div class="col-sm-9">@inv_pc.Sgi_Sw</div><div class="clearfix"></div>
+        <div class="col-sm-3">Estado SGI-P30 Restricciones:</div><div class="col-sm-9">@inv_pc.Sgi_Res</div><div class="clearfix"></div>
+        <div class="col-sm-3">Fecha Ultima Mantencion:</div><div class="col-sm-9">@inv_pc.F_Ul_Man</div><div class="clearfix"></div>
+        <div class="col-sm-3">Devolucion:</div><div class="col-sm-9">@inv_pc.Devu</div><div class="clearfix"></div>
+        <div class="col-sm-3">Asignado Devolucion:</div><div class="col-sm-9">@inv_pc.Asign_Devu</div><div class="clearfix"></div>
+        <div class="col-sm-3">Obra:</div><div class="col-sm-9">@inv_pc.Obra</div><div class="clearfix"></div>
+
+
+    }
+}
+

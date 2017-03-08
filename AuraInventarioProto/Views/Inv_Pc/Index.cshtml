@@ -32,7 +32,7 @@
         <tbody>
             @foreach (var inv_pc in Model) {
                 <tr>
-                    <td>@Html.ActionLink(inv_pc.Serial, "Detalles", "Inv_Pc", new { id = inv_pc.Serial }, null)</td>
+                    <td>@Html.ActionLink(inv_pc.Serial, "Detalles", "Inv_Pc", new { serial = inv_pc.Serial }, null)</td>
                     <td>@inv_pc.Modelo</td>
                     <td>@inv_pc.Marca</td>
                     <td>@inv_pc.Tipo</td>
