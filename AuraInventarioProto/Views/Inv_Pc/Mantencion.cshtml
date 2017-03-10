@@ -1,0 +1,239 @@
+﻿@model List<AuraInventarioProto.Models.Inv_PcModels>
+@{
+    ViewBag.Title = "Mantencion de Pc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mantencion de PC</h2>
+<div class="well bs-component">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Ingreso</legend>
+            <div class="form-group">
+                <label for="inputSerial" class="col-lg-2 control-label">Serial</label>
+                <div class="col-lg-10">
+                    <input value="@Model.First().Serial" type="text" class="form-control" id="inputSerial" placeholder="Serial">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputMarca" class="col-lg-2 control-label">Marca</label>
+                <div class="col-lg-10">
+                    <input value="@Model.First().Marca" type="text" class="form-control" id="inputMarca" placeholder="Marca">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputModelo" class="col-lg-2 control-label">Modelo</label>
+                <div class="col-lg-10">
+                    <input value="@Model.First().Modelo" type="text" class="form-control" id="inputModelo" placeholder="Modelo">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Tipo</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                        @{
+                            if (Model.First().Tipo == "Notebook") {
+                                <option selected="selected">Notebook</option>
+                                <option>All in One</option>
+                            } else {
+                                <option>Notebook</option>
+                                <option selected="selected">All in One</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="select" class="col-lg-2 control-label">Estado</label>
+                <div class="col-lg-10">
+                    <select class="form-control" id="select">
+                        @{
+                            if (Model.First().Estado == "Operacional") {
+                                <option selected="selected">Operacional</option>
+                                <option>Malo</option>
+                                <option>De Baja</option>
+                            } else if (Model.First().Estado == "Malo") {
+                                <option>Operacional</option>
+                                <option selected="selected">Malo</option>
+                                <option>De Baja</option>
+                            } else {
+                                <option>Operacional</option>
+                                <option>Malo</option>
+                                <option selected="selected">De Baja</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputObra" class="col-lg-2 control-label">Obra</label>
+                <div class="col-lg-10">
+                    <input value="@Model.First().Obra" type="text" class="form-control" id="inputObra" placeholder="Obra">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputFechaADQ" class="col-lg-2 control-label">Fecha de Adquisicion</label>
+                <div class="col-lg-10">
+                    <input value="@Model.First().Fecha_Adq" type="text" class="form-control" id="inputFechaADQ" placeholder="Fecha de Adquisicion">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label class="col-lg-2">Estado de Mantenciones:</label>
+                    <label class="col-lg-10">
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>                    
+                        @{
+                            if (Model.First().Est_Tw == "Ok") {
+                                <label class="col-lg-10">
+                                    <input checked="checked" type="checkbox" id="est_tw"> TeamViewer
+                                </label>
+                            } else {
+                                <label class="col-lg-10">
+                                    <input type="checkbox" id="est_tw"> TeamViewer
+                                </label>
+                            }
+                        }                                                                    
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Cc == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_cc"> Ccleaner
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_cc"> Ccleaner
+                            </label>
+                        }
+                    }                    
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Av == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_av"> Anti Virus
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_av"> Anti Virus
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Pd == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_pd"> PDF
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_pd"> PDF
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Reg == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_reg"> Registros
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_reg"> Registros
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Of == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_of"> Licencia Office
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_of"> Licencia Office
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Est_Wn == "Ok") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="est_wn"> Licencia Windows
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="est_wn"> Licencia Windows
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2">Cumplimiento SGI-P30:</label>
+                    <label class="col-lg-10">
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Sgi_Sw == "Cumple") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="sgi_sw"> Cumple SGI-P30 Sofware
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="sgi_sw"> Cumple SGI-P30 Sofware
+                            </label>
+                        }
+                    }   
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    @{
+                        if (Model.First().Sgi_Res == "Cumple") {
+                            <label class="col-lg-10">
+                                <input checked="checked" type="checkbox" id="sgi_res"> Cumple SGI-P30 Restricciones
+                            </label>
+                        } else {
+                            <label class="col-lg-10">
+                                <input type="checkbox" id="sgi_res"> Cumple SGI-P30 Restricciones
+                            </label>
+                        }
+                    }   
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">Observaciones</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea">@Model.First().Obs</textarea>
+                    <span class="help-block">Observaciones.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

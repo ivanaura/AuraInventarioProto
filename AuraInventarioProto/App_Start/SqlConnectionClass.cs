@@ -21,7 +21,9 @@ public class SqlConnectionClass {
         sqlda = new SqlDataAdapter();
         ds = new DataSet();
         try {
-            sqlcon.ConnectionString = "Initial Catalog=AuraInventarioProtoDB; Data Source=localhost\\SQLEXPRESS; Integrated Security=SSPI";
+            //sqlcon.ConnectionString = "Initial Catalog=AuraInventarioProtoDB; Data Source=localhost\\SQLEXPRESS; Integrated Security=SSPI";
+            sqlcon.ConnectionString = "Server = tcp:NB-BODEGA\\SQLEXPRESS; Database = AuraInventarioProtoDB; User ID = Aura; Password =aura";
+            
             sqlcon.Open();
             sqlcon.Close();
         } catch (SqlException ex) {

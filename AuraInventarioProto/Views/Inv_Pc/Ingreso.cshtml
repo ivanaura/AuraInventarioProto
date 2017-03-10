@@ -1,6 +1,6 @@
-﻿@model List<AuraInventarioProto.Models.UsuariosModels>
+﻿@model List<AuraInventarioProto.Models.Inv_PcModels>
 @{
-    ViewBag.Title = "Ingreso de Usuarios";
+    ViewBag.Title = "Ingreso de Pc";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -73,6 +73,13 @@
             </div>
 
             <div class="form-group">
+                <label for="inputObra" class="col-lg-2 control-label">Obra</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputObra" placeholder="Obra">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="inputFechaADQ" class="col-lg-2 control-label">Fecha de Adquisicion</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputFechaADQ" placeholder="Fecha de Adquisicion">
@@ -80,20 +87,68 @@
             </div>
             <div class="form-group">
                 <div class="checkbox">
-                    <label class="col-lg-2 control-label">Estado de Mantenciones:</label>
-                    <label><input type="checkbox" id="est_tw"> TeamViewer</label>
-                    <label><input type="checkbox" id="est_cc"> Ccleaner</label>
-                    <label><input type="checkbox" id="est_av"> Anti Virus</label>
-                    <label><input type="checkbox" id="est_pd"> PDF</label><br />
-
-                    <label><input type="checkbox" id="est_reg"> Registros</label>
-                    <label><input type="checkbox" id="est_of"> Licencia Office</label>
-                    <label><input type="checkbox" id="est_wn"> Licencia Windows</label><br /><br />
-
-                    <label class="col-lg-2 control-label">Cumplimiento SGI-P30:</label>
-                    <label><input type="checkbox" id="sgi_sw"> Cumple SGI-P30 Sofware</label><br />
-                    <label><input type="checkbox" id="sgi_res"> Cumple SGI-P30 Restricciones</label><br />
-
+                    <label class="col-lg-2">Estado de Mantenciones:</label>
+                    <label class="col-lg-10">                        
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_tw"> TeamViewer
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_cc"> Ccleaner
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_av"> Anti Virus
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_pd"> PDF
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_reg"> Registros
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_of"> Licencia Office
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="est_wn"> Licencia Windows
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2">Cumplimiento SGI-P30:</label>
+                    <label class="col-lg-10">                        
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="sgi_sw"> Cumple SGI-P30 Sofware
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label class="col-lg-2"></label>
+                    <label class="col-lg-10">
+                        <input type="checkbox" id="sgi_res"> Cumple SGI-P30 Restricciones
+                    </label>
                 </div>
             </div>
             <div class="form-group">

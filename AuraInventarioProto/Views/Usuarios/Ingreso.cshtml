@@ -27,12 +27,13 @@
 </form>
 
 <div class="well bs-component">
-    <form class="form-horizontal">
+    @using (Html.BeginForm("Ingreso", "Usuarios", FormMethod.Post, new { @class = "form-horizontal" })) {
         <fieldset>
             <legend>Ingreso</legend>
             <div class="form-group">
                 <label for="inputrut" class="col-lg-2 control-label">Rut</label>
                 <div class="col-lg-10">
+                    
                     <input type="text" class="form-control" id="inputrut" placeholder="Rut">
                 </div>
             </div>
@@ -68,11 +69,9 @@
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-default">Cancelar</button>
-                    <button type="submit" class="btn btn-success" onclick="location.href='@Url.Action("IngresoUsuario", "Usuarios", new {  })'">Guardar</button>
-
-                    @* <button type="submit" class="btn btn-success">Guardar</button>  *@
+                    <button type="submit" class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </fieldset>
-    </form>
+    }
 </div>

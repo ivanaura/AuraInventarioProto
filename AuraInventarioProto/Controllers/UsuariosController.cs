@@ -42,7 +42,7 @@ namespace AuraInventarioProto.Controllers {
 
         }
 
-        [Route("Usuarios/Ingreso")]
+        [Route("Usuarios/Ingreso/")]
         public ActionResult Ingreso() {
             return View();
         }

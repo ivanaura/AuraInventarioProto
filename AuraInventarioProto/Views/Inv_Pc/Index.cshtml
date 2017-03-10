@@ -9,7 +9,7 @@
 @if (!Model.Any()) {
     <text>No hay Inventarios.</text>
 } else {
-    <table class="table table-striped table-hover " title="Usuarios">
+    <table class="table table-striped table-bordered table-hover table-responsive display compact" id="myTable" title="Usuarios">
         <thead>
             <tr>
                 <th>Serial</th>
@@ -17,15 +17,15 @@
                 <th>Marca</th>
                 <th>Tipo</th>
                 <th>Estado</th>
-                <th>Fecha Adquisicion</th>
-                <th>Estado Office</th>
-                <th>Estado Windows</th>
-                <th>Estado Registros</th>
-                <th>Sgi Software</th>
-                <th>Sgi Res</th>
-                <th>Fecha Ultima Mantencion</th>
+                <th>F.Adquisicion</th>
+                <th>Office</th>
+                <th>Windows</th>
+                <th>Registros</th>
+                <th>Sgi-Sw</th>
+                <th>Sgi-Res</th>
+                <th>Ultima Mant.</th>
                 <th>Devuelto</th>
-                <th>Asignado Devuelto</th>
+                <th>Asig. Dev.</th>
                 <th>Obra</th>
             </tr>
         </thead>

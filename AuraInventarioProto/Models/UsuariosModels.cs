@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace AuraInventarioProto.Models {
     public class UsuariosModels {
         public string Rut { get; set; }

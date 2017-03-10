@@ -3,32 +3,64 @@
     ViewBag.Title = "Detalles de PC";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@{ 
+<form>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Gestionar devolucion de PC</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="inputDev" class="col-lg-4 control-label">Asignado Para Devolucion:</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="inputDev" placeholder="Asignado">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@{
     foreach (var inv_pc in Model) {
-        <h2>Serial: @inv_pc.Serial</h2>
+        <div class="well bs-component">
+            <h2>Serial: @inv_pc.Serial</h2>
 
-        <div class="col-sm-3">Modelo:</div><div class="col-sm-9">@inv_pc.Modelo</div><div class="clearfix"></div>
-        <div class="col-sm-3">Marca:</div><div class="col-sm-9">@inv_pc.Marca</div><div class="clearfix"></div>
-        <div class="col-sm-3">Tipo:</div><div class="col-sm-9">@inv_pc.Tipo</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado:</div><div class="col-sm-9">@inv_pc.Estado</div><div class="clearfix"></div>
-        <div class="col-sm-3">Observaciones:</div><div class="col-sm-9">@inv_pc.Obs</div><div class="clearfix"></div>
-        <div class="col-sm-3">Fecha de adquisicion:</div><div class="col-sm-9">@inv_pc.Fecha_Adq</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Teamviewer:</div><div class="col-sm-9">@inv_pc.Est_Tw</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Ccleaner:</div><div class="col-sm-9">@inv_pc.Est_Cc</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Antivirus:</div><div class="col-sm-9">@inv_pc.Est_Av</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado PDF:</div><div class="col-sm-9">@inv_pc.Est_Pd</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Licencia Office:</div><div class="col-sm-9">@inv_pc.Est_Of</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Licencia Windows:</div><div class="col-sm-9">@inv_pc.Est_Wn</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado Registros:</div><div class="col-sm-9">@inv_pc.Est_Reg</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado SGI-P30 Software:</div><div class="col-sm-9">@inv_pc.Sgi_Sw</div><div class="clearfix"></div>
-        <div class="col-sm-3">Estado SGI-P30 Restricciones:</div><div class="col-sm-9">@inv_pc.Sgi_Res</div><div class="clearfix"></div>
-        <div class="col-sm-3">Fecha Ultima Mantencion:</div><div class="col-sm-9">@inv_pc.F_Ul_Man</div><div class="clearfix"></div>
-        <div class="col-sm-3">Devolucion:</div><div class="col-sm-9">@inv_pc.Devu</div><div class="clearfix"></div>
-        <div class="col-sm-3">Asignado Devolucion:</div><div class="col-sm-9">@inv_pc.Asign_Devu</div><div class="clearfix"></div>
-        <div class="col-sm-3">Obra:</div><div class="col-sm-9">@inv_pc.Obra</div><div class="clearfix"></div>
-
-
+            <div class="col-sm-3">Modelo:</div><div class="col-sm-9">@inv_pc.Modelo</div><div class="clearfix"></div>
+            <div class="col-sm-3">Marca:</div><div class="col-sm-9">@inv_pc.Marca</div><div class="clearfix"></div>
+            <div class="col-sm-3">Tipo:</div><div class="col-sm-9">@inv_pc.Tipo</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado:</div><div class="col-sm-9">@inv_pc.Estado</div><div class="clearfix"></div>
+            <div class="col-sm-3">Observaciones:</div><div class="col-sm-9">@inv_pc.Obs</div><div class="clearfix"></div>
+            <div class="col-sm-3">Fecha de adquisicion:</div><div class="col-sm-9">@inv_pc.Fecha_Adq</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Teamviewer:</div><div class="col-sm-9">@inv_pc.Est_Tw</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Ccleaner:</div><div class="col-sm-9">@inv_pc.Est_Cc</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Antivirus:</div><div class="col-sm-9">@inv_pc.Est_Av</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado PDF:</div><div class="col-sm-9">@inv_pc.Est_Pd</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Licencia Office:</div><div class="col-sm-9">@inv_pc.Est_Of</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Licencia Windows:</div><div class="col-sm-9">@inv_pc.Est_Wn</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado Registros:</div><div class="col-sm-9">@inv_pc.Est_Reg</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado SGI-P30 Software:</div><div class="col-sm-9">@inv_pc.Sgi_Sw</div><div class="clearfix"></div>
+            <div class="col-sm-3">Estado SGI-P30 Restricciones:</div><div class="col-sm-9">@inv_pc.Sgi_Res</div><div class="clearfix"></div>
+            <div class="col-sm-3">Fecha Ultima Mantencion:</div><div class="col-sm-9">@inv_pc.F_Ul_Man</div><div class="clearfix"></div>
+            <div class="col-sm-3">Devolucion:</div><div class="col-sm-9">@inv_pc.Devu</div><div class="clearfix"></div>
+            <div class="col-sm-3">Asignado Devolucion:</div><div class="col-sm-9">@inv_pc.Asign_Devu</div><div class="clearfix"></div>
+            <div class="col-sm-3">Obra:</div><div class="col-sm-9">@inv_pc.Obra</div><div class="clearfix"></div>
+            <br />
+                <div class="col-lg-2">
+                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Mantencion","Inv_Pc", new { serial = inv_pc.Serial }, null)'">Realizar Mantencion</button>
+                </div>
+                <div class="col-lg-10">
+                    <button type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#myModal">Gestionar Devolucion</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
     }
 }
 

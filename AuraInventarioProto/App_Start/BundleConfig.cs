@@ -22,6 +22,7 @@ namespace AuraInventarioProto.App_Start {
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-paper.css",
+                      //"~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
             
