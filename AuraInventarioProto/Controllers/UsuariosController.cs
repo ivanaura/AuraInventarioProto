@@ -1,108 +1,126 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace AuraInventarioProto.Controllers {
-    public class UsuariosController : Controller {
-        // GET: Usuarios
-        [Route("Usuarios/Detalles/{rut}/")]
-        public ActionResult Detalles(string rut) {
-            var usuariodetalle = new List<UsuariosModels>();
-            SqlConnectionClass ins = new SqlConnectionClass();
-            try {
-                ins.Connect();
-                using (ins.sqlcon) {
-                    using (SqlCommand cmd = new SqlCommand("Select * from USUARIOS where rut='" + rut + "'", ins.sqlcon)) {
-                        ins.sqlcon.Open();
-                        ins.sqldr = cmd.ExecuteReader();
+    public class USUARIOSController : Controller {
+        private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
 
-                        while (ins.sqldr.Read()) {
-                            var usuario = new UsuariosModels();
-                            usuario.Rut = ins.sqldr["RUT"].ToString();
-                            usuario.Nombre = ins.sqldr["NOMBRE_C"].ToString();
-                            usuario.Correo = ins.sqldr["CORREO"].ToString();
-                            usuario.Une = ins.sqldr["UNE"].ToString();
-                            usuariodetalle.Add(usuario);
-                        }
-                    }
-                }
-                ins.sqlcon.Close();
-            } catch (SqlException ex) {
-                ins.sqlcon.Close();
-                Debug.WriteLine(ex.Message);
-            }
-
-            return View(usuariodetalle);
-
+        // GET: USUARIOS
+        public ActionResult Index() {
+            return View(db.USUARIOS.ToList());
         }
 
-        [Route("Usuarios/Ingreso/")]
-        public ActionResult Ingreso() {
+        // GET: USUARIOS/Details/5
+        public ActionResult Details(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
+            if (uSUARIOS == null) {
+                return HttpNotFound();
+            }
+            return View(uSUARIOS);
+        }
+
+        // GET: USUARIOS/Create
+        public ActionResult Create() {
             return View();
         }
 
-        public ActionResult Index() {
-
-            var usuariosmodel = new List<UsuariosModels>();
-            SqlConnectionClass ins = new SqlConnectionClass();
-
-            try {
-                ins.Connect();
-                using (ins.sqlcon) {
-                    using (SqlCommand cmd = new SqlCommand("Select * from USUARIOS", ins.sqlcon)) {
-                        ins.sqlcon.Open();
-                        ins.sqldr = cmd.ExecuteReader();
-
-                        while (ins.sqldr.Read()) {
-                            var usuario = new UsuariosModels();
-                            usuario.Rut = ins.sqldr["RUT"].ToString();
-                            usuario.Nombre = ins.sqldr["NOMBRE_C"].ToString();
-                            usuario.Correo = ins.sqldr["CORREO"].ToString();
-                            usuario.Une = ins.sqldr["UNE"].ToString();
-                            usuariosmodel.Add(usuario);
-                        }
-                    }
+        // POST: USUARIOS/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
+            if (ModelState.IsValid) {
+                if (db.USUARIOS.Any(o => o.RUT == uSUARIOS.RUT)) {
+                    ModelState.AddModelError(uSUARIOS.RUT, "Error");
+                    return View(uSUARIOS);
                 }
-                ins.sqlcon.Close();
-            } catch (SqlException ex) {
-                ins.sqlcon.Close();
-                Debug.WriteLine(ex.Message);
+
+                db.USUARIOS.Add(uSUARIOS);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(usuariosmodel);
-
-            #region
-            /*
-try {                
-    string cmd = "Select * from USUARIOS";
-    SqlCommand com = new SqlCommand(cmd, sql.sqlcon);
-    SqlDataReader dr;
-    sql.Connect();
-    using (sql.sqlcon) {                    
-        sql.sqlcon.Open();
-        dr = com.ExecuteReader();
-        while (dr.Read()) {
-            var usuario = new UsuariosModels();
-            usuario.Id = Convert.ToInt32(dr["ID"]);
-            usuario.Nombre = dr["NOMBRE"].ToString();
-            usuario.Correo = dr["CORREO"].ToString();
-            usuario.Une = dr["UNE"].ToString();
-            usuariosmodel.Add(usuario);
+            return View(uSUARIOS);
         }
-    }
-    sql.sqlcon.Close();                
-} catch (SqlException ex) {
-    sql.sqlcon.Close();
-    Debug.WriteLine(ex.Message);
-}
-*/
-            #endregion
+
+        // GET: USUARIOS/Edit/5
+        public ActionResult Edit(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
+            if (uSUARIOS == null) {
+                return HttpNotFound();
+            }
+            return View(uSUARIOS);
+        }
+
+        // POST: USUARIOS/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
+        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
+            if (ModelState.IsValid) {
+                db.Entry(uSUARIOS).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(uSUARIOS);
+        }
+
+        // GET: USUARIOS/Delete/5
+        public ActionResult Delete(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
+            if (uSUARIOS == null) {
+                return HttpNotFound();
+            }
+            return View(uSUARIOS);
+        }
+
+        // POST: USUARIOS/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id) {
+            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
+            db.USUARIOS.Remove(uSUARIOS);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public JsonResult doesRutExist(string Rut) {
+            var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
+
+            return Json(user == null);
+        }
+
+        [HttpPost]
+        public JsonResult doesCorreoExist(string Correo) {
+            var email = db.USUARIOS.FirstOrDefault(p => p.CORREO == Correo);
+
+            return Json(email == null);
         }
     }
 }

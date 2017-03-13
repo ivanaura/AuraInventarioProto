@@ -7,29 +7,12 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Aura Inventario</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css")    
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/modernizr")
-    
-
-    @{
-        if (CurrentURL.Contains("Usuarios") || CurrentURL.Contains("Inv_PC") || CurrentURL.Contains("Movimientos")) {
-            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
-            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-                        
-            <script type = "text/javascript" >
-                $(document).ready(function() {
-                    $('#myTable').DataTable({
-                        "language": {
-                            "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
-                         },
-                    });
-            });
-            </script>
-        }
-    }
-
-
+    @Scripts.Render("~/bundles/modernizr")  
+    @Scripts.Render("~/bundles/inputmask")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     
     <meta name="description" content="The description of my page" />
 </head>

@@ -1,0 +1,67 @@
+﻿@model AuraInventarioProto.Models.MOVIMIENTOS_PC
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+
+<div class="well bs-component">
+    <h4>Movimientos de Pc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Rut:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RUT_USUARIO)
+        </dd>
+
+        <dt>
+            Id Pc:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_PC)
+        </dd>
+
+        <dt>
+            Tipo Movimiento:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO_MOV)
+        </dd>
+
+        <dt>
+            Fecha Asignacion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_AS)
+        </dd>
+
+        <dt>
+            Fecha Devolucion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_DV)
+        </dd>
+
+        <dt>
+            Fecha Movimiento:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_MOV)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Volver al Listado", "Index")
+</p>

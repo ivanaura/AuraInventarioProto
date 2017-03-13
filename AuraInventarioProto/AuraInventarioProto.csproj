@@ -71,6 +71,8 @@
     <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Abstractions">
       <Private>True</Private>
     </Reference>
@@ -146,9 +148,26 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Models\AuraModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuraModel.edmx</DependentUpon>
+      <LastGenOutput>AuraModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AuraModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AuraModel.edmx</DependentUpon>
+      <LastGenOutput>AuraModel.cs</LastGenOutput>
+    </Content>
     <Content Include="ProtoDB.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\AuraModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AuraModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AuraModel.edmx.diagram">
+      <DependentUpon>AuraModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -159,6 +178,21 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.phone.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.phone.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.regex.extensions.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.regex.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.js" />
@@ -186,9 +220,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SqlConnectionClass.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Inv_PcController.cs" />
-    <Compile Include="Controllers\MovimientosController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\INV_PCController.cs" />
+    <Compile Include="Controllers\MOVIMIENTOS_PCController.cs" />
+    <Compile Include="Controllers\USUARIOSController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -199,24 +233,60 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Inv_PcModels.cs" />
-    <Compile Include="Models\MovimientosModels.cs" />
-    <Compile Include="Models\UsuariosModels.cs" />
+    <Compile Include="Models\AuraModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuraModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuraModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AuraModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuraModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INV_PC.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MOVIMIENTOS_PC.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USUARIOS.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Movimientos\Index.cshtml" />
-    <Content Include="Views\Inv_Pc\Index.cshtml" />
-    <Content Include="Views\Usuarios\Ingreso.cshtml" />
-    <Content Include="Views\Movimientos\Ingreso.cshtml" />
-    <Content Include="Views\Inv_Pc\Ingreso.cshtml" />
-    <Content Include="Views\Usuarios\Detalles.cshtml" />
-    <Content Include="Views\Inv_Pc\Detalles.cshtml" />
-    <Content Include="Views\Movimientos\Detalles.cshtml" />
-    <Content Include="Views\Inv_Pc\Mantencion.cshtml" />
+    <Content Include="Views\Deprecated\Usuarios\Index.cshtml" />
+    <Content Include="Views\Deprecated\Movimientos\Index.cshtml" />
+    <Content Include="Views\Deprecated\Inv_Pc\Index.cshtml" />
+    <Content Include="Views\Deprecated\Usuarios\Ingreso.cshtml" />
+    <Content Include="Views\Deprecated\Movimientos\Ingreso.cshtml" />
+    <Content Include="Views\Deprecated\Inv_Pc\Ingreso.cshtml" />
+    <Content Include="Views\Deprecated\Usuarios\Detalles.cshtml" />
+    <Content Include="Views\Deprecated\Inv_Pc\Detalles.cshtml" />
+    <Content Include="Views\Deprecated\Movimientos\Detalles.cshtml" />
+    <Content Include="Views\Deprecated\Inv_Pc\Mantencion.cshtml" />
+    <Content Include="Views\USUARIOS\Create.cshtml" />
+    <Content Include="Views\USUARIOS\Delete.cshtml" />
+    <Content Include="Views\USUARIOS\Details.cshtml" />
+    <Content Include="Views\USUARIOS\Edit.cshtml" />
+    <Content Include="Views\USUARIOS\Index.cshtml" />
+    <Content Include="Views\INV_PC\Create.cshtml" />
+    <Content Include="Views\INV_PC\Delete.cshtml" />
+    <Content Include="Views\INV_PC\Details.cshtml" />
+    <Content Include="Views\INV_PC\Edit.cshtml" />
+    <Content Include="Views\INV_PC\Index.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\Create.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\Delete.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\Details.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\Edit.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\Index.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,6 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

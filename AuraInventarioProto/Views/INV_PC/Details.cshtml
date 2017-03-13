@@ -1,0 +1,178 @@
+﻿@model AuraInventarioProto.Models.INV_PC
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles</h2>
+<div class="well bs-component">
+    <h4>Inventario de Pc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Serial:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SERIAL)
+        </dd>
+
+        <dt>
+            Modelo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODELO)
+        </dd>
+
+        <dt>
+            Marca:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCA)
+        </dd>
+
+        <dt>
+            Tipo:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO)
+        </dd>
+
+        <dt>
+            Estado:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO)
+        </dd>
+
+        <dt>
+            Fecha Adquisicion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ADQ)
+        </dd>
+
+        <dt>
+            Estado TeamViewer:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_TW)
+        </dd>
+
+        <dt>
+            Estado Ccleaner:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_CC)
+        </dd>
+
+        <dt>
+            Estado Anti Virus:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_AV)
+        </dd>
+
+        <dt>
+            Estado PDF:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_PD)
+        </dd>
+
+        <dt>
+            Estado Registros:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_REG)
+        </dd>
+
+        <dt>
+            Licencia Office:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_OF)
+        </dd>
+
+        <dt>
+            Licencia Windows:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_WN)
+        </dd>
+
+        <dt>
+            SGI P-30 Software:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SGI_SW)
+        </dd>
+
+        <dt>
+            SGI P-30 Restricciones:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SGI_RES)
+        </dd>
+
+        <dt>
+            Fecha Ultima Mantencion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.F_UL_MAN)
+        </dd>
+
+        <dt>
+            Devuelto:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEVU)
+        </dd>
+
+        <dt>
+            Asignado Devolucion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASIGN_DEVU)
+        </dd>
+
+        <dt>
+            Obra:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBRA)
+        </dd>
+
+        <dt>
+            Observaciones:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBS)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Volver al Listado", "Index")
+</p>

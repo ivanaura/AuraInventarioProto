@@ -1,0 +1,185 @@
+﻿@model AuraInventarioProto.Models.INV_PC
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Esta Seguro de que desear eliminar este registro?</h3>
+<div>
+    <h4>Inventario de Pc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SERIAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SERIAL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MODELO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MODELO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MARCA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MARCA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OBS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ADQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_ADQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_TW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_TW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_CC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_CC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_AV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_AV)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_PD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_PD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_OF)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_OF)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_WN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_WN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EST_REG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_REG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SGI_SW)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SGI_SW)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SGI_RES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SGI_RES)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.F_UL_MAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.F_UL_MAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DEVU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEVU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ASIGN_DEVU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ASIGN_DEVU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OBRA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBRA)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver al Listado", "Index")
+        </div>
+    }
+</div>
