@@ -13,9 +13,9 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.CORREO, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.NOMBRE, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.CORREO, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:lowercase", @maxlength = "30" } })                            
+                                @Html.EditorFor(model => model.NOMBRE, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:lowercase", @maxlength = "30" } })                            
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="reset" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Entrar</button>
                     </div>
                 </div>

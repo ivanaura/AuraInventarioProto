@@ -18,26 +18,17 @@ namespace AuraInventarioProto.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Rut")]
-        [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
-        //[Required(ErrorMessage = "Error, Rut es requerido.")]
-        [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
-        [Remote("doesRutExist", "LOGIN", HttpMethod = "POST", ErrorMessage = "Error, El Usuario no existe.")]
-        public string RUT { get; set; }
+        [Display(Name = "Usuario:")]
+        [Required(ErrorMessage = "Error, Usuario es requerido.")]
+        [MaxLength(30, ErrorMessage = "Error, El Usuario tiene un limite de 30 caracteres.")]
+        [Remote("doesNameExist", "LOGIN", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
+        public string NOMBRE { get; set; }
 
-        [Display(Name = "Correo")]
-        [Required(ErrorMessage = "Error, Correo es requerido.")]
-        [EmailAddress(ErrorMessage = "Favor entrar un Correo valido.")]
-        [MaxLength(30, ErrorMessage = "Error, El Correo tiene un limite de 30 caracteres.")]
-        [Remote("doesCorreoExist", "LOGIN", HttpMethod = "POST", ErrorMessage = "Error, El Correo no existe.")]
-        public string CORREO { get; set; }
-
-        [Display(Name = "Clave")]
-        [Required(ErrorMessage = "Error, Clave es requerido.")]
+        [Display(Name = "Clave:")]
+        [Required(ErrorMessage = "Error, Clave es requerida.")]
         [MinLength(4, ErrorMessage = "Error, Campo necesita almenos 4 caracteres.")]
         public string PASS { get; set; }
 
-        //[Required(ErrorMessage = "Error, Salt es requerido.")]
         public string SALT { get; set; }
     }
 }

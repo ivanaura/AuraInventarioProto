@@ -17,68 +17,88 @@ namespace AuraInventarioProto.Models
     {
         public int ID { get; set; }
 
+        [Display(Name = "Serial:")]
         [Required(ErrorMessage = "Error, Serial es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string SERIAL { get; set; }
 
+        [Display(Name = "Modelo:")]
         [Required(ErrorMessage = "Error, Modelo es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string MODELO { get; set; }
 
+        [Display(Name = "Marca:")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string MARCA { get; set; }
 
+        [Display(Name = "Tipo:")]
         [Required(ErrorMessage = "Error, Tipo es requerido")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string TIPO { get; set; }
 
+        [Display(Name = "Estado:")]
         [Required(ErrorMessage = "Error, Estado es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string ESTADO { get; set; }
 
+        [Display(Name = "Observaciones:")]
         [MaxLength(255, ErrorMessage = "Error, Campo tiene un limite de 255 caracteres.")]
         public string OBS { get; set; }
 
+        [Display(Name = "Fecha Adquisicion:")]
         [Required(ErrorMessage = "Error, Fecha Adquisicion es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string FECHA_ADQ { get; set; }
 
+        [Display(Name = "Estado TeamViewer:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_TW { get; set; }
 
+        [Display(Name = "Estado Ccleaner:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_CC { get; set; }
 
+        [Display(Name = "Estado Anti Virus:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_AV { get; set; }
 
+        [Display(Name = "Estado Pdf:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_PD { get; set; }
 
+        [Display(Name = "Licencia Office:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_OF { get; set; }
 
+        [Display(Name = "Licencia Windows:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_WN { get; set; }
 
+        [Display(Name = "Estado registros:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string EST_REG { get; set; }
 
+        [Display(Name = "SGI Software:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string SGI_SW { get; set; }
 
+        [Display(Name = "SGI Restricciones:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string SGI_RES { get; set; }
 
+        [Display(Name = "Fecha Ultima Mantencion:")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string F_UL_MAN { get; set; }
 
+        [Display(Name = "Devuelto:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string DEVU { get; set; }
 
+        [Display(Name = "Asignado Devolucion:")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string ASIGN_DEVU { get; set; }
 
+        [Display(Name = "Obra:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         public string OBRA { get; set; }
     }

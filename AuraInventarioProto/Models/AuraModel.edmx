@@ -36,8 +36,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RUT" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="PASS" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SALT" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
@@ -49,9 +48,9 @@
           <Property Name="RUT_USUARIO" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="ID_PC" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TIPO_MOV" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="FECHA_AS" Type="date" />
-          <Property Name="FECHA_DV" Type="date" />
-          <Property Name="FECHA_MOV" Type="date" Nullable="false" />
+          <Property Name="FECHA_AS" Type="varchar" MaxLength="30" />
+          <Property Name="FECHA_DV" Type="varchar" MaxLength="30" />
+          <Property Name="FECHA_MOV" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -63,12 +62,6 @@
           <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="UNE" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__LOGIN__CORREO__1DE57479' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__LOGIN__CORREO__1DE57479" />-->
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__LOGIN__RUT__1CF15040' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__LOGIN__RUT__1CF15040" />-->
         <!--Errores durante la generación:
 advertencia 6035: La relación 'FK__MOVIMIENT__ID_PC__182C9B23' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK__MOVIMIENT__ID_PC__182C9B23" />-->
@@ -119,9 +112,9 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
           <Property Name="RUT_USUARIO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_PC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TIPO_MOV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FECHA_AS" Type="DateTime" Precision="0" />
-          <Property Name="FECHA_DV" Type="DateTime" Precision="0" />
-          <Property Name="FECHA_MOV" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FECHA_AS" Type="DateTime" />
+          <Property Name="FECHA_DV" Type="DateTime" />
+          <Property Name="FECHA_MOV" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -149,8 +142,7 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RUT" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PASS" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="SALT" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -214,10 +206,9 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
           <EntitySetMapping Name="LOGIN">
             <EntityTypeMapping TypeName="AuraInvModel.LOGIN">
               <MappingFragment StoreEntitySet="LOGIN">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="SALT" ColumnName="SALT" />
                 <ScalarProperty Name="PASS" ColumnName="PASS" />
-                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
-                <ScalarProperty Name="RUT" ColumnName="RUT" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

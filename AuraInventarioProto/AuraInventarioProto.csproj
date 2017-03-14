@@ -300,6 +300,7 @@
     <Content Include="Views\LOGIN\Edit.cshtml" />
     <Content Include="Views\LOGIN\Index.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringCheckbox.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

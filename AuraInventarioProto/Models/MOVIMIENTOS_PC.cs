@@ -18,31 +18,31 @@ namespace AuraInventarioProto.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Rut Usuario")]
+        [Display(Name = "Rut Usuario:")]
         [Required(ErrorMessage = "Error, Rut es requerido.")]
         [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
         [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
         [Remote("doesRutExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
         public string RUT_USUARIO { get; set; }
 
-        [Display(Name = "Serial Pc")]
+        [Display(Name = "Serial Pc:")]
         [Required(ErrorMessage = "Error, Serial es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string ID_PC { get; set; }
 
-        [Display(Name = "Tipo de Movimiento")]
+        [Display(Name = "Tipo de Movimiento:")]
         [Required(ErrorMessage = "Error, Tipo es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string TIPO_MOV { get; set; }
 
-        [Display(Name = "Fecha Asignacion")]
-        public Nullable<System.DateTime> FECHA_AS { get; set; }
+        [Display(Name = "Fecha Asignacion:")]
+        public string FECHA_AS { get; set; }
 
-        [Display(Name = "Fecha Devolucion")]
-        public Nullable<System.DateTime> FECHA_DV { get; set; }
+        [Display(Name = "Fecha Devolucion:")]
+        public string FECHA_DV { get; set; }
 
-        [Display(Name = "Fecha Movimiento")]
+        [Display(Name = "Fecha Movimiento:")]
         [Required(ErrorMessage = "Error, Fecha es requerido")]
-        public System.DateTime FECHA_MOV { get; set; }
+        public string FECHA_MOV { get; set; }
     }
 }

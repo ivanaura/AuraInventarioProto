@@ -27,10 +27,9 @@
     </div>
 </form>
 
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal well bs-component">
         <h4>Inventario de Pc</h4>
         <hr />
@@ -87,14 +86,16 @@
             @Html.LabelFor(model => model.FECHA_ADQ, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FECHA_ADQ, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger", @id = "date" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.EST_TW, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EST_TW, new { htmlAttributes = new { @class = "form-control" } })
+                
+                @*@Html.EditorFor(model => model.EST_TW, new { htmlAttributes = new { @class = "form-control" } })*@
+                
                 @Html.ValidationMessageFor(model => model.EST_TW, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -167,7 +168,7 @@
             @Html.LabelFor(model => model.F_UL_MAN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.F_UL_MAN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger", @id = "date" })
             </div>
         </div>
 
@@ -209,4 +210,9 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+        });
+    </script>
 }
