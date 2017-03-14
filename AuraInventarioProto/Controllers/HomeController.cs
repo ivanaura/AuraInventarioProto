@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
 using System.Web.Security;
+using static AuraInventarioProto.App_Start.HashClass;
 
 
 namespace AuraInventarioProto.Controllers {
@@ -26,10 +27,12 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Login(LOGIN objLogin) {
             if (ModelState.IsValid) {
-                var obj = db.LOGIN.Where(a => a.NOMBRE.Equals(objLogin.NOMBRE) && a.PASS.Equals(objLogin.PASS)).FirstOrDefault();
-                if (obj != null) {
-                    
+                string salt = (from n in db.LOGIN where objLogin.NOMBRE == n.NOMBRE select n.SALT).First().ToString();
+                string passtohash = objLogin.PASS + salt;
+                objLogin.PASS = CreateHash(passtohash);
 
+                var obj = db.LOGIN.Where(a => a.NOMBRE.Equals(objLogin.NOMBRE) && a.PASS.Equals(objLogin.PASS)).FirstOrDefault();
+                if (obj != null) {                    
                     Session["UserID"] = obj.ID.ToString();
                     Session["UserName"] = obj.NOMBRE.ToString();
                     return RedirectToAction("Index");

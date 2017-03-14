@@ -119,17 +119,11 @@ namespace AuraInventarioProto.Controllers {
         }
 
         [HttpPost]
-        public JsonResult DoesRutExist(string Rut) {
-            var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
+        public JsonResult DoesNameExist(string Nombre) {
+            var user = db.LOGIN.FirstOrDefault(p => p.NOMBRE == Nombre);
 
-            return Json(user);
+            return Json(user == null);
         }
 
-        [HttpPost]
-        public JsonResult DoesCorreoExist(string Correo) {
-            var email = db.USUARIOS.FirstOrDefault(p => p.CORREO == Correo);
-
-            return Json(email);
-        }
     }
 }

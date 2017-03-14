@@ -10,43 +10,56 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.RUT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CORREO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PASS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SALT)
-        </th>
-        <th></th>
-    </tr>
+@if (!Model.Any()) {
+    <text>No hay Usuarios.</text>
+} else {
+
+<table class="table table-striped table-bordered table-hover table-responsive display compact" id="Logins">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PASS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SALT)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RUT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CORREO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PASS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SALT)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NOMBRE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PASS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SALT)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    </tbody>
 }
-
 </table>
+}
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Logins').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
+                },
+            });
+        });
+    </script>
+}
