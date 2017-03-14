@@ -43,7 +43,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RUT,CORREO,PASS")] LOGIN lOGIN) {
+        public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 string salt = CreateSalt();
                 lOGIN.SALT = salt;
@@ -80,7 +80,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RUT,CORREO,PASS,SALT")] LOGIN lOGIN) {
+        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,SALT")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 db.Entry(lOGIN).State = EntityState.Modified;
                 db.SaveChanges();

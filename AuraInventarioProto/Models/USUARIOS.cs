@@ -7,22 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuraInventarioProto.Models
-{
+namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
 
-    public partial class USUARIOS
-    {
+    public partial class USUARIOS {
         public int ID { get; set; }
 
         [Display(Name = "Rut:")]
         [Required(ErrorMessage = "Error, Rut es requerido.")]
-        [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage ="Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
-        [MaxLength(12,ErrorMessage ="Error, El Rut tiene un limite de 12 caracteres.")]
+        [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
+        [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
         [Remote("doesRutExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
         public string RUT { get; set; }
 

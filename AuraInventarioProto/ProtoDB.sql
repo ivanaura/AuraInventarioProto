@@ -13,15 +13,15 @@ TIPO varchar(10) not null,
 ESTADO varchar(30) not null,
 OBS varchar(255),
 FECHA_ADQ varchar(30) not null,
-EST_TW varchar(10),
-EST_CC varchar(10),
-EST_AV varchar(10),
-EST_PD varchar(10),
-EST_OF varchar(10),
-EST_WN varchar(10),
-EST_REG varchar(10),
-SGI_SW varchar(10),
-SGI_RES varchar(10),
+EST_TW  Bit,
+EST_CC  Bit,
+EST_AV  Bit,
+EST_PD  Bit,
+EST_OF  Bit,
+EST_WN  Bit,
+EST_REG Bit,
+SGI_SW  Bit,
+SGI_RES Bit,
 F_UL_MAN varchar(30) not null,
 DEVU varchar(10),
 ASIGN_DEVU varchar(30),
@@ -62,8 +62,8 @@ insert into USUARIOS values('33333333-3','nombre completo','correo3@aura.cl','OF
 insert into LOGIN values('Admin','trapecio23','a');
 
 
-insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Nok','Ok','Ok','Cumple','No cumple','11-1-2017','No','n/a','O111');
-insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Ok','Ok','Nok','Cumple','Cumple','11-1-2017','Si','Freddy Marquez','OF');
+insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','No','n/a','O111');
+insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','Si','Freddy Marquez','OF');
 
 
 drop table INV_PC

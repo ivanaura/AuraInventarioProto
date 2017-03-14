@@ -13,10 +13,10 @@ namespace AuraInventarioProto.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AuraInventarioProtoDBEntities1 : DbContext
+    public partial class AuraInventarioProtoDBEntities : DbContext
     {
-        public AuraInventarioProtoDBEntities1()
-            : base("name=AuraInventarioProtoDBEntities1")
+        public AuraInventarioProtoDBEntities()
+            : base("name=AuraInventarioProtoDBEntities")
         {
         }
     
@@ -26,8 +26,8 @@ namespace AuraInventarioProto.Models
         }
     
         public virtual DbSet<INV_PC> INV_PC { get; set; }
+        public virtual DbSet<LOGIN> LOGIN { get; set; }
         public virtual DbSet<MOVIMIENTOS_PC> MOVIMIENTOS_PC { get; set; }
         public virtual DbSet<USUARIOS> USUARIOS { get; set; }
-        public virtual DbSet<LOGIN> LOGIN { get; set; }
     }
 }

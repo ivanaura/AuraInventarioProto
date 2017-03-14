@@ -7,15 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuraInventarioProto.Models
-{
+namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
-    public partial class MOVIMIENTOS_PC
-    {
+    public partial class MOVIMIENTOS_PC {
         public int ID { get; set; }
 
         [Display(Name = "Rut Usuario:")]

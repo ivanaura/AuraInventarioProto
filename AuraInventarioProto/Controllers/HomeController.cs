@@ -26,12 +26,12 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Login(LOGIN objLogin) {
             if (ModelState.IsValid) {
-                var obj = db.LOGIN.Where(a => a.CORREO.Equals(objLogin.CORREO) && a.PASS.Equals(objLogin.PASS)).FirstOrDefault();
+                var obj = db.LOGIN.Where(a => a.NOMBRE.Equals(objLogin.NOMBRE) && a.PASS.Equals(objLogin.PASS)).FirstOrDefault();
                 if (obj != null) {
                     
 
                     Session["UserID"] = obj.ID.ToString();
-                    Session["UserName"] = obj.CORREO.ToString();
+                    Session["UserName"] = obj.NOMBRE.ToString();
                     return RedirectToAction("Index");
                 }
             }
