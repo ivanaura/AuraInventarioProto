@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AuraInvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AuraInvModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="INV_PC">
           <Key>
             <PropertyRef Name="ID" />
@@ -31,6 +31,16 @@
           <Property Name="ASIGN_DEVU" Type="varchar" MaxLength="30" />
           <Property Name="OBRA" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="LOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUT" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PASS" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="SALT" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
         <EntityType Name="MOVIMIENTOS_PC">
           <Key>
             <PropertyRef Name="ID" />
@@ -54,18 +64,24 @@
           <Property Name="UNE" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__MOVIMIENT__ID_PC__173876EA' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__MOVIMIENT__ID_PC__173876EA" />-->
+advertencia 6035: La relación 'FK__LOGIN__CORREO__1DE57479' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__LOGIN__CORREO__1DE57479" />-->
         <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__164452B1' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__MOVIMIENT__RUT_U__164452B1" />-->
+advertencia 6035: La relación 'FK__LOGIN__RUT__1CF15040' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__LOGIN__RUT__1CF15040" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__MOVIMIENT__ID_PC__182C9B23' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__MOVIMIENT__ID_PC__182C9B23" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK__MOVIMIENT__RUT_U__173876EA" />-->
         <EntityContainer Name="AuraInvModelStoreContainer">
           <EntitySet Name="INV_PC" EntityType="Self.INV_PC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOGIN" EntityType="Self.LOGIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIMIENTOS_PC" EntityType="Self.MOVIMIENTOS_PC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuraInvModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -126,7 +142,18 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__164452B1' tiene columnas q
           <EntitySet Name="INV_PC" EntityType="Self.INV_PC" />
           <EntitySet Name="MOVIMIENTOS_PC" EntityType="Self.MOVIMIENTOS_PC" />
           <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <EntitySet Name="LOGIN" EntityType="AuraInvModel.LOGIN" />
         </EntityContainer>
+        <EntityType Name="LOGIN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PASS" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SALT" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -181,6 +208,17 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__164452B1' tiene columnas q
                 <ScalarProperty Name="NOMBRE_C" ColumnName="NOMBRE_C" />
                 <ScalarProperty Name="CORREO" ColumnName="CORREO" />
                 <ScalarProperty Name="UNE" ColumnName="UNE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGIN">
+            <EntityTypeMapping TypeName="AuraInvModel.LOGIN">
+              <MappingFragment StoreEntitySet="LOGIN">
+                <ScalarProperty Name="SALT" ColumnName="SALT" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

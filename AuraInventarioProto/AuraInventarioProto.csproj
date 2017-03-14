@@ -193,6 +193,8 @@
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.js" />
@@ -217,10 +219,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\HashClass.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SqlConnectionClass.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INV_PCController.cs" />
+    <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\MOVIMIENTOS_PCController.cs" />
     <Compile Include="Controllers\USUARIOSController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -249,6 +253,9 @@
       <DependentUpon>AuraModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\INV_PC.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LOGIN.cs">
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MOVIMIENTOS_PC.cs">
@@ -287,6 +294,12 @@
     <Content Include="Views\MOVIMIENTOS_PC\Details.cshtml" />
     <Content Include="Views\MOVIMIENTOS_PC\Edit.cshtml" />
     <Content Include="Views\MOVIMIENTOS_PC\Index.cshtml" />
+    <Content Include="Views\LOGIN\Create.cshtml" />
+    <Content Include="Views\LOGIN\Delete.cshtml" />
+    <Content Include="Views\LOGIN\Details.cshtml" />
+    <Content Include="Views\LOGIN\Edit.cshtml" />
+    <Content Include="Views\LOGIN\Index.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

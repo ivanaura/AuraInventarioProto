@@ -1,5 +1,6 @@
 ﻿@{
     string CurrentURL = Request.Url.AbsoluteUri;
+
 }
 <!DOCTYPE html>
 
@@ -7,16 +8,22 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Aura Inventario</title>
-    @Styles.Render("~/Content/css")    
+    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/modernizr")  
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/inputmask")
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    
+
     <meta name="description" content="The description of my page" />
 </head>
 <body>
+    @{
+        if (Session["UserID"] == null) {
+            @Html.Partial("_Login")
+        }
+    }
+
     @Html.Partial("_NavBar")
     <div class="container body-content">
         @RenderBody()

@@ -7,99 +7,106 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using System.Web.Security;
+using System.Security.Cryptography;
+using System.Text;
+using static AuraInventarioProto.App_Start.HashClass;
 
 namespace AuraInventarioProto.Controllers {
-//    [Authorize]
-    public class USUARIOSController : Controller {
+    public class LOGINController : Controller {
         private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
 
-        // GET: USUARIOS
-        [AllowAnonymous]
+        // GET: Index
         public ActionResult Index() {
-            return View(db.USUARIOS.ToList());
+            return View(db.LOGIN.ToList());
         }
 
-        // GET: USUARIOS/Details/5
+        // GET: LOGIN/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null) {
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            if (lOGIN == null) {
                 return HttpNotFound();
             }
-            return View(uSUARIOS);
+            return View(lOGIN);
         }
 
-        // GET: USUARIOS/Create
+        // GET: LOGIN/Create
         public ActionResult Create() {
             return View();
         }
 
-        // POST: USUARIOS/Create
+        // POST: LOGIN/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
+        public ActionResult Create([Bind(Include = "ID,RUT,CORREO,PASS")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
-                if (db.USUARIOS.Any(o => o.RUT == uSUARIOS.RUT)) {
-                    ModelState.AddModelError(uSUARIOS.RUT, "Error");
-                    return View(uSUARIOS);
-                }
+                string salt = CreateSalt();
+                lOGIN.SALT = salt;
+                string pass = lOGIN.PASS + salt;
+                lOGIN.PASS = CreateHash(pass);
 
-                db.USUARIOS.Add(uSUARIOS);
+                //lOGIN.PASS = CreateHash(pass, new SHA256CryptoServiceProvider());
+
+
+                db.LOGIN.Add(lOGIN);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(uSUARIOS);
+            return View(lOGIN);
         }
 
-        // GET: USUARIOS/Edit/5
+
+
+        // GET: LOGIN/Edit/5
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null) {
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            if (lOGIN == null) {
                 return HttpNotFound();
             }
-            return View(uSUARIOS);
+            return View(lOGIN);
         }
 
-        // POST: USUARIOS/Edit/5
+        // POST: LOGIN/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
+        public ActionResult Edit([Bind(Include = "ID,RUT,CORREO,PASS,SALT")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
-                db.Entry(uSUARIOS).State = EntityState.Modified;
+                db.Entry(lOGIN).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(uSUARIOS);
+            return View(lOGIN);
         }
 
-        // GET: USUARIOS/Delete/5
+        // GET: LOGIN/Delete/5
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            if (uSUARIOS == null) {
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            if (lOGIN == null) {
                 return HttpNotFound();
             }
-            return View(uSUARIOS);
+            return View(lOGIN);
         }
 
-        // POST: USUARIOS/Delete/5
+        // POST: LOGIN/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            USUARIOS uSUARIOS = db.USUARIOS.Find(id);
-            db.USUARIOS.Remove(uSUARIOS);
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            db.LOGIN.Remove(lOGIN);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -115,14 +122,14 @@ namespace AuraInventarioProto.Controllers {
         public JsonResult doesRutExist(string Rut) {
             var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
 
-            return Json(user == null);
+            return Json(user);
         }
 
         [HttpPost]
         public JsonResult doesCorreoExist(string Correo) {
             var email = db.USUARIOS.FirstOrDefault(p => p.CORREO == Correo);
 
-            return Json(email == null);
+            return Json(email);
         }
     }
 }

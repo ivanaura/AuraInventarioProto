@@ -1,49 +1,75 @@
 ﻿@{
     string CurrentURL = Request.Url.AbsoluteUri;
 }
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="@Url.Action("Index","Home")" class="navbar-brand">
-                    <img src="~/Content/Img/logo.gif" style="max-height:200px; max-width:127px;" />
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vistas<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Vistas Usuarios", "Index", "USUARIOS")</li>
-                            <li>@Html.ActionLink("Vistas Inventarios PC", "Index", "INV_PC")</li>
-                            <li>@Html.ActionLink("Vistas Movimientos", "Index", "MOVIMIENTOS_PC")</li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ingresos<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Ingreso de Usuarios", "Create", "USUARIOS")</li>
-                            <li>@Html.ActionLink("Ingreso de Inventarios PC", "Create", "INV_PC")</li>
-                            <li>@Html.ActionLink("Ingreso de Movimientos", "Create", "MOVIMIENTOS_PC")</li>
-                        </ul>
-                    </li>
-
-                    @{
-                        if (CurrentURL.Contains("Create")) {
-                            <li><a href="#" data-toggle="modal" data-target="#myModal">Ingresos Masivos</a></li>
-                        }
-                    }
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" >Login</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index","Home")" class="navbar-brand">
+                <img src="~/Content/Img/logo.gif" style="max-height:200px; max-width:127px;" />
+            </a>
         </div>
-    </nav>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                @{
+                    if (!(Session["UserID"] == null)) {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Vistas<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Vistas Usuarios", "Index", "USUARIOS")</li>
+                                <li>@Html.ActionLink("Vistas Inventarios PC", "Index", "INV_PC")</li>
+                                <li>@Html.ActionLink("Vistas Movimientos", "Index", "MOVIMIENTOS_PC")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ingresos<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Ingreso de Usuarios", "Create", "USUARIOS")</li>
+                                <li>@Html.ActionLink("Ingreso de Inventarios PC", "Create", "INV_PC")</li>
+                                <li>@Html.ActionLink("Ingreso de Movimientos", "Create", "MOVIMIENTOS_PC")</li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mantenedores<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("Logins", "Index", "LOGIN")</li>
+                            </ul>
+                        </li>
+                    }
+                }
+                
+
+                @{
+                    if (CurrentURL.Contains("Create")) {
+                        <li><a href="#" data-toggle="modal" data-target="#myModal">Ingresos Masivos</a></li>
+                    }
+                }
+            </ul>
+
+
+            @{
+                if (Session["UserID"] == null) {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" data-toggle="modal" data-target="#LoginModal">Login</a></li>
+                    </ul>
+                } else {
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li><div class="navbar-text">Usuario: @Session["UserName"]</div></li>                                                                            
+                        @*<li>@Ajax.ActionLink("Desloguear","Logout", new AjaxOptions { HttpMethod = "POST" })</li>*@
+                        <li>@Html.ActionLink("Desloguear","Logout","Home")</li>
+                    </ul>
+                }
+            }
+
+
+        </div>
+    </div>
+</nav>

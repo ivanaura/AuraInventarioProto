@@ -32,7 +32,7 @@ create table USUARIOS(
 ID int identity(1,1) primary key not null,
 RUT varchar(12) UNIQUE not null,
 NOMBRE_C varchar(40) not null,
-CORREO varchar(30) not null,
+CORREO varchar(30) UNIQUE not null,
 UNE varchar(10)
 );
 
@@ -48,14 +48,31 @@ foreign key(RUT_USUARIO) references USUARIOS(RUT),
 foreign key(ID_PC) references INV_PC(SERIAL)
 );
 
-insert into USUARIOS values('11.111.111-1','nombre completo','correo@aura.cl','OF');
-insert into USUARIOS values('22.222.222-2','nombre completo','correo@aura.cl','O111');
+create table LOGIN(
+ID int identity(1,1) primary key not null,
+RUT varchar(12) UNIQUE not null,
+CORREO varchar(30) UNIQUE not null,
+CARGO varchar(20) not null,
+PASS nvarchar(128) not null,
+SALT nvarchar(128)  not null,
+foreign key(RUT) references USUARIOS(RUT),
+foreign key(CORREO) references USUARIOS(CORREO),
+);
 
-insert into USUARIOS values('11','nombre completo','correo@aura.cl','OF');
+insert into USUARIOS values('11111111-1','nombre completo','correo@aura.cl','OF');
+insert into USUARIOS values('22222222-2','nombre completo','correo2@aura.cl','O111');
+insert into USUARIOS values('33333333-3','nombre completo','correo3@aura.cl','OF');
 
-insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operacional','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Nok','Ok','Ok','Cumple','No cumple','11-1-2017','No','n/a','O111');
-insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operacional','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Ok','Ok','Nok','Cumple','Cumple','11-1-2017','Si','Freddy Marquez','OF');
+insert into LOGIN values('11111111-1','correo@aura.cl','admin','a');
 
+insert into LOGIN values('18038796-k','admin@aura.cl','admin','a');
+
+insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Nok','Ok','Ok','Cumple','No cumple','11-1-2017','No','n/a','O111');
+insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','Ok','Ok','Ok','Ok','Ok','Ok','Nok','Cumple','Cumple','11-1-2017','Si','Freddy Marquez','OF');
+
+
+drop table INV_PC
 update INV_PC set ESTADO='Operativo' where SERIAL='XXX67890'
 select * from USUARIOS
+select * from LOGIN
 delete from INV_PC where SERIAL='XXX67890'
