@@ -11,7 +11,7 @@ using AuraInventarioProto.Models;
 namespace AuraInventarioProto.Controllers {
 //    [Authorize]
     public class USUARIOSController : Controller {
-        private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
+        private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: USUARIOS
         [AllowAnonymous]
@@ -112,14 +112,14 @@ namespace AuraInventarioProto.Controllers {
         }
 
         [HttpPost]
-        public JsonResult doesRutExist(string Rut) {
+        public JsonResult DoesRutExist(string Rut) {
             var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
 
             return Json(user == null);
         }
 
         [HttpPost]
-        public JsonResult doesCorreoExist(string Correo) {
+        public JsonResult DoesCorreoExist(string Correo) {
             var email = db.USUARIOS.FirstOrDefault(p => p.CORREO == Correo);
 
             return Json(email == null);

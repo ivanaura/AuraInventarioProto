@@ -13,7 +13,7 @@ using System.Web.Security;
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
     public class HomeController : Controller {
-        private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
+        private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: Home
         [AllowAnonymous]

@@ -11,7 +11,7 @@ using AuraInventarioProto.Models;
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
     public class INV_PCController : Controller {
-        private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
+        private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: INV_PC
         public ActionResult Index() {

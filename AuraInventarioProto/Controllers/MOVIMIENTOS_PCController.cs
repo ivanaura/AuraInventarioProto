@@ -11,7 +11,7 @@ using AuraInventarioProto.Models;
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
     public class MOVIMIENTOS_PCController : Controller {
-        private AuraInventarioProtoDBEntities1 db = new AuraInventarioProtoDBEntities1();
+        private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: MOVIMIENTOS_PC
         public ActionResult Index() {

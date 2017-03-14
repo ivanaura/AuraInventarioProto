@@ -19,7 +19,7 @@ namespace AuraInventarioProto.Models {
         [Display(Name = "Usuario:")]
         [Required(ErrorMessage = "Error, Usuario es requerido.")]
         [MaxLength(30, ErrorMessage = "Error, El Usuario tiene un limite de 30 caracteres.")]
-        [Remote("doesNameExist", "LOGIN", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
+        [Remote("DoesNameExist", "LOGIN", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
         public string NOMBRE { get; set; }
 
         [Display(Name = "Clave:")]

@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e2cfac7c1e6d425ca67459bde59ba06e" Name="Diagram1">
-        <EntityTypeShape EntityType="AuraInventarioProtoDBModel.INV_PC" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuraInventarioProtoDBModel.INV_PC" Width="1.75" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.LOGIN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.MOVIMIENTOS_PC" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.USUARIOS" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />

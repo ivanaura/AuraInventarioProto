@@ -21,7 +21,7 @@ namespace AuraInventarioProto.Models {
         [Required(ErrorMessage = "Error, Rut es requerido.")]
         [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
         [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
-        [Remote("doesRutExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
+        [Remote("DoesRutExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
         public string RUT { get; set; }
 
         [Display(Name = "Nombre Completo:")]
@@ -33,7 +33,7 @@ namespace AuraInventarioProto.Models {
         [Required(ErrorMessage = "Error, Correo es requerido.")]
         [EmailAddress(ErrorMessage = "Favor entrar un Correo valido.")]
         [MaxLength(30, ErrorMessage = "Error, El Correo tiene un limite de 30 caracteres.")]
-        [Remote("doesCorreoExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Correo ya existe.")]
+        [Remote("DoesCorreoExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Correo ya existe.")]
         public string CORREO { get; set; }
 
         [Display(Name = "Une:")]
