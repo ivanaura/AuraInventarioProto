@@ -28,21 +28,25 @@
                             </ul>
                         </li>
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ingresos<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Ingreso de Usuarios", "Create", "USUARIOS")</li>
-                                <li>@Html.ActionLink("Ingreso de Inventarios PC", "Create", "INV_PC")</li>
-                                <li>@Html.ActionLink("Ingreso de Movimientos", "Create", "MOVIMIENTOS_PC")</li>
-                            </ul>
-                        </li>
+                        if (Session["UserRole"].ToString() != "ReadOnly") {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ingresos<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Ingreso de Usuarios", "Create", "USUARIOS")</li>
+                                    <li>@Html.ActionLink("Ingreso de Inventarios PC", "Create", "INV_PC")</li>
+                                    <li>@Html.ActionLink("Ingreso de Movimientos", "Create", "MOVIMIENTOS_PC")</li>
+                                </ul>
+                            </li>
+                        }
 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mantenedores<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Logins", "Index", "LOGIN")</li>
-                            </ul>
-                        </li>
+                        if (Session["UserRole"].ToString() == "Admin") {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mantenedores<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>@Html.ActionLink("Logins", "Index", "LOGIN")</li>
+                                </ul>
+                            </li>
+                        }
                     }
                 }
                 

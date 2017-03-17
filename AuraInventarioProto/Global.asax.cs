@@ -16,6 +16,7 @@ namespace AuraInventarioProto
             SqlConnectionClass sql = new SqlConnectionClass();
             sql.Connect();
 
+            //GlobalFilters.Filters.Add(new SessionExpireAttribute());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

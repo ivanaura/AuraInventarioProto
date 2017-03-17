@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
+    [SessionExpire]
     public class MOVIMIENTOS_PCController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -69,8 +71,13 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_AS,FECHA_DV,FECHA_MOV")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             if (ModelState.IsValid) {
-                db.Entry(mOVIMIENTOS_PC).State = EntityState.Modified;
-                db.SaveChanges();
+                try {
+                    db.Entry(mOVIMIENTOS_PC).State = EntityState.Modified;
+                    db.SaveChanges();
+                } catch (Exception) {
+
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction("Index");
             }
             return View(mOVIMIENTOS_PC);

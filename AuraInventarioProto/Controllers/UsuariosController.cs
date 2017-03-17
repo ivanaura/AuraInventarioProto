@@ -7,14 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
-//    [Authorize]
+    //    [Authorize]
+    [SessionExpire]
     public class USUARIOSController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: USUARIOS
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public ActionResult Index() {
             return View(db.USUARIOS.ToList());
         }
@@ -75,8 +77,15 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
             if (ModelState.IsValid) {
-                db.Entry(uSUARIOS).State = EntityState.Modified;
-                db.SaveChanges();
+                try {
+                    
+                    db.Entry(uSUARIOS).State = EntityState.Modified;
+                    db.SaveChanges();
+                    
+                } catch (Exception) {
+
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction("Index");
             }
             return View(uSUARIOS);
@@ -112,9 +121,18 @@ namespace AuraInventarioProto.Controllers {
         }
 
         [HttpPost]
+        //public JsonResult DoesRutExist(string Rut, string Id, FormContext frm1, FormCollection frm2) {
         public JsonResult DoesRutExist(string Rut) {
-            var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
 
+
+
+            //if (Id == "Edit") {
+            //    var usered = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
+
+            //    return Json(usered == null);
+            //}
+
+            var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
             return Json(user == null);
         }
 

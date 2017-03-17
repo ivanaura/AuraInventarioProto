@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
+    [SessionExpire]
     public class INV_PCController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -39,7 +41,7 @@ namespace AuraInventarioProto.Controllers {
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
                 db.INV_PC.Add(iNV_PC);
@@ -69,8 +71,14 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
-                db.Entry(iNV_PC).State = EntityState.Modified;
-                db.SaveChanges();
+                try {
+                    db.Entry(iNV_PC).State = EntityState.Modified;
+                    db.SaveChanges();
+                } catch (Exception) {
+
+                    return RedirectToAction("Index");
+                }
+
                 return RedirectToAction("Index");
             }
             return View(iNV_PC);
@@ -103,6 +111,13 @@ namespace AuraInventarioProto.Controllers {
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public JsonResult DoesSerialExist(string Serial) {
+            var serial = db.INV_PC.FirstOrDefault(p => p.SERIAL == Serial);
+
+            return Json(serial == null);
         }
     }
 }

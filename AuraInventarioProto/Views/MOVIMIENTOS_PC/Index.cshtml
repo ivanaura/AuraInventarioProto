@@ -8,7 +8,9 @@
 <h2>Listado de Movimientos PC</h2>
 
 <p>
-    @Html.ActionLink("Crear Nuevo", "Create")
+    @if (Session["UserRole"].ToString() != "ReadOnly") {
+        @Html.ActionLink("Crear Nuevo", "Create")
+    }    
 </p>
 @if (!Model.Any()) {
     <text>No hay Movimientos.</text>
@@ -60,9 +62,16 @@
                         @Html.DisplayFor(modelItem => item.FECHA_MOV)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                        @{
+                            if (Session["UserRole"].ToString() != "ReadOnly") {
+                                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
+                                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                            } else {
+                                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
+
+                            }
+                        }
                     </td>
                 </tr>
             }

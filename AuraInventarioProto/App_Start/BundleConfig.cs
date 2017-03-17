@@ -21,7 +21,13 @@ namespace AuraInventarioProto.App_Start {
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(                    
+                    "~/Scripts/bootstrap-datepicker.min.js",
+                    "~/Scripts/bootstrap-datepicker.js",
+                    "~/Scripts/bootstrap-datepicker.es.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap-datepicker3.standalone.min.css",
                       "~/Content/bootstrap-paper.css",
                       //"~/Content/bootstrap.css",
                       "~/Content/site.css"));

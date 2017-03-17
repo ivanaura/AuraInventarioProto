@@ -1,5 +1,11 @@
 ﻿@{
     string CurrentURL = Request.Url.AbsoluteUri;
+    //if (Session["UserID"]==null) {
+    //    new RedirectToRouteResult(new RouteValueDictionary { { "action", "Index" }, { "controller", "Home" } });
+    //}
+    HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
+    HttpContext.Current.Response.AddHeader("Expires", "0");
 
 }
 <!DOCTYPE html>
@@ -12,6 +18,12 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/inputmask")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+
+    @if (CurrentURL.Contains("INV_PC")) {
+        
+    }
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
     <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
@@ -19,9 +31,14 @@
 </head>
 <body>
     @{
+        //try {
         if (Session["UserID"] == null) {
-            @Html.Partial("_Login")
-        }
+                @Html.Partial("_Login")
+            }
+            //} catch (Exception) {
+            //    new RedirectToRouteResult(new RouteValueDictionary { { "action", "Index" }, { "controller", "Home" } });
+            //}
+
     }
 
     @Html.Partial("_NavBar")

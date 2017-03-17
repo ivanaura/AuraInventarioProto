@@ -62,6 +62,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) |
+    @if (Session["UserRole"].ToString() != "ReadOnly") {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.ID })
+    }|
+    @Html.ActionLink("Volver al Listado", "Index")
     @Html.ActionLink("Volver al Listado", "Index")
 </p>

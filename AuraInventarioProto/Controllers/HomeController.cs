@@ -23,7 +23,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LOGIN objLogin) {
             if (ModelState.IsValid) {
@@ -35,6 +35,15 @@ namespace AuraInventarioProto.Controllers {
                 if (obj != null) {                    
                     Session["UserID"] = obj.ID.ToString();
                     Session["UserName"] = obj.NOMBRE.ToString();
+
+                    if (obj.NOMBRE == "Admin" || obj.NOMBRE == "Informatica") {
+                        Session["UserRole"] = "Admin";
+                    } else if (obj.NOMBRE == "RRHH") {
+                        Session["UserRole"] = "User";
+                    } else {
+                        Session["UserRole"] = "ReadOnly";
+                    }
+
                     return RedirectToAction("Index");
                 }
             }
@@ -43,7 +52,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Login2(LOGIN objLogin) {
             if (ModelState.IsValid) {

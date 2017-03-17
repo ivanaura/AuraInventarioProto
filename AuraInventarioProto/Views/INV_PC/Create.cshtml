@@ -61,7 +61,17 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TIPO, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TIPO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.TIPO, new SelectList(
+                       new List<Object>{
+                               new { value = "AIO" , text = "All in One"  },
+                               new { value = "Notebook" , text = "Notebook" },
+                            },
+                          "value",
+                          "text",
+                          2
+                ),new { htmlAttributes = new { @class = "form-control" } })
+
+                @*@Html.EditorFor(model => model.TIPO, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.TIPO, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -69,7 +79,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ESTADO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ESTADO, new SelectList(
+                       new List<Object>{
+                               new { value = "Operacional" , text = "Operacional"  },
+                               new { value = "De Baja" , text = "De Baja" },
+                               new { value = "Malo" , text = "Malo" },
+                            },
+                          "value",
+                          "text",
+                          2
+                ), new { htmlAttributes = new { @class = "form-control" } })
+
+                @*@Html.EditorFor(model => model.ESTADO, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.ESTADO, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -77,15 +98,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_ADQ, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FECHA_ADQ, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger", @id = "date" })
+                @Html.EditorFor(model => model.FECHA_ADQ, new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.EST_TW, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                
+
                 @*@Html.EditorFor(model => model.EST_TW, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.CheckBoxFor(model => model.EST_TW, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EST_TW, "", new { @class = "text-danger" })
@@ -159,14 +180,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.F_UL_MAN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.F_UL_MAN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger", @id = "date" })
+                @Html.EditorFor(model => model.F_UL_MAN, new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DEVU, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @*@Html.RadioButtonFor(model => model.DEVU, "Si", new { htmlAttributes = new { @class = "form-control" } }) Si <br />
+                @Html.RadioButtonFor(model => model.DEVU, "No", new { htmlAttributes = new { @class = "form-control" } }) No*@
                 @Html.EditorFor(model => model.DEVU, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.DEVU, "", new { @class = "text-danger" })
             </div>
@@ -183,6 +206,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBRA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+
                 @Html.EditorFor(model => model.OBRA, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OBRA, "", new { @class = "text-danger" })
             </div>
@@ -191,7 +215,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -210,9 +234,24 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+
     <script>
         $(document).ready(function () {
-            $("#date").datepicker({ dateFormat: 'dd-mm-yy' });
+            $('#date').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+            $('#date2').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
         });
     </script>
 }

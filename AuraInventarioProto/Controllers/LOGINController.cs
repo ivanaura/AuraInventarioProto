@@ -11,8 +11,10 @@ using System.Web.Security;
 using System.Security.Cryptography;
 using System.Text;
 using static AuraInventarioProto.App_Start.HashClass;
+using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
+    [SessionExpire]
     public class LOGINController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -72,6 +74,7 @@ namespace AuraInventarioProto.Controllers {
             if (lOGIN == null) {
                 return HttpNotFound();
             }
+            lOGIN.PASS = null;
             return View(lOGIN);
         }
 
@@ -82,8 +85,13 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,SALT")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
-                db.Entry(lOGIN).State = EntityState.Modified;
-                db.SaveChanges();
+                try {
+                    db.Entry(lOGIN).State = EntityState.Modified;
+                    db.SaveChanges();
+                } catch (Exception) {
+
+                    return RedirectToAction("Index");
+                }
                 return RedirectToAction("Index");
             }
             return View(lOGIN);

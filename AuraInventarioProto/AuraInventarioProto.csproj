@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-paper.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -159,6 +160,9 @@
       <LastGenOutput>AuraModel.cs</LastGenOutput>
     </Content>
     <Content Include="ProtoDB.sql" />
+    <Content Include="Scripts\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\AuraModel.edmx">
@@ -221,6 +225,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HashClass.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SessionExpireAttribute.cs" />
     <Compile Include="App_Start\SqlConnectionClass.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INV_PCController.cs" />

@@ -65,12 +65,12 @@ insert into LOGIN values('RRHH','60c920b7bb63dcc53a2d690cf37bd688ae3e0d48efde2ca
 insert into LOGIN values('SGI','141d945fee0d78aceee3c6cf5d6c072a799572ebdebe9308f911487ecb65589b','LnSqbkSTV6VVcwm9a/2xaLuxUlrWAH710Ugq9zVUR6g=');
 
 
-insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','No','n/a','O111');
-insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','Si','Freddy Marquez','OF');
+insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','false','n/a','O111');
+insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','true','Freddy Marquez','OF');
 
 
 drop table INV_PC
-update INV_PC set ESTADO='Operativo' where SERIAL='XXX67890'
+update INV_PC set DEVU='Si' where SERIAL='XXX67890'
 select * from USUARIOS
 select * from LOGIN
 delete from INV_PC where SERIAL='XXX67890'

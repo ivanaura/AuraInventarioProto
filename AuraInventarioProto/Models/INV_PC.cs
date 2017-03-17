@@ -11,6 +11,7 @@ namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public partial class INV_PC {
         public int ID { get; set; }
@@ -18,6 +19,7 @@ namespace AuraInventarioProto.Models {
         [Display(Name = "Serial:")]
         [Required(ErrorMessage = "Error, Serial es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
+        [Remote("DoesSerialExist", "INV_PC", HttpMethod = "POST", ErrorMessage = "Error, La Serial ya existe.")]
         public string SERIAL { get; set; }
 
         [Display(Name = "Modelo:")]

@@ -8,7 +8,10 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (Session["UserRole"].ToString() != "ReadOnly") {
+        @Html.ActionLink("Crear Nuevo", "Create")
+    }
+    
 </p>
 @if (!Model.Any()) {
     <text>No hay Usuarios.</text>
@@ -29,27 +32,35 @@
             <th></th>
         </tr>
     </thead>
-
-@foreach (var item in Model) {
     <tbody>
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NOMBRE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PASS)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SALT)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
+        @foreach (var item in Model) {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PASS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SALT)
+                </td>
+                <td>
+                    @{
+                        if (Session["UserRole"].ToString() != "ReadOnly") {
+                            @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
+                            @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                        } else {
+                            @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
+
+                        }
+                    }
+                </td>
+            </tr>
+
+        }
     </tbody>
-}
 </table>
 }
 @section scripts{
