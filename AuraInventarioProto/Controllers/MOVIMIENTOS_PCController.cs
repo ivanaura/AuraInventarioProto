@@ -34,6 +34,22 @@ namespace AuraInventarioProto.Controllers {
 
         // GET: MOVIMIENTOS_PC/Create
         public ActionResult Create() {
+            List<SelectListItem> Usuarios = new List<SelectListItem>();
+            List<SelectListItem> Equipos = new List<SelectListItem>();
+            foreach (var usuario in db.USUARIOS) {
+                Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+            }
+            foreach (var equipo in db.INV_PC) {
+                Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+            }
+
+            ViewBag.Rut = Usuarios;
+            ViewBag.Pc = Equipos;
+
+            
+
+
+
             return View();
         }
 
@@ -111,5 +127,20 @@ namespace AuraInventarioProto.Controllers {
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public JsonResult DoesRutExist(string Rut_Usuario) {           
+            var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut_Usuario);
+
+            return Json(user != null);
+        }
+
+        [HttpPost]
+        public JsonResult DoesPcExist(string Id_Pc) {
+            var pc = db.INV_PC.FirstOrDefault(p => p.SERIAL == Id_Pc);
+
+            return Json(pc != null);
+        }
+
     }
 }

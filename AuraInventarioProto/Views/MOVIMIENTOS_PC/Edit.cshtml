@@ -37,7 +37,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TIPO_MOV, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TIPO_MOV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.TIPO_MOV, new SelectList(
+                       new List<Object>{
+                               new { value = "Adquisicion" , text = "Adquisicion"  },
+                               new { value = "Devolucion" , text = "Devolucion" },
+                               new { value = "Asignacion" , text = "Asignacion" },
+                               new { value = "De Baja" , text = "De Baja" },
+                            },
+                          "value",
+                          "text",
+                          2
+                ), new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.TIPO_MOV, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.TIPO_MOV, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,7 +56,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_AS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FECHA_AS, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FECHA_AS, new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FECHA_AS, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,7 +64,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_DV, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FECHA_DV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FECHA_DV, new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FECHA_DV, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_MOV, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FECHA_MOV, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.FECHA_MOV, new { htmlAttributes = new { @class = "form-control", @id = "date3", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FECHA_MOV, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,4 +91,30 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+        $(document).ready(function () {
+            $('#date').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+            $('#date2').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+            $('#date3').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+        });
+</script>
 }

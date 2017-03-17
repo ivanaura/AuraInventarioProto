@@ -68,6 +68,8 @@ insert into LOGIN values('SGI','141d945fee0d78aceee3c6cf5d6c072a799572ebdebe9308
 insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','false','n/a','O111');
 insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','true','Freddy Marquez','OF');
 
+insert into INV_PC values('XXX67891','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','true','Freddy Marquez','OF');
+
 
 drop table INV_PC
 update INV_PC set DEVU='Si' where SERIAL='XXX67890'

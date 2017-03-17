@@ -83,9 +83,14 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,SALT")] LOGIN lOGIN) {
+        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 try {
+                    string salt = CreateSalt();
+                    lOGIN.SALT = salt;
+                    string pass = lOGIN.PASS + salt;
+                    lOGIN.PASS = CreateHash(pass);
+
                     db.Entry(lOGIN).State = EntityState.Modified;
                     db.SaveChanges();
                 } catch (Exception) {

@@ -20,12 +20,13 @@ namespace AuraInventarioProto.Models {
         [Required(ErrorMessage = "Error, Rut es requerido.")]
         [RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
         [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
-        [Remote("DoesRutExist", "USUARIOS", HttpMethod = "POST", ErrorMessage = "Error, El Usuario ya existe.")]
+        [Remote("DoesRutExist", "MOVIMIENTOS_PC", HttpMethod = "POST", ErrorMessage = "Error, El Usuario no existe.")]
         public string RUT_USUARIO { get; set; }
 
         [Display(Name = "Serial Pc:")]
         [Required(ErrorMessage = "Error, Serial es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
+        [Remote("DoesPcExist", "MOVIMIENTOS_PC", HttpMethod = "POST", ErrorMessage = "Error, El Equipo no existe.")]
         public string ID_PC { get; set; }
 
         [Display(Name = "Tipo de Movimiento:")]

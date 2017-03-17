@@ -40,15 +40,26 @@ namespace AuraInventarioProto.Controllers {
         // POST: INV_PC/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        //[HttpPost]
         //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
+        //    if (ModelState.IsValid) {
+        //        db.INV_PC.Add(iNV_PC);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    return View(iNV_PC);
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            //return RedirectToAction("Index");
             return View(iNV_PC);
         }
 
