@@ -56,6 +56,7 @@ SALT nvarchar(128)  not null
 );
 
 insert into USUARIOS values('11111111-1','nombre completo','correo@aura.cl','OF');
+insert into USUARIOS values('Informatica','Aura Ingenieria','informatica@aura.cl','OF');
 insert into USUARIOS values('22222222-2','nombre completo','correo2@aura.cl','O111');
 insert into USUARIOS values('33333333-3','nombre completo','correo3@aura.cl','OF');
 

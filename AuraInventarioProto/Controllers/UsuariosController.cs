@@ -83,7 +83,7 @@ namespace AuraInventarioProto.Controllers {
                     db.SaveChanges();
                     
                 } catch (Exception) {
-
+                    ModelState.AddModelError("","Error, Problema de coincidencias ( Usuario ya existe )");
                     return RedirectToAction("Index");
                 }
                 return RedirectToAction("Index");
@@ -123,16 +123,8 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         //public JsonResult DoesRutExist(string Rut, string Id, FormContext frm1, FormCollection frm2) {
         public JsonResult DoesRutExist(string Rut) {
-
-
-
-            //if (Id == "Edit") {
-            //    var usered = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
-
-            //    return Json(usered == null);
-            //}
-
             var user = db.USUARIOS.FirstOrDefault(p => p.RUT == Rut);
+
             return Json(user == null);
         }
 

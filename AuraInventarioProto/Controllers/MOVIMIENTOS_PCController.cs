@@ -60,6 +60,38 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_AS,FECHA_DV,FECHA_MOV")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             if (ModelState.IsValid) {
+
+                if (mOVIMIENTOS_PC.TIPO_MOV == "Devolucion") {
+                    int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
+                    INV_PC iNV_PC =  db.INV_PC.Find(idpc);
+
+                    mOVIMIENTOS_PC.RUT_USUARIO = "Informatica";
+                    iNV_PC.DEVU = "Si";
+                    iNV_PC.ASIGN_DEVU = "Informatica";
+                    iNV_PC.OBRA = "OF";
+
+                    db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                    db.SaveChanges();
+
+                    db.Entry(iNV_PC).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                } else if (mOVIMIENTOS_PC.TIPO_MOV == "Asignacion") {
+                    int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
+                    INV_PC iNV_PC = db.INV_PC.Find(idpc);
+
+                    iNV_PC.DEVU = "No";
+                    iNV_PC.ASIGN_DEVU = db.USUARIOS.FirstOrDefault(p => p.RUT == mOVIMIENTOS_PC.RUT_USUARIO).NOMBRE_C;
+
+                    db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                    db.SaveChanges();
+
+                    db.Entry(iNV_PC).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
                 db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
                 db.SaveChanges();
                 return RedirectToAction("Index");
