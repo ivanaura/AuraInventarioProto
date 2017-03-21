@@ -183,5 +183,29 @@ namespace AuraInventarioProto.Controllers {
             return Json(pc != null);
         }
 
+        [HttpPost]
+        public ActionResult Test(string selection) {
+            
+            if (selection == "Asignacion") {
+                List<SelectListItem> Equipos = new List<SelectListItem>();                
+                foreach (var equipo in db.INV_PC) {
+                    if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                        Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                    }                    
+                }
+                ViewBag.Pc = Equipos;
+            } else if (selection == "Devolucion") {
+                List<SelectListItem> Equipos = new List<SelectListItem>();
+                foreach (var equipo in db.INV_PC) {
+                    if (equipo.DEVU == "No") {
+                        Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                    }
+                }
+                ViewBag.Pc = Equipos;
+
+            }
+
+            return Json(ViewBag);
+        }
     }
 }
