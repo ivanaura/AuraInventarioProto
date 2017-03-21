@@ -55,10 +55,22 @@ PASS nvarchar(128) not null,
 SALT nvarchar(128)  not null
 );
 
-insert into USUARIOS values('11111111-1','nombre completo','correo@aura.cl','OF');
-insert into USUARIOS values('Informatica','Aura Ingenieria','informatica@aura.cl','OF');
-insert into USUARIOS values('22222222-2','nombre completo','correo2@aura.cl','O111');
-insert into USUARIOS values('33333333-3','nombre completo','correo3@aura.cl','OF');
+create table UNE(
+ID int identity(1,1) primary key not null,
+OBRA varchar(15) not null,
+DESCRIPCION varchar(50)
+);
+
+insert into UNE values('OF','Oficina Central');
+insert into UNE values('O166','');
+insert into UNE values('O172','');
+insert into UNE values('O175','');
+insert into UNE values('O168','');
+
+insert into USUARIOS values('11111111-1','IVAN GUZMAN CAVIERES','correo@aura.cl','OF');
+insert into USUARIOS values('00000000-0','Informatica','informatica@aura.cl','OF');
+insert into USUARIOS values('22222222-2','FREDDY MARQUEZ','correo2@aura.cl','O111');
+insert into USUARIOS values('33333333-3','HERNAN OPAZO','correo3@aura.cl','OF');
 
 insert into LOGIN values('Admin','fa042c452bda6483cf4cfbb01d2b9df7bbc916903075612afa9a499f27820297','bOb5KyDlxHzbKz3j6EzoesS3mVtSyCGN2Niwxo9s2Rw=');
 insert into LOGIN values('Informatica','eb65f4ea944f73683434d9ce606bac2b1ae100a17e5eb238d1424eb5b6805018','h4Q1vHLcplQjILcDoZu7yQJG+ZaoCCH4g56rfMepjyU==');

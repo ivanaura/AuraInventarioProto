@@ -50,6 +50,10 @@ namespace AuraInventarioProto.Controllers {
                     return View(uSUARIOS);
                 }
 
+                uSUARIOS.NOMBRE_C = uSUARIOS.NOMBRE_C.ToUpper();
+                uSUARIOS.UNE = uSUARIOS.UNE.ToUpper();
+                uSUARIOS.RUT = uSUARIOS.RUT.ToUpper();
+
                 db.USUARIOS.Add(uSUARIOS);
                 db.SaveChanges();
                 return RedirectToAction("Index");

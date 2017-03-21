@@ -46,10 +46,6 @@ namespace AuraInventarioProto.Controllers {
             ViewBag.Rut = Usuarios;
             ViewBag.Pc = Equipos;
 
-            
-
-
-
             return View();
         }
 
@@ -65,7 +61,7 @@ namespace AuraInventarioProto.Controllers {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC =  db.INV_PC.Find(idpc);
 
-                    mOVIMIENTOS_PC.RUT_USUARIO = "Informatica";
+                    mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
                     iNV_PC.DEVU = "Si";
                     iNV_PC.ASIGN_DEVU = "Informatica";
                     iNV_PC.OBRA = "OF";
@@ -109,6 +105,19 @@ namespace AuraInventarioProto.Controllers {
             if (mOVIMIENTOS_PC == null) {
                 return HttpNotFound();
             }
+
+            List<SelectListItem> Usuarios = new List<SelectListItem>();
+            List<SelectListItem> Equipos = new List<SelectListItem>();
+            foreach (var usuario in db.USUARIOS) {
+                Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+            }
+            foreach (var equipo in db.INV_PC) {
+                Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+            }
+
+            ViewBag.Rut = Usuarios;
+            ViewBag.Pc = Equipos;
+
             return View(mOVIMIENTOS_PC);
         }
 

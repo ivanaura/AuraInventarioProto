@@ -154,6 +154,25 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="js\datatables\buttons.bootstrap.min.css" />
+    <Content Include="js\datatables\buttons.bootstrap.min.js" />
+    <Content Include="js\datatables\buttons.html5.min.js" />
+    <Content Include="js\datatables\buttons.print.min.js" />
+    <Content Include="js\datatables\dataTables.bootstrap.js" />
+    <Content Include="js\datatables\dataTables.buttons.min.js" />
+    <Content Include="js\datatables\dataTables.fixedHeader.min.js" />
+    <Content Include="js\datatables\dataTables.keyTable.min.js" />
+    <Content Include="js\datatables\dataTables.responsive.min.js" />
+    <Content Include="js\datatables\dataTables.scroller.min.js" />
+    <Content Include="js\datatables\fixedHeader.bootstrap.min.css" />
+    <Content Include="js\datatables\jquery.dataTables.min.css" />
+    <Content Include="js\datatables\jquery.dataTables.min.js" />
+    <Content Include="js\datatables\jszip.min.js" />
+    <Content Include="js\datatables\pdfmake.min.js" />
+    <Content Include="js\datatables\responsive.bootstrap.min.css" />
+    <Content Include="js\datatables\responsive.bootstrap.min.js" />
+    <Content Include="js\datatables\scroller.bootstrap.min.css" />
+    <Content Include="js\datatables\vfs_fonts.js" />
     <Content Include="Models\AuraModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AuraModel.edmx</DependentUpon>

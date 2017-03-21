@@ -11,7 +11,7 @@
     @if (Session["UserRole"].ToString() != "ReadOnly") {
         @Html.ActionLink("Crear Nuevo", "Create")
     }
-    
+
 </p>
 @if (!Model.Any()) {
     <text>No hay Usuarios.</text>
@@ -67,15 +67,24 @@
         </tbody>
     </table>
     @section scripts{
+
+
+        @*//new $.fn.dataTable.Buttons(table, {
+            //    //"language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+            //    buttons: [ 'copy', 'excel', 'pdf' ]
+            //});
+
+            //table.buttons().container().appendTo($('.col-sm-6:eq(0)', table.table().container()));*@
+
         <script>
             $(document).ready(function () {
-                $('#Usuarios').DataTable({
-                    "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
-                    },
+                var table = $('#Usuarios').DataTable({
+                    "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                    dom: 'Bfrtip',
+                    buttons: ['excel']
                 });
             });
         </script>
     }
 
-                            }
+}

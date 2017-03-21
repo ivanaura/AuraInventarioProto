@@ -55,6 +55,11 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
+                iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
+                iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
+                iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
+
+
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
                 return RedirectToAction("Index");
