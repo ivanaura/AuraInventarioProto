@@ -80,7 +80,7 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.TIPO_MOV, new SelectList(
                        new List<Object>{
-                               new { value = "Adquisicion" , text = "Adquisicion"  },
+                               //new { value = "Adquisicion" , text = "Adquisicion"  },
                                new { value = "Devolucion" , text = "Devolucion" },
                                new { value = "Asignacion" , text = "Asignacion" },
                                new { value = "De Baja" , text = "De Baja" },
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.FECHA_AS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FECHA_AS, new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
@@ -109,7 +109,7 @@
                 @Html.EditorFor(model => model.FECHA_DV, new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FECHA_DV, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_MOV, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -140,13 +140,13 @@
         $(document).ready(function () {
             $('#RUT_USUARIO').chosen({       
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
+                max_shown_results: 7,
                 placeholder_text_single: "Seleccione"
             });
 
             $('#ID_PC').chosen({
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
+                max_shown_results: 7,
                 placeholder_text_single: "Seleccione"
             });
 

@@ -46,7 +46,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.UNE, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UNE, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase", @maxlength = "10" } })
+                @*@Html.EditorFor(model => model.UNE, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase", @maxlength = "10" } })*@
+                @Html.DropDownListFor(model => model.UNE, new SelectList(
+                          ViewBag.Obra,
+                          "value",
+                          "text",
+                          2
+                ), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.UNE, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,5 +70,16 @@
 </div>
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+    $(document).ready(function () {
+        $('#UNE').chosen({
+            no_results_text: "No hay resultados para ",
+            max_shown_results: 7,
+            placeholder_text_single: "Seleccione"
+        });
+    });
+</script>
+
 }

@@ -81,9 +81,23 @@
         <script>
             $(document).ready(function () {
                 $('#Movimientos').DataTable({
-                    "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
-                    },
+                    "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                orthogonal: 'sort',
+                                columns: [':not(:last-child)'],
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                orthogonal: 'sort',
+                                columns: [0, 1, 2, 3, 4, 5]
+                            }
+                        }],
                 });
             });
         </script>

@@ -55,7 +55,7 @@
                 <th>
                     Obra
                 </th>
-                <th>Opciones</th>
+                <th class="not-export-col" >Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -97,7 +97,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.OBRA)
                     </td>
-                    <td>
+                    <td class="not-export-col" >
                         @{
                             if (Session["UserRole"].ToString() != "ReadOnly") {
                                 @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
@@ -132,8 +132,16 @@
                     buttons: [
                         {
                             extend: 'excelHtml5',
+                            exportOptions: {                                
+                                orthogonal: 'sort',
+                                columns: [':not(:last-child)'],
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
                             exportOptions: {
-                                orthogonal: 'sort'
+                                orthogonal: 'sort',
+                                columns: [0,1,2,3,4,9,10]
                             }
                         }],
 

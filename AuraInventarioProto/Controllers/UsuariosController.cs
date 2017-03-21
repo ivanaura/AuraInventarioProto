@@ -35,6 +35,12 @@ namespace AuraInventarioProto.Controllers {
 
         // GET: USUARIOS/Create
         public ActionResult Create() {
+            List<SelectListItem> Obras = new List<SelectListItem>();
+            foreach (var obra in db.UNE) {
+                Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+            }
+            ViewBag.Obra = Obras;
+
             return View();
         }
 
@@ -71,6 +77,13 @@ namespace AuraInventarioProto.Controllers {
             if (uSUARIOS == null) {
                 return HttpNotFound();
             }
+
+            List<SelectListItem> Obras = new List<SelectListItem>();
+            foreach (var obra in db.UNE) {
+                Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+            }
+            ViewBag.Obra = Obras;
+
             return View(uSUARIOS);
         }
 

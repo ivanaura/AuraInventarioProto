@@ -78,7 +78,6 @@ namespace AuraInventarioProto.Models {
         public bool SGI_RES { get; set; }
 
         [Display(Name = "Fecha Ultima Mantencion:")]
-        [Required(ErrorMessage = "Error, Fecha De Ultima Mantencion es requerido")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string F_UL_MAN { get; set; }
 

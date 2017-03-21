@@ -34,6 +34,11 @@ namespace AuraInventarioProto.Controllers {
 
         // GET: INV_PC/Create
         public ActionResult Create() {
+            List<SelectListItem> Obras = new List<SelectListItem>();
+            foreach (var obra in db.UNE) {
+                Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+            }
+            ViewBag.Obra = Obras;
             return View();
         }
 
@@ -55,13 +60,21 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
+
                 iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
                 iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
                 iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
-
-
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
+              
+                MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
+                mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
+                mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
+                mOVIMIENTOS_PC.TIPO_MOV = "Adquisicion";
+                mOVIMIENTOS_PC.FECHA_MOV = iNV_PC.FECHA_ADQ;
+                db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             //return RedirectToAction("Index");
@@ -77,6 +90,11 @@ namespace AuraInventarioProto.Controllers {
             if (iNV_PC == null) {
                 return HttpNotFound();
             }
+            List<SelectListItem> Obras = new List<SelectListItem>();
+            foreach (var obra in db.UNE) {
+                Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+            }
+            ViewBag.Obra = Obras;
             return View(iNV_PC);
         }
 

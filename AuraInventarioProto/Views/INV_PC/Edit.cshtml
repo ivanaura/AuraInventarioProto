@@ -67,7 +67,7 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ESTADO, new SelectList(
                        new List<Object>{
-                               new { value = "Operacional" , text = "Operacional"  },
+                               new { value = "Operativo" , text = "Operativo"  },
                                new { value = "De Baja" , text = "De Baja" },
                                new { value = "Malo" , text = "Malo" },
                             },
@@ -192,7 +192,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBRA, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OBRA, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.OBRA, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.OBRA, new SelectList(
+                          ViewBag.Obra,
+                          "value",
+                          "text",
+                          2
+                ), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OBRA, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -219,4 +225,46 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script>
+        $(document).ready(function () {
+            $('#RUT_USUARIO').chosen({
+                no_results_text: "No hay resultados para ",
+                max_shown_results: 4,
+                placeholder_text_single: "Seleccione"
+            });
+
+            $('#ID_PC').chosen({
+                no_results_text: "No hay resultados para ",
+                max_shown_results: 4,
+                placeholder_text_single: "Seleccione"
+            });
+
+            $('#TIPO_MOV').chosen({
+                disable_search: "true",
+                placeholder_text_single: "Seleccione"
+            });
+
+            $('#date').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+            $('#date2').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+            $('#date3').datepicker({
+                format: "dd-mm-yy",
+                todayBtn: true,
+                clearBtn: true,
+                language: "es",
+                todayHighlight: true
+            });
+        });
+</script>
 }

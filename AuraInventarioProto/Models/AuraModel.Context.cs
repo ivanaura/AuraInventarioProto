@@ -29,5 +29,6 @@ namespace AuraInventarioProto.Models
         public virtual DbSet<LOGIN> LOGIN { get; set; }
         public virtual DbSet<MOVIMIENTOS_PC> MOVIMIENTOS_PC { get; set; }
         public virtual DbSet<USUARIOS> USUARIOS { get; set; }
+        public virtual DbSet<UNE> UNE { get; set; }
     }
 }

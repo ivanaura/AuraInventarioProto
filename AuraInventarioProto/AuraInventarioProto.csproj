@@ -263,6 +263,7 @@
     <Compile Include="Controllers\INV_PCController.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
     <Compile Include="Controllers\MOVIMIENTOS_PCController.cs" />
+    <Compile Include="Controllers\UNEController.cs" />
     <Compile Include="Controllers\USUARIOSController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -298,6 +299,9 @@
     <Compile Include="Models\MOVIMIENTOS_PC.cs">
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UNE.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\USUARIOS.cs">
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
@@ -328,6 +332,11 @@
     <Content Include="Views\LOGIN\Index.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringCheckbox.cshtml" />
+    <Content Include="Views\UNE\Create.cshtml" />
+    <Content Include="Views\UNE\Delete.cshtml" />
+    <Content Include="Views\UNE\Details.cshtml" />
+    <Content Include="Views\UNE\Edit.cshtml" />
+    <Content Include="Views\UNE\Index.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -340,6 +349,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\ModelGen\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

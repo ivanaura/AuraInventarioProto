@@ -19,7 +19,19 @@ namespace AuraInventarioProto.Controllers {
         // GET: Home
         [AllowAnonymous]
         public ActionResult Index() {
-            return View();
+            var obj = db.USUARIOS.Where(a => a.RUT.Equals("00000000-0")).FirstOrDefault();
+            if (obj == null) {
+                USUARIOS uSUARIOS = new USUARIOS();
+                uSUARIOS.RUT = "00000000-0";
+                uSUARIOS.NOMBRE_C = "Informatica";
+                uSUARIOS.CORREO = "admin@aura.cl";
+                uSUARIOS.UNE = "OF";
+
+                db.USUARIOS.Add(uSUARIOS);
+                db.SaveChanges();
+            }
+
+                return View();
         }
 
         [HttpPost]

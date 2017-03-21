@@ -47,6 +47,7 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
+                lOGIN.NOMBRE = lOGIN.NOMBRE.ToUpper();
                 string salt = CreateSalt();
                 lOGIN.SALT = salt;
                 string pass = lOGIN.PASS + salt;
