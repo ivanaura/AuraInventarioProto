@@ -45,14 +45,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.SALT)
                 </td>
-                <td>
+                <td style="text-align:center">
                     @{
                         if (Session["UserRole"].ToString() != "ReadOnly") {
-                            @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
-                            @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
-                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
+                            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) <text>|</text>
+                            @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Eliminar" })
                         } else {
-                            @Html.ActionLink("Detalles", "Details", new { id = item.ID })
+                            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
 
                         }
                     }
@@ -64,6 +64,11 @@
 </table>
 }
 @section scripts{
+<script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+</script>
     <script>
         $(document).ready(function () {
             $('#Logins').DataTable({

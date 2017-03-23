@@ -61,6 +61,30 @@ OBRA varchar(15) not null,
 DESCRIPCION varchar(50)
 );
 
+create table DETMAN(
+ID int identity(1,1) primary key not null,
+SERIAL varchar(30) not null,
+MODELO varchar(30) not null,
+MARCA varchar(30) not null,
+TIPO varchar(10) not null,
+ESTADO varchar(30) not null,
+OBS varchar(255),
+FECHA_ADQ varchar(30) not null,
+EST_TW  Bit,
+EST_CC  Bit,
+EST_AV  Bit,
+EST_PD  Bit,
+EST_OF  Bit,
+EST_WN  Bit,
+EST_REG Bit,
+SGI_SW  Bit,
+SGI_RES Bit,
+F_UL_MAN varchar(30) not null,
+DEVU varchar(10),
+ASIGN_DEVU varchar(30),
+OBRA varchar(10)
+);
+
 insert into UNE values('OF','Oficina Central');
 insert into UNE values('O166','');
 insert into UNE values('O172','');
@@ -80,7 +104,6 @@ insert into LOGIN values('SGI','141d945fee0d78aceee3c6cf5d6c072a799572ebdebe9308
 
 insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','false','n/a','O111');
 insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','true','Freddy Marquez','OF');
-
 insert into INV_PC values('XXX67891','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','true','Freddy Marquez','OF');
 
 

@@ -337,6 +337,7 @@
     <Content Include="Views\UNE\Details.cshtml" />
     <Content Include="Views\UNE\Edit.cshtml" />
     <Content Include="Views\UNE\Index.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\_Create_Mov.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -39,7 +39,21 @@ namespace AuraInventarioProto.Controllers {
                 Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
             }
             ViewBag.Obra = Obras;
-            return View();
+
+            INV_PC inv = new INV_PC();
+            inv.EST_TW = true;
+            inv.EST_WN = true;
+            inv.EST_REG = true;
+            inv.EST_PD = true;
+            inv.EST_OF = true;
+            inv.EST_CC = true;
+            inv.EST_AV = true;
+            inv.SGI_RES = true;
+            inv.SGI_SW = true;
+            inv.FECHA_ADQ = DateTime.Now.ToShortDateString().Replace("/", "-"); 
+            inv.F_UL_MAN = DateTime.Now.ToShortDateString().Replace("/", "-");
+
+            return View(inv);
         }
 
         // POST: INV_PC/Create
@@ -64,6 +78,9 @@ namespace AuraInventarioProto.Controllers {
                 iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
                 iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
                 iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
+                iNV_PC.DEVU = "No";
+                iNV_PC.ASIGN_DEVU = "Informatica";
+
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
               

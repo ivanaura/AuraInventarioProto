@@ -79,10 +79,10 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.FECHA_ADQ)
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @Html.DisplayFor(modelItem => item.SGI_SW)
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @Html.DisplayFor(modelItem => item.SGI_RES)
                     </td>
                     <td>
@@ -97,14 +97,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.OBRA)
                     </td>
-                    <td class="not-export-col" >
+                    <td style="text-align:center" >
                         @{
                             if (Session["UserRole"].ToString() != "ReadOnly") {
-                                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
-                                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
-                                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                                @Html.ActionLink(" ", "Mantencion", new { id = item.ID }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantencion" }) <text>|</text>
+                                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) <text>|</text>
+                                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Eliminar" })
                             } else {
-                                @Html.ActionLink("Detalles", "Details", new { id = item.ID })
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
 
                             }
                         }
@@ -114,15 +115,11 @@
         </tbody>
     </table>
     @section scripts{
-@*<script>
-                    $(document).ready(function () {
-                        var table = $('#Inventario_PC').DataTable({
-                            "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
-                            dom: 'Bfrtip',
-                            buttons: ['excelHtml5', 'pdf']
-                        });
-                    });
-</script>*@
+<script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 
 <script>
             $(document).ready(function () {
@@ -141,7 +138,7 @@
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 orthogonal: 'sort',
-                                columns: [0,1,2,3,4,9,10]
+                                columns: [0, 1, 2, 3, 4, 9, 10],                                
                             }
                         }],
 

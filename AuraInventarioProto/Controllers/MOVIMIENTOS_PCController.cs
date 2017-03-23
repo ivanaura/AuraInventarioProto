@@ -33,9 +33,85 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: MOVIMIENTOS_PC/Create
-        public ActionResult Create() {
+        public ActionResult Create(string selection) {
             List<SelectListItem> Usuarios = new List<SelectListItem>();
             List<SelectListItem> Equipos = new List<SelectListItem>();
+            #region Default Block            
+
+            foreach (var usuario in db.USUARIOS) {
+                Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+            }
+            foreach (var equipo in db.INV_PC) {
+                Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+            }
+
+            ViewBag.Rut = Usuarios;
+            ViewBag.Pc = Equipos;
+            #endregion
+
+            MOVIMIENTOS_PC mov = new MOVIMIENTOS_PC();
+            mov.FECHA_MOV = DateTime.Now.ToShortDateString().Replace("/","-");
+            
+            return View(mov);
+        }
+
+        [HttpPost]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        public PartialViewResult Create_logic(string selection) {
+            List<SelectListItem> Usuarios = new List<SelectListItem>();
+            List<SelectListItem> Equipos = new List<SelectListItem>();
+
+            #region Logic Block
+
+            if (selection == "Asignacion") {
+
+                foreach (var usuario in db.USUARIOS) {
+                    Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                }
+                foreach (var equipo in db.INV_PC) {
+                    if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                        Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                    }
+                }
+
+                ViewBag.Rut = Usuarios;
+                ViewBag.Pc = Equipos;
+                return PartialView("_Create_Mov");
+
+            } else if (selection == "Devolucion") {
+                //TODO
+                Usuarios.Add(new SelectListItem { Text = "Seleccione un equipo...", Value = "0" });
+
+
+
+                foreach (var equipo in db.INV_PC) {
+                    if (equipo.DEVU == "No") {
+                        Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                    }
+                }
+
+                ViewBag.Rut = Usuarios;
+                ViewBag.Pc = Equipos;
+                return PartialView("_Create_Mov");
+
+            } else if (selection == "De Baja") {
+                Usuarios.Add(new SelectListItem { Text = "Informatica", Value = "00000000-0" });
+
+                foreach (var equipo in db.INV_PC) {
+                    if (equipo.DEVU == "Si") {
+                        Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                    }
+                }
+
+                ViewBag.Rut = Usuarios;
+                ViewBag.Pc = Equipos;
+                return PartialView("_Create_Mov");
+            }
+
+            #endregion
+
+            #region Default Block            
+
             foreach (var usuario in db.USUARIOS) {
                 Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
             }
@@ -46,8 +122,11 @@ namespace AuraInventarioProto.Controllers {
             ViewBag.Rut = Usuarios;
             ViewBag.Pc = Equipos;
 
-            return View();
+            #endregion
+
+            return PartialView("_Create_Mov");
         }
+
 
         // POST: MOVIMIENTOS_PC/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
@@ -61,7 +140,13 @@ namespace AuraInventarioProto.Controllers {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC =  db.INV_PC.Find(idpc);
 
-                    mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
+                    string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN_DEVU).RUT;
+
+
+                    mOVIMIENTOS_PC.RUT_USUARIO = user;
+
+
+
                     iNV_PC.DEVU = "Si";
                     iNV_PC.ASIGN_DEVU = "Informatica";
                     iNV_PC.OBRA = "OF";
@@ -93,7 +178,7 @@ namespace AuraInventarioProto.Controllers {
                 return RedirectToAction("Index");
             }
 
-            return View(mOVIMIENTOS_PC);
+            return RedirectToAction("Create");
         }
 
         // GET: MOVIMIENTOS_PC/Edit/5

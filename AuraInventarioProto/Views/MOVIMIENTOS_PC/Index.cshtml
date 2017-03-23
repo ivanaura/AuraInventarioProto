@@ -27,12 +27,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.TIPO_MOV)
                 </th>
-                <th>
+                @*<th>
                     @Html.DisplayNameFor(model => model.FECHA_AS)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FECHA_DV)
-                </th>
+                </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.FECHA_MOV)
                 </th>
@@ -52,23 +52,23 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TIPO_MOV)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.FECHA_AS)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FECHA_DV)
-                    </td>
+                    </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.FECHA_MOV)
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @{
                             if (Session["UserRole"].ToString() != "ReadOnly") {
-                                @Html.ActionLink("Editar", "Edit", new { id = item.ID }) <text>|</text>
-                                @Html.ActionLink("Detalles", "Details", new { id = item.ID }) <text>|</text>
-                                @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
+                                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) <text>|</text>
+                                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Eliminar" })
                             } else {
-                                @Html.ActionLink("Detalles", "Details", new { id = item.ID })
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
 
                             }
                         }
@@ -78,6 +78,11 @@
         </tbody>
     </table>
     @section scripts{
+<script type="text/javascript">
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+</script>
         <script>
             $(document).ready(function () {
                 $('#Movimientos').DataTable({
@@ -95,7 +100,7 @@
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 orthogonal: 'sort',
-                                columns: [0, 1, 2, 3, 4, 5]
+                                columns: [0, 1, 2, 3]
                             }
                         }],
                 });

@@ -167,7 +167,9 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OBS)
+
+            @*@Html.Raw(Html.Encode(model.OBS).Replace("\n", "<br />"))*@
+            @Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))
         </dd>
 
     </dl>
