@@ -100,10 +100,10 @@
                     <td style="text-align:center" >
                         @{
                             if (Session["UserRole"].ToString() != "ReadOnly") {
-                                @Html.ActionLink(" ", "Mantencion", new { id = item.ID }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantencion" }) <text>|</text>
+                                @Html.ActionLink(" ", "Create", "DETMAN", new { id = item.ID }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantencion" }) <text>|</text>
                                 @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
                                 @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) <text>|</text>
-                                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Eliminar" })
+                                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Dar de Baja" })
                             } else {
                                 @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
 
@@ -132,6 +132,7 @@
                             exportOptions: {                                
                                 orthogonal: 'sort',
                                 columns: [':not(:last-child)'],
+                                
                             }
                         },
                         {
@@ -147,7 +148,7 @@
                         render: function (data, type, row, meta) {
                             if (type === 'sort') {
                                 var $input = $(data).find('input[type="checkbox"]').addBack();
-                                data = ($input.prop('checked')) ? "Si" : "No";
+                                data = ($input.prop('checked')) ? "Cumple" : "No Cumple";
                             }
 
                             return data;
@@ -157,16 +158,5 @@
             });
 </script>
 
-
-
-        @*<script>
-            $(document).ready(function () {
-                $('#Inventario_PC').DataTable({
-                    "language": {
-                        "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
-                    },
-                });
-            });
-        </script>*@
     }
 }

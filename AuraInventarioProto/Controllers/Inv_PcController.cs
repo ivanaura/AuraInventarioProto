@@ -22,6 +22,11 @@ namespace AuraInventarioProto.Controllers {
             return View(db.INV_PC.ToList());
         }
 
+        //GET: Mantencion
+        //public ActionResult Mantencion() {
+        //    return View()
+        //}
+
         // GET: INV_PC/Details/5
         public ActionResult Details(int? id) {
             if (id == null) {
@@ -52,8 +57,10 @@ namespace AuraInventarioProto.Controllers {
             inv.EST_AV = true;
             inv.SGI_RES = true;
             inv.SGI_SW = true;
-            inv.FECHA_ADQ = DateTime.Now.ToShortDateString().Replace("/", "-"); 
+            inv.FECHA_ADQ = DateTime.Now.ToShortDateString().Replace("/", "-");
             inv.F_UL_MAN = DateTime.Now.ToShortDateString().Replace("/", "-");
+            //inv.FECHA_ADQ = DateTime.Today;
+            //inv.F_UL_MAN = DateTime.Today;
 
             return View(inv);
         }
@@ -154,7 +161,9 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
-            db.INV_PC.Remove(iNV_PC);
+            //db.INV_PC.Remove(iNV_PC);
+            iNV_PC.ESTADO = "De Baja";
+            db.Entry(iNV_PC).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

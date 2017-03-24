@@ -1,0 +1,294 @@
+﻿@model AuraInventarioProto.Models.DETMAN
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gestionar Mantencion</h2>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        <div class="col-lg-6">
+            <div class="form-horizontal well bs-component">
+                <h4>Mantencion</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SERIAL, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SERIAL, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                        @Html.ValidationMessageFor(model => model.SERIAL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MODELO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MODELO, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                        @Html.ValidationMessageFor(model => model.MODELO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MARCA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.MARCA, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
+                        @Html.ValidationMessageFor(model => model.MARCA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TIPO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.TIPO, new SelectList(
+                       new List<Object>{
+                           new { value = "AIO" , text = "All in One"  },
+                           new { value = "Notebook" , text = "Notebook" },
+                       }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TIPO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.ESTADO, new SelectList(
+                       new List<Object>{
+                           new { value = "Operativo" , text = "Operativo"  },
+                           new { value = "De Baja" , text = "De Baja" },
+                           new { value = "Malo" , text = "Malo" },
+                       }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ESTADO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FECHA_ADQ, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FECHA_ADQ, new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_TW, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_TW, new { htmlAttributes = new { @class = "form-control", @checked = 0 } })
+                        @Html.ValidationMessageFor(model => model.EST_TW, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_CC, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_CC, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_CC, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_AV, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_AV, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_AV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_PD, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_PD, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_PD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_OF, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_OF, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_OF, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_WN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_WN, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_WN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EST_REG, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.EST_REG, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.EST_REG, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SGI_SW, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.SGI_SW, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.SGI_SW, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SGI_RES, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.SGI_RES, new { htmlAttributes = new { @class = "form-control", @value = "true" } })
+                        @Html.ValidationMessageFor(model => model.SGI_RES, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.F_UL_MAN, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.F_UL_MAN, new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OBRA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.OBRA, new SelectList(
+                          ViewBag.Obra, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.OBRA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control", @style = "margin: 0px; width: 308px; height: 109px; " } })
+                        @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+        
+
+<div class="col-lg-6">
+    <div class="well bs-component">
+        <h4>Detalle De Ultima Mantencion</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>Serial:</dt>
+            <dd>@*@Html.DisplayFor(model => model.SERIAL)*@</dd>
+
+            <dt>Modelo:</dt>
+            <dd>@*@Html.DisplayFor(model => model.MODELO)*@</dd>
+
+            <dt>Marca:</dt>
+            <dd>@*@Html.DisplayFor(model => model.MARCA)*@</dd>
+
+            <dt>Tipo:</dt>
+            <dd>@*@Html.DisplayFor(model => model.TIPO)*@</dd>
+
+            <dt>Estado:</dt>
+            <dd>@*@Html.DisplayFor(model => model.ESTADO)*@</dd>
+
+            <dt>Fecha Adquisicion:</dt>
+            <dd>@*@Html.DisplayFor(model => model.FECHA_ADQ)*@</dd>
+
+            <dt>Estado TeamViewer:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_TW)*@</dd>
+
+            <dt>Estado Ccleaner:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_CC)*@</dd>
+
+            <dt>Estado Anti Virus:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_AV)*@</dd>
+
+            <dt>Estado PDF:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_PD)*@</dd>
+
+            <dt>Estado Registros:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_REG)*@</dd>
+
+            <dt>Licencia Office:<dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_OF)*@</dd>
+
+            <dt>Licencia Windows:</dt>
+            <dd>@*@Html.DisplayFor(model => model.EST_WN)*@</dd>
+
+            <dt>SGI P-30 Software:</dt>
+            <dd>@*@Html.DisplayFor(model => model.SGI_SW)*@</dd>
+
+            <dt>SGI P-30 Restricciones:</dt>
+            <dd>@*@Html.DisplayFor(model => model.SGI_RES)*@</dd>
+
+            <dt>Fecha Ultima Mantencion:</dt>
+            <dd>@*@Html.DisplayFor(model => model.F_UL_MAN)*@</dd>
+
+            <dt>Devuelto:</dt>
+            <dd>@*@Html.DisplayFor(model => model.DEVU)*@</dd>
+
+            <dt>Asignado Devolucion:</dt>
+            <dd>@*@Html.DisplayFor(model => model.ASIGN)*@</dd>
+
+            <dt>Obra:</dt>
+            <dd>@*@Html.DisplayFor(model => model.OBRA)*@</dd>
+
+            <dt>Observaciones:</dt>
+            <dd>@*@Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))*@</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="row"></div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(document).ready(function () {
+
+                $('#OBRA').chosen({
+                    no_results_text: "No hay resultados para ",
+                    max_shown_results: 7,
+                    placeholder_text_single: "Seleccione",
+                    width: 120
+
+                });
+                $('#ESTADO').chosen({
+                    disable_search: "true",
+                    placeholder_text_single: "Seleccione",
+                    width: 120
+                });
+                $('#TIPO').chosen({
+                    disable_search: "true",
+                    placeholder_text_single: "Seleccione",
+                    width: 120
+                });
+
+
+                $('#date').datepicker({
+                    format: "dd-mm-yy",
+                    todayBtn: true,
+                    clearBtn: true,
+                    language: "es",
+                    todayHighlight: true
+                });
+                $('#date2').datepicker({
+                    format: "dd-mm-yy",
+                    todayBtn: true,
+                    clearBtn: true,
+                    language: "es",
+                    todayHighlight: true
+                });
+            });
+        </script>
+    }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using AuraInventarioProto.ViewModels;
 using System.Web.Security;
 using static AuraInventarioProto.App_Start.HashClass;
 
@@ -30,20 +31,22 @@ namespace AuraInventarioProto.Controllers {
                 db.USUARIOS.Add(uSUARIOS);
                 db.SaveChanges();
             }
-
+            if (Session["UserID"] == null) {
+                return View();
+            }
                 return View();
         }
 
         [HttpPost]
         //[AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LOGIN objLogin) {
+        public ActionResult Login(LoginViewModel objLogin) {            
             if (ModelState.IsValid) {
                 string salt = (from n in db.LOGIN where objLogin.NOMBRE == n.NOMBRE select n.SALT).First().ToString();
                 string passtohash = objLogin.PASS + salt;
                 objLogin.PASS = CreateHash(passtohash);
 
-                var obj = db.LOGIN.Where(a => a.NOMBRE.Equals(objLogin.NOMBRE) && a.PASS.Equals(objLogin.PASS)).FirstOrDefault();
+                var obj = db.LOGIN.Where(a => a.NOMBRE.Equals(objLogin.NOMBRE) && a.PASS.Equals(objLogin.PASS) && a.ESTADO.Equals("Activo")).FirstOrDefault();
                 if (obj != null) {                    
                     Session["UserID"] = obj.ID.ToString();
                     Session["UserName"] = obj.NOMBRE.ToString();

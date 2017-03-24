@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AuraInventarioProto")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Toshiba")]
+[assembly: AssemblyCompany("Aura")]
 [assembly: AssemblyProduct("AuraInventarioProto")]
 [assembly: AssemblyCopyright("Copyright © Toshiba 2017")]
 [assembly: AssemblyTrademark("")]

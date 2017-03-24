@@ -86,7 +86,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,ROL")] LOGIN lOGIN) {
+        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,ROL,ESTADO")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 try {
                     string salt = CreateSalt();
@@ -122,7 +122,9 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             LOGIN lOGIN = db.LOGIN.Find(id);
-            db.LOGIN.Remove(lOGIN);
+            //db.LOGIN.Remove(lOGIN);
+            lOGIN.ESTADO = "Inactivo";
+            db.Entry(lOGIN).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<AuraInventarioProto.Models.DETMAN>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table table-striped table-bordered table-hover table-responsive display compact" id="Detalles_PC">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SERIAL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODELO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MARCA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TIPO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ESTADO)
+            </th>           
+            <th>
+                @Html.DisplayNameFor(model => model.FECHA_ADQ)
+            </th>           
+            <th>
+                @Html.DisplayNameFor(model => model.SGI_SW)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SGI_RES)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.F_UL_MAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DEVU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ASIGN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OBRA)
+            </th>
+            <th style="text-align:center"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SERIAL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODELO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MARCA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TIPO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTADO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA_ADQ)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.SGI_SW)
+                </td>
+                <td style="text-align:center">
+                    @Html.DisplayFor(modelItem => item.SGI_RES)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.F_UL_MAN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DEVU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ASIGN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OBRA)
+                </td>
+                <td style="text-align:center">                    
+                    @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
+<script>
+            $(document).ready(function () {
+                var table = $('#Detalles_PC').DataTable({
+                    "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                    dom: 'Bfrtlip',
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                orthogonal: 'sort',
+                                columns: [':not(:last-child)'],
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                orthogonal: 'sort',
+                                columns: [0, 1, 2, 3, 4, 9, 10],
+                            }
+                        }],
+
+                    columnDefs: [{
+                        targets: [6, 7],
+                        render: function (data, type, row, meta) {
+                            if (type === 'sort') {
+                                var $input = $(data).find('input[type="checkbox"]').addBack();
+                                data = ($input.prop('checked')) ? "Cumple" : "No Cumple";
+                            }
+
+                            return data;
+                        }
+                    }]
+                });
+            });
+</script>
+    }

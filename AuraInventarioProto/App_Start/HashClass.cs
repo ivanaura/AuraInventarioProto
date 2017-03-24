@@ -35,13 +35,5 @@ namespace AuraInventarioProto.App_Start {
             rng.GetBytes(buff);
             return Convert.ToBase64String(buff);
         }
-
-        //public string ComputeHash(string input, HashAlgorithm algorithm) {
-        //    Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-
-        //    Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
-
-        //    return BitConverter.ToString(hashedBytes);
-        //}
     }
 }

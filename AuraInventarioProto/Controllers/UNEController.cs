@@ -81,7 +81,7 @@ namespace AuraInventarioProto.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,OBRA,DESCRIPCION")] UNE uNE)
+        public ActionResult Edit([Bind(Include = "ID,OBRA,DESCRIPCION,ESTADO")] UNE uNE)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +113,9 @@ namespace AuraInventarioProto.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             UNE uNE = db.UNE.Find(id);
-            db.UNE.Remove(uNE);
+            //db.UNE.Remove(uNE);
+            uNE.ESTADO = "Inactivo";
+            db.Entry(uNE).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

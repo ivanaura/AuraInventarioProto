@@ -40,10 +40,14 @@ namespace AuraInventarioProto.Controllers {
             #region Default Block            
 
             foreach (var usuario in db.USUARIOS) {
-                Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                if (usuario.ESTADO == "Activo") {
+                    Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                }                
             }
             foreach (var equipo in db.INV_PC) {
-                Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                    Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                }                
             }
 
             ViewBag.Rut = Usuarios;
@@ -51,7 +55,7 @@ namespace AuraInventarioProto.Controllers {
             #endregion
 
             MOVIMIENTOS_PC mov = new MOVIMIENTOS_PC();
-            mov.FECHA_MOV = DateTime.Now.ToShortDateString().Replace("/","-");
+            //mov.FECHA_MOV = DateTime.Now.ToShortDateString().Replace("/","-");
             
             return View(mov);
         }
@@ -67,7 +71,9 @@ namespace AuraInventarioProto.Controllers {
             if (selection == "Asignacion") {
 
                 foreach (var usuario in db.USUARIOS) {
-                    Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                    if (usuario.ESTADO == "Activo") {
+                        Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                    }
                 }
                 foreach (var equipo in db.INV_PC) {
                     if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
@@ -114,10 +120,14 @@ namespace AuraInventarioProto.Controllers {
             #region Default Block            
 
             foreach (var usuario in db.USUARIOS) {
-                Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                if (usuario.ESTADO == "Activo") {
+                    Usuarios.Add(new SelectListItem { Text = usuario.NOMBRE_C, Value = usuario.RUT });
+                }
             }
             foreach (var equipo in db.INV_PC) {
-                Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                    Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
+                }
             }
 
             ViewBag.Rut = Usuarios;
