@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using AuraInventarioProto.Models;
 using AuraInventarioProto.App_Start;
 
+
 namespace AuraInventarioProto.Controllers {
     //    [Authorize]
     [SessionExpire]
@@ -59,6 +60,7 @@ namespace AuraInventarioProto.Controllers {
                 uSUARIOS.NOMBRE_C = uSUARIOS.NOMBRE_C.ToUpper();
                 uSUARIOS.UNE = uSUARIOS.UNE.ToUpper();
                 uSUARIOS.RUT = uSUARIOS.RUT.ToUpper();
+                uSUARIOS.ESTADO = "Activo";
 
                 db.USUARIOS.Add(uSUARIOS);
                 db.SaveChanges();

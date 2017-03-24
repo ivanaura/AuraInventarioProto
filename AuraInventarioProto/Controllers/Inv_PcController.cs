@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+
 using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
@@ -16,6 +17,7 @@ namespace AuraInventarioProto.Controllers {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: INV_PC
+        
         public ActionResult Index() {
             return View(db.INV_PC.ToList());
         }
@@ -61,7 +63,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
+        //public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
         //    if (ModelState.IsValid) {
         //        db.INV_PC.Add(iNV_PC);
         //        db.SaveChanges();
@@ -72,14 +74,14 @@ namespace AuraInventarioProto.Controllers {
         //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
+        public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
 
                 iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
                 iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
                 iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
                 iNV_PC.DEVU = "No";
-                iNV_PC.ASIGN_DEVU = "Informatica";
+                iNV_PC.ASIGN = "Informatica";
 
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
@@ -120,7 +122,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN_DEVU,OBRA")] INV_PC iNV_PC) {
+        public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
                 try {
                     db.Entry(iNV_PC).State = EntityState.Modified;

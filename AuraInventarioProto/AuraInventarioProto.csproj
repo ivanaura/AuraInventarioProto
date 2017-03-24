@@ -59,8 +59,8 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
@@ -259,6 +259,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SessionExpireAttribute.cs" />
     <Compile Include="App_Start\SqlConnectionClass.cs" />
+    <Compile Include="Controllers\DETMANController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INV_PCController.cs" />
     <Compile Include="Controllers\LOGINController.cs" />
@@ -289,6 +290,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AuraModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DETMAN.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\INV_PC.cs">
       <DependentUpon>AuraModel.tt</DependentUpon>
@@ -338,6 +342,11 @@
     <Content Include="Views\UNE\Edit.cshtml" />
     <Content Include="Views\UNE\Index.cshtml" />
     <Content Include="Views\MOVIMIENTOS_PC\_Create_Mov.cshtml" />
+    <Content Include="Views\DETMen\Create.cshtml" />
+    <Content Include="Views\DETMen\Delete.cshtml" />
+    <Content Include="Views\DETMen\Details.cshtml" />
+    <Content Include="Views\DETMen\Edit.cshtml" />
+    <Content Include="Views\DETMen\Index.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

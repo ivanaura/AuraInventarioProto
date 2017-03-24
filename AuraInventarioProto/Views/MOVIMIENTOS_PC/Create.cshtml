@@ -64,6 +64,15 @@
                 @Html.ValidationMessageFor(model => model.FECHA_MOV, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control", @style = "margin: 0px; width: 308px; height: 109px; " } })
+                @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Guardar" class="btn btn-success" />

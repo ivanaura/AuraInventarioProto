@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+
 using System.Web.Security;
 using System.Security.Cryptography;
 using System.Text;
@@ -45,13 +46,14 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS")] LOGIN lOGIN) {
+        public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS,ROL")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 lOGIN.NOMBRE = lOGIN.NOMBRE.ToUpper();
                 string salt = CreateSalt();
                 lOGIN.SALT = salt;
                 string pass = lOGIN.PASS + salt;
                 lOGIN.PASS = CreateHash(pass);
+                lOGIN.ESTADO = "Activo";
 
                 //lOGIN.PASS = CreateHash(pass, new SHA256CryptoServiceProvider());
 
@@ -84,7 +86,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS")] LOGIN lOGIN) {
+        public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,ROL")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 try {
                     string salt = CreateSalt();

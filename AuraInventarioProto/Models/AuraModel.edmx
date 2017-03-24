@@ -5,6 +5,32 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="AuraInventarioProtoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DETMAN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SERIAL" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MODELO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MARCA" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="OBS" Type="varchar" MaxLength="255" />
+          <Property Name="FECHA_ADQ" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EST_TW" Type="bit" />
+          <Property Name="EST_CC" Type="bit" />
+          <Property Name="EST_AV" Type="bit" />
+          <Property Name="EST_PD" Type="bit" />
+          <Property Name="EST_OF" Type="bit" />
+          <Property Name="EST_WN" Type="bit" />
+          <Property Name="EST_REG" Type="bit" />
+          <Property Name="SGI_SW" Type="bit" />
+          <Property Name="SGI_RES" Type="bit" />
+          <Property Name="F_UL_MAN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DEVU" Type="varchar" MaxLength="10" />
+          <Property Name="ASIGN" Type="varchar" MaxLength="30" />
+          <Property Name="OBRA" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="INV_PC">
           <Key>
             <PropertyRef Name="ID" />
@@ -28,7 +54,7 @@
           <Property Name="SGI_RES" Type="bit" />
           <Property Name="F_UL_MAN" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="DEVU" Type="varchar" MaxLength="10" />
-          <Property Name="ASIGN_DEVU" Type="varchar" MaxLength="30" />
+          <Property Name="ASIGN" Type="varchar" MaxLength="30" />
           <Property Name="OBRA" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="LOGIN">
@@ -39,6 +65,8 @@
           <Property Name="NOMBRE" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="PASS" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="SALT" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ROL" Type="varchar" MaxLength="20" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="MOVIMIENTOS_PC">
           <Key>
@@ -48,17 +76,17 @@
           <Property Name="RUT_USUARIO" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="ID_PC" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TIPO_MOV" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="FECHA_AS" Type="varchar" MaxLength="30" />
-          <Property Name="FECHA_DV" Type="varchar" MaxLength="30" />
           <Property Name="FECHA_MOV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="OBS" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UNE">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OBRA" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="OBRA" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
@@ -69,14 +97,25 @@
           <Property Name="NOMBRE_C" Type="varchar" MaxLength="40" Nullable="false" />
           <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="UNE" Type="varchar" MaxLength="10" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__MOVIMIENT__ID_PC__182C9B23' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__MOVIMIENT__ID_PC__182C9B23" />-->
+advertencia 6035: La relación 'FK_DETMAN_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_DETMAN_INV_PC" />-->
         <!--Errores durante la generación:
-advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
-        <Association Name="FK__MOVIMIENT__RUT_U__173876EA" />-->
+advertencia 6035: La relación 'FK_INV_PC_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_INV_PC_UNE" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_MOVIMIENTOS_PC_INV_PC" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_USUARIOS' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_MOVIMIENTOS_PC_USUARIOS" />-->
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <Association Name="FK_USUARIOS_UNE" />-->
         <EntityContainer Name="AuraInventarioProtoDBModelStoreContainer">
+          <EntitySet Name="DETMAN" EntityType="Self.DETMAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INV_PC" EntityType="Self.INV_PC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOGIN" EntityType="Self.LOGIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIMIENTOS_PC" EntityType="Self.MOVIMIENTOS_PC" Schema="dbo" store:Type="Tables" />
@@ -87,18 +126,26 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuraInventarioProtoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="INV_PC">
+        <EntityContainer Name="AuraInventarioProtoDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DETMAN" EntityType="AuraInventarioProtoDBModel.DETMAN" />
+          <EntitySet Name="INV_PC" EntityType="AuraInventarioProtoDBModel.INV_PC" />
+          <EntitySet Name="LOGIN" EntityType="AuraInventarioProtoDBModel.LOGIN" />
+          <EntitySet Name="MOVIMIENTOS_PC" EntityType="AuraInventarioProtoDBModel.MOVIMIENTOS_PC" />
+          <EntitySet Name="UNE" EntityType="AuraInventarioProtoDBModel.UNE" />
+          <EntitySet Name="USUARIOS" EntityType="AuraInventarioProtoDBModel.USUARIOS" />
+        </EntityContainer>
+        <EntityType Name="DETMAN">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SERIAL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MODELO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MARCA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TIPO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ESTADO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SERIAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MODELO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MARCA" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_ADQ" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FECHA_ADQ" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="EST_TW" Type="Boolean" />
           <Property Name="EST_CC" Type="Boolean" />
           <Property Name="EST_AV" Type="Boolean" />
@@ -108,9 +155,35 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
           <Property Name="EST_REG" Type="Boolean" />
           <Property Name="SGI_SW" Type="Boolean" />
           <Property Name="SGI_RES" Type="Boolean" />
-          <Property Name="F_UL_MAN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="F_UL_MAN" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="DEVU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ASIGN_DEVU" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ASIGN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OBRA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="INV_PC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SERIAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MODELO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MARCA" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ADQ" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EST_TW" Type="Boolean" />
+          <Property Name="EST_CC" Type="Boolean" />
+          <Property Name="EST_AV" Type="Boolean" />
+          <Property Name="EST_PD" Type="Boolean" />
+          <Property Name="EST_OF" Type="Boolean" />
+          <Property Name="EST_WN" Type="Boolean" />
+          <Property Name="EST_REG" Type="Boolean" />
+          <Property Name="SGI_SW" Type="Boolean" />
+          <Property Name="SGI_RES" Type="Boolean" />
+          <Property Name="F_UL_MAN" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DEVU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ASIGN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBRA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="LOGIN">
@@ -118,119 +191,145 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRE" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PASS" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SALT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PASS" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SALT" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ROL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MOVIMIENTOS_PC">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RUT_USUARIO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_PC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TIPO_MOV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FECHA_AS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_DV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_MOV" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUT_USUARIO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PC" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_MOV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_MOV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UNE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OBRA" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USUARIOS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RUT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NOMBRE_C" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CORREO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUT" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE_C" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="UNE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="AuraInventarioProtoDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="INV_PC" EntityType="Self.INV_PC" />
-          <EntitySet Name="LOGIN" EntityType="Self.LOGIN" />
-          <EntitySet Name="MOVIMIENTOS_PC" EntityType="Self.MOVIMIENTOS_PC" />
-          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
-          <EntitySet Name="UNE" EntityType="AuraInventarioProtoDBModel.UNE" />
-        </EntityContainer>
-        <EntityType Name="UNE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OBRA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AuraInventarioProtoDBModelStoreContainer" CdmEntityContainer="AuraInventarioProtoDBEntities">
+          <EntitySetMapping Name="DETMAN">
+            <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.DETMAN">
+              <MappingFragment StoreEntitySet="DETMAN">
+                <ScalarProperty Name="OBRA" ColumnName="OBRA" />
+                <ScalarProperty Name="ASIGN" ColumnName="ASIGN" />
+                <ScalarProperty Name="DEVU" ColumnName="DEVU" />
+                <ScalarProperty Name="F_UL_MAN" ColumnName="F_UL_MAN" />
+                <ScalarProperty Name="SGI_RES" ColumnName="SGI_RES" />
+                <ScalarProperty Name="SGI_SW" ColumnName="SGI_SW" />
+                <ScalarProperty Name="EST_REG" ColumnName="EST_REG" />
+                <ScalarProperty Name="EST_WN" ColumnName="EST_WN" />
+                <ScalarProperty Name="EST_OF" ColumnName="EST_OF" />
+                <ScalarProperty Name="EST_PD" ColumnName="EST_PD" />
+                <ScalarProperty Name="EST_AV" ColumnName="EST_AV" />
+                <ScalarProperty Name="EST_CC" ColumnName="EST_CC" />
+                <ScalarProperty Name="EST_TW" ColumnName="EST_TW" />
+                <ScalarProperty Name="FECHA_ADQ" ColumnName="FECHA_ADQ" />
+                <ScalarProperty Name="OBS" ColumnName="OBS" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="INV_PC">
             <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.INV_PC">
               <MappingFragment StoreEntitySet="INV_PC">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
-                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
-                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
-                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
-                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="OBS" ColumnName="OBS" />
-                <ScalarProperty Name="FECHA_ADQ" ColumnName="FECHA_ADQ" />
-                <ScalarProperty Name="EST_TW" ColumnName="EST_TW" />
-                <ScalarProperty Name="EST_CC" ColumnName="EST_CC" />
-                <ScalarProperty Name="EST_AV" ColumnName="EST_AV" />
-                <ScalarProperty Name="EST_PD" ColumnName="EST_PD" />
-                <ScalarProperty Name="EST_OF" ColumnName="EST_OF" />
-                <ScalarProperty Name="EST_WN" ColumnName="EST_WN" />
-                <ScalarProperty Name="EST_REG" ColumnName="EST_REG" />
-                <ScalarProperty Name="SGI_SW" ColumnName="SGI_SW" />
-                <ScalarProperty Name="SGI_RES" ColumnName="SGI_RES" />
-                <ScalarProperty Name="F_UL_MAN" ColumnName="F_UL_MAN" />
-                <ScalarProperty Name="DEVU" ColumnName="DEVU" />
-                <ScalarProperty Name="ASIGN_DEVU" ColumnName="ASIGN_DEVU" />
                 <ScalarProperty Name="OBRA" ColumnName="OBRA" />
+                <ScalarProperty Name="ASIGN" ColumnName="ASIGN" />
+                <ScalarProperty Name="DEVU" ColumnName="DEVU" />
+                <ScalarProperty Name="F_UL_MAN" ColumnName="F_UL_MAN" />
+                <ScalarProperty Name="SGI_RES" ColumnName="SGI_RES" />
+                <ScalarProperty Name="SGI_SW" ColumnName="SGI_SW" />
+                <ScalarProperty Name="EST_REG" ColumnName="EST_REG" />
+                <ScalarProperty Name="EST_WN" ColumnName="EST_WN" />
+                <ScalarProperty Name="EST_OF" ColumnName="EST_OF" />
+                <ScalarProperty Name="EST_PD" ColumnName="EST_PD" />
+                <ScalarProperty Name="EST_AV" ColumnName="EST_AV" />
+                <ScalarProperty Name="EST_CC" ColumnName="EST_CC" />
+                <ScalarProperty Name="EST_TW" ColumnName="EST_TW" />
+                <ScalarProperty Name="FECHA_ADQ" ColumnName="FECHA_ADQ" />
+                <ScalarProperty Name="OBS" ColumnName="OBS" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LOGIN">
             <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.LOGIN">
               <MappingFragment StoreEntitySet="LOGIN">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
                 <ScalarProperty Name="SALT" ColumnName="SALT" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MOVIMIENTOS_PC">
             <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.MOVIMIENTOS_PC">
               <MappingFragment StoreEntitySet="MOVIMIENTOS_PC">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RUT_USUARIO" ColumnName="RUT_USUARIO" />
-                <ScalarProperty Name="ID_PC" ColumnName="ID_PC" />
-                <ScalarProperty Name="TIPO_MOV" ColumnName="TIPO_MOV" />
-                <ScalarProperty Name="FECHA_AS" ColumnName="FECHA_AS" />
-                <ScalarProperty Name="FECHA_DV" ColumnName="FECHA_DV" />
+                <ScalarProperty Name="OBS" ColumnName="OBS" />
                 <ScalarProperty Name="FECHA_MOV" ColumnName="FECHA_MOV" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="USUARIOS">
-            <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.USUARIOS">
-              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="TIPO_MOV" ColumnName="TIPO_MOV" />
+                <ScalarProperty Name="ID_PC" ColumnName="ID_PC" />
+                <ScalarProperty Name="RUT_USUARIO" ColumnName="RUT_USUARIO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RUT" ColumnName="RUT" />
-                <ScalarProperty Name="NOMBRE_C" ColumnName="NOMBRE_C" />
-                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
-                <ScalarProperty Name="UNE" ColumnName="UNE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UNE">
             <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.UNE">
               <MappingFragment StoreEntitySet="UNE">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="OBRA" ColumnName="OBRA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="UNE" ColumnName="UNE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="NOMBRE_C" ColumnName="NOMBRE_C" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -253,6 +352,7 @@ advertencia 6035: La relación 'FK__MOVIMIENT__RUT_U__173876EA' tiene columnas q
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="SynchronizePropertyFacets" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

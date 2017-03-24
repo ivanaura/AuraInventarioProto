@@ -50,31 +50,31 @@ namespace AuraInventarioProto.Models {
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string FECHA_ADQ { get; set; }
 
-        [Display(Name = "Estado TeamViewer:")]
+        [Display(Name = "Estado TeamViewer:")]        
         public bool EST_TW { get; set; }
 
-        [Display(Name = "Estado Ccleaner:")]
+        [Display(Name = "Estado Ccleaner:")]        
         public bool EST_CC { get; set; }
 
-        [Display(Name = "Estado Anti Virus:")]
+        [Display(Name = "Estado Anti Virus:")]        
         public bool EST_AV { get; set; }
 
-        [Display(Name = "Estado Pdf:")]
+        [Display(Name = "Estado Pdf:")]        
         public bool EST_PD { get; set; }
 
-        [Display(Name = "Licencia Office:")]
+        [Display(Name = "Licencia Office:")]        
         public bool EST_OF { get; set; }
 
-        [Display(Name = "Licencia Windows:")]
+        [Display(Name = "Licencia Windows:")]        
         public bool EST_WN { get; set; }
 
-        [Display(Name = "Estado registros:")]
+        [Display(Name = "Estado registros:")]        
         public bool EST_REG { get; set; }
 
-        [Display(Name = "SGI Software:")]
+        [Display(Name = "SGI Software:")]        
         public bool SGI_SW { get; set; }
 
-        [Display(Name = "SGI Restricciones:")]
+        [Display(Name = "SGI Restricciones:")]        
         public bool SGI_RES { get; set; }
 
         [Display(Name = "Fecha Ultima Mantencion:")]
@@ -88,7 +88,7 @@ namespace AuraInventarioProto.Models {
 
         [Display(Name = "Asignado Devolucion:")]
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
-        public string ASIGN { get; set; }
+        public string ASIGN_DEVU { get; set; }
 
         [Display(Name = "Obra:")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]

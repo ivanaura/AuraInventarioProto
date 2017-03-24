@@ -1,17 +1,18 @@
-﻿@model AuraInventarioProto.Models.INV_PC
+﻿@model AuraInventarioProto.Models.DETMAN
 
 @{
-    ViewBag.Title = "Detalles";
+    ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Detalles</h2>
-<div class="well bs-component">
-    <h4>Inventario de Pc</h4>
+<h2>Details</h2>
+
+<div>
+    <h4>DETMAN</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Serial:
+            @Html.DisplayNameFor(model => model.SERIAL)
         </dt>
 
         <dd>
@@ -19,7 +20,7 @@
         </dd>
 
         <dt>
-            Modelo:
+            @Html.DisplayNameFor(model => model.MODELO)
         </dt>
 
         <dd>
@@ -27,7 +28,7 @@
         </dd>
 
         <dt>
-            Marca:
+            @Html.DisplayNameFor(model => model.MARCA)
         </dt>
 
         <dd>
@@ -35,7 +36,7 @@
         </dd>
 
         <dt>
-            Tipo:
+            @Html.DisplayNameFor(model => model.TIPO)
         </dt>
 
         <dd>
@@ -43,7 +44,7 @@
         </dd>
 
         <dt>
-            Estado:
+            @Html.DisplayNameFor(model => model.ESTADO)
         </dt>
 
         <dd>
@@ -51,7 +52,15 @@
         </dd>
 
         <dt>
-            Fecha Adquisicion:
+            @Html.DisplayNameFor(model => model.OBS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_ADQ)
         </dt>
 
         <dd>
@@ -59,7 +68,7 @@
         </dd>
 
         <dt>
-            Estado TeamViewer:
+            @Html.DisplayNameFor(model => model.EST_TW)
         </dt>
 
         <dd>
@@ -67,7 +76,7 @@
         </dd>
 
         <dt>
-            Estado Ccleaner:
+            @Html.DisplayNameFor(model => model.EST_CC)
         </dt>
 
         <dd>
@@ -75,7 +84,7 @@
         </dd>
 
         <dt>
-            Estado Anti Virus:
+            @Html.DisplayNameFor(model => model.EST_AV)
         </dt>
 
         <dd>
@@ -83,7 +92,7 @@
         </dd>
 
         <dt>
-            Estado PDF:
+            @Html.DisplayNameFor(model => model.EST_PD)
         </dt>
 
         <dd>
@@ -91,15 +100,7 @@
         </dd>
 
         <dt>
-            Estado Registros:
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EST_REG)
-        </dd>
-
-        <dt>
-            Licencia Office:
+            @Html.DisplayNameFor(model => model.EST_OF)
         </dt>
 
         <dd>
@@ -107,7 +108,7 @@
         </dd>
 
         <dt>
-            Licencia Windows:
+            @Html.DisplayNameFor(model => model.EST_WN)
         </dt>
 
         <dd>
@@ -115,7 +116,15 @@
         </dd>
 
         <dt>
-            SGI P-30 Software:
+            @Html.DisplayNameFor(model => model.EST_REG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EST_REG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SGI_SW)
         </dt>
 
         <dd>
@@ -123,7 +132,7 @@
         </dd>
 
         <dt>
-            SGI P-30 Restricciones:
+            @Html.DisplayNameFor(model => model.SGI_RES)
         </dt>
 
         <dd>
@@ -131,7 +140,7 @@
         </dd>
 
         <dt>
-            Fecha Ultima Mantencion:
+            @Html.DisplayNameFor(model => model.F_UL_MAN)
         </dt>
 
         <dd>
@@ -139,7 +148,7 @@
         </dd>
 
         <dt>
-            Devuelto:
+            @Html.DisplayNameFor(model => model.DEVU)
         </dt>
 
         <dd>
@@ -147,7 +156,7 @@
         </dd>
 
         <dt>
-            Asignado Devolucion:
+            @Html.DisplayNameFor(model => model.ASIGN)
         </dt>
 
         <dd>
@@ -155,28 +164,16 @@
         </dd>
 
         <dt>
-            Obra:
+            @Html.DisplayNameFor(model => model.OBRA)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.OBRA)
         </dd>
 
-        <dt>
-            Observaciones:
-        </dt>
-
-        <dd>
-
-            @*@Html.Raw(Html.Encode(model.OBS).Replace("\n", "<br />"))*@
-            @Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))
-        </dd>
-
     </dl>
 </div>
 <p>
-    @if (Session["UserRole"].ToString() != "ReadOnly") {
-        @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) <text>|</text>
-    }
-    @Html.ActionLink("Volver al Listado", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

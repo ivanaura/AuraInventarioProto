@@ -24,8 +24,5 @@ namespace AuraInventarioProto.Models
 
         [Display(Name = "Descripcion:")]
         public string DESCRIPCION { get; set; }
-
-        [Display(Name = "Estado:")]
-        public string ESTADO { get; set; }
     }
 }

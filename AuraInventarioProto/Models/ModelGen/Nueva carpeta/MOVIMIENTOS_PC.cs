@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuraInventarioProto.Models
-{
+namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
-    public partial class MOVIMIENTOS_PC
-    {
+    public partial class MOVIMIENTOS_PC {
         public int ID { get; set; }
 
         [Display(Name = "Rut Usuario:")]
         [Required(ErrorMessage = "Error, Rut es requerido.")]
+        //[RegularExpression(pattern: "[0-9]{2}[0-9]{3}[0-9]{3}-[k-k0-9]{1}", ErrorMessage = "Error, Favor entrar un Rut valido, ejemplo '12345678-k'.")]
         [MaxLength(12, ErrorMessage = "Error, El Rut tiene un limite de 12 caracteres.")]
         [Remote("DoesRutExist", "MOVIMIENTOS_PC", HttpMethod = "POST", ErrorMessage = "Error, El Usuario no existe.")]
         public string RUT_USUARIO { get; set; }
@@ -35,12 +34,14 @@ namespace AuraInventarioProto.Models
         [MaxLength(30, ErrorMessage = "Error, Campo tiene un limite de 30 caracteres.")]
         public string TIPO_MOV { get; set; }
 
+        [Display(Name = "Fecha Asignacion:")]
+        public string FECHA_AS { get; set; }
+
+        [Display(Name = "Fecha Devolucion:")]
+        public string FECHA_DV { get; set; }
+
         [Display(Name = "Fecha Movimiento:")]
         [Required(ErrorMessage = "Error, Fecha es requerido")]
         public string FECHA_MOV { get; set; }
-
-        [Display(Name = "Observaciones:")]
-        [MaxLength(255, ErrorMessage = "Error, Campo tiene un limite de 255 caracteres.")]
-        public string OBS { get; set; }
     }
 }

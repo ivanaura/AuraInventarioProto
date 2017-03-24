@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+
 using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
@@ -133,14 +134,14 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_AS,FECHA_DV,FECHA_MOV")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
+        public ActionResult Create([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_MOV,OBS")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             if (ModelState.IsValid) {
 
                 if (mOVIMIENTOS_PC.TIPO_MOV == "Devolucion") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC =  db.INV_PC.Find(idpc);
 
-                    string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN_DEVU).RUT;
+                    string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN).RUT;
 
 
                     mOVIMIENTOS_PC.RUT_USUARIO = user;
@@ -148,7 +149,7 @@ namespace AuraInventarioProto.Controllers {
 
 
                     iNV_PC.DEVU = "Si";
-                    iNV_PC.ASIGN_DEVU = "Informatica";
+                    iNV_PC.ASIGN = "Informatica";
                     iNV_PC.OBRA = "OF";
 
                     db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
@@ -163,7 +164,7 @@ namespace AuraInventarioProto.Controllers {
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
 
                     iNV_PC.DEVU = "No";
-                    iNV_PC.ASIGN_DEVU = db.USUARIOS.FirstOrDefault(p => p.RUT == mOVIMIENTOS_PC.RUT_USUARIO).NOMBRE_C;
+                    iNV_PC.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == mOVIMIENTOS_PC.RUT_USUARIO).NOMBRE_C;
 
                     db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
                     db.SaveChanges();
@@ -211,7 +212,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_AS,FECHA_DV,FECHA_MOV")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
+        public ActionResult Edit([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_MOV,OBS")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             if (ModelState.IsValid) {
                 try {
                     db.Entry(mOVIMIENTOS_PC).State = EntityState.Modified;

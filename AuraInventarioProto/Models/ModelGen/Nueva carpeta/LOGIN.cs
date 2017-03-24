@@ -7,15 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuraInventarioProto.Models
-{
+namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
-    public partial class LOGIN
-    {
+    public partial class LOGIN {
         public int ID { get; set; }
 
         [Display(Name = "Usuario:")]
@@ -30,12 +28,5 @@ namespace AuraInventarioProto.Models
         public string PASS { get; set; }
 
         public string SALT { get; set; }
-
-        [Display(Name = "Rol:")]
-        [Required(ErrorMessage = "Error, Rol es requerido.")]
-        public string ROL { get; set; }
-
-        [Display(Name = "Estado:")]
-        public string ESTADO { get; set; }
     }
 }

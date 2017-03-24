@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AuraInventarioProto.Models
-{
+namespace AuraInventarioProto.Models {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
-    public partial class USUARIOS
-    {
+
+    public partial class USUARIOS {
         public int ID { get; set; }
 
         [Display(Name = "Rut:")]
@@ -41,8 +40,5 @@ namespace AuraInventarioProto.Models
         [Required(ErrorMessage = "Error, Une es requerido.")]
         [MaxLength(10, ErrorMessage = "Error, Une tiene un limite de 10 caracteres.")]
         public string UNE { get; set; }
-
-        [Display(Name = "Estado:")]
-        public string ESTADO { get; set; }
     }
 }

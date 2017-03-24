@@ -25,10 +25,11 @@ namespace AuraInventarioProto.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DETMAN> DETMAN { get; set; }
         public virtual DbSet<INV_PC> INV_PC { get; set; }
         public virtual DbSet<LOGIN> LOGIN { get; set; }
         public virtual DbSet<MOVIMIENTOS_PC> MOVIMIENTOS_PC { get; set; }
-        public virtual DbSet<USUARIOS> USUARIOS { get; set; }
         public virtual DbSet<UNE> UNE { get; set; }
+        public virtual DbSet<USUARIOS> USUARIOS { get; set; }
     }
 }

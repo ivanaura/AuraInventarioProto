@@ -47,15 +47,7 @@ namespace AuraInventarioProto.Controllers {
                 if (obj != null) {                    
                     Session["UserID"] = obj.ID.ToString();
                     Session["UserName"] = obj.NOMBRE.ToString();
-
-                    if (obj.NOMBRE == "Admin" || obj.NOMBRE == "Informatica") {
-                        Session["UserRole"] = "Admin";
-                    } else if (obj.NOMBRE == "RRHH") {
-                        Session["UserRole"] = "User";
-                    } else {
-                        Session["UserRole"] = "ReadOnly";
-                    }
-
+                    Session["UserRole"] = obj.ROL.ToString();
                     return RedirectToAction("Index");
                 }
             }
