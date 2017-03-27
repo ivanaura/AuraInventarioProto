@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AuraInventarioProtoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AuraInventarioProtoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DETMAN">
           <Key>
             <PropertyRef Name="ID" />
@@ -16,17 +16,17 @@
           <Property Name="TIPO" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ESTADO" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="OBS" Type="varchar" MaxLength="255" />
-          <Property Name="FECHA_ADQ" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="EST_TW" Type="bit" />
-          <Property Name="EST_CC" Type="bit" />
-          <Property Name="EST_AV" Type="bit" />
-          <Property Name="EST_PD" Type="bit" />
-          <Property Name="EST_OF" Type="bit" />
-          <Property Name="EST_WN" Type="bit" />
-          <Property Name="EST_REG" Type="bit" />
-          <Property Name="SGI_SW" Type="bit" />
-          <Property Name="SGI_RES" Type="bit" />
-          <Property Name="F_UL_MAN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA_ADQ" Type="date" Nullable="false" />
+          <Property Name="EST_TW" Type="bit" Nullable="false" />
+          <Property Name="EST_CC" Type="bit" Nullable="false" />
+          <Property Name="EST_AV" Type="bit" Nullable="false" />
+          <Property Name="EST_PD" Type="bit" Nullable="false" />
+          <Property Name="EST_OF" Type="bit" Nullable="false" />
+          <Property Name="EST_WN" Type="bit" Nullable="false" />
+          <Property Name="EST_REG" Type="bit" Nullable="false" />
+          <Property Name="SGI_SW" Type="bit" Nullable="false" />
+          <Property Name="SGI_RES" Type="bit" Nullable="false" />
+          <Property Name="F_UL_MAN" Type="date" Nullable="false" />
           <Property Name="DEVU" Type="varchar" MaxLength="10" />
           <Property Name="ASIGN" Type="varchar" MaxLength="30" />
           <Property Name="OBRA" Type="varchar" MaxLength="10" />
@@ -42,17 +42,17 @@
           <Property Name="TIPO" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="ESTADO" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="OBS" Type="varchar" MaxLength="255" />
-          <Property Name="FECHA_ADQ" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="EST_TW" Type="bit" />
-          <Property Name="EST_CC" Type="bit" />
-          <Property Name="EST_AV" Type="bit" />
-          <Property Name="EST_PD" Type="bit" />
-          <Property Name="EST_OF" Type="bit" />
-          <Property Name="EST_WN" Type="bit" />
-          <Property Name="EST_REG" Type="bit" />
-          <Property Name="SGI_SW" Type="bit" />
-          <Property Name="SGI_RES" Type="bit" />
-          <Property Name="F_UL_MAN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA_ADQ" Type="date" Nullable="false" />
+          <Property Name="EST_TW" Type="bit" Nullable="false" />
+          <Property Name="EST_CC" Type="bit" Nullable="false" />
+          <Property Name="EST_AV" Type="bit" Nullable="false" />
+          <Property Name="EST_PD" Type="bit" Nullable="false" />
+          <Property Name="EST_OF" Type="bit" Nullable="false" />
+          <Property Name="EST_WN" Type="bit" Nullable="false" />
+          <Property Name="EST_REG" Type="bit" Nullable="false" />
+          <Property Name="SGI_SW" Type="bit" Nullable="false" />
+          <Property Name="SGI_RES" Type="bit" Nullable="false" />
+          <Property Name="F_UL_MAN" Type="date" Nullable="false" />
           <Property Name="DEVU" Type="varchar" MaxLength="10" />
           <Property Name="ASIGN" Type="varchar" MaxLength="30" />
           <Property Name="OBRA" Type="varchar" MaxLength="10" />
@@ -76,7 +76,7 @@
           <Property Name="RUT_USUARIO" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="ID_PC" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TIPO_MOV" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="FECHA_MOV" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="FECHA_MOV" Type="date" Nullable="false" />
           <Property Name="OBS" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UNE">
@@ -99,20 +99,20 @@
           <Property Name="UNE" Type="varchar" MaxLength="10" />
           <Property Name="ESTADO" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_DETMAN_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_DETMAN_INV_PC' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_DETMAN_INV_PC" />-->
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_INV_PC_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_INV_PC_UNE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_INV_PC_UNE" />-->
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_MOVIMIENTOS_PC_INV_PC' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_MOVIMIENTOS_PC_INV_PC" />-->
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_USUARIOS' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_MOVIMIENTOS_PC_USUARIOS' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_MOVIMIENTOS_PC_USUARIOS" />-->
-        <!--Errores durante la generación:
-advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_USUARIOS_UNE" />-->
         <EntityContainer Name="AuraInventarioProtoDBModelStoreContainer">
           <EntitySet Name="DETMAN" EntityType="Self.DETMAN" Schema="dbo" store:Type="Tables" />
@@ -126,7 +126,7 @@ advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman pa
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AuraInventarioProtoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="AuraInventarioProtoDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AuraInventarioProtoDBEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="DETMAN" EntityType="AuraInventarioProtoDBModel.DETMAN" />
           <EntitySet Name="INV_PC" EntityType="AuraInventarioProtoDBModel.INV_PC" />
           <EntitySet Name="LOGIN" EntityType="AuraInventarioProtoDBModel.LOGIN" />
@@ -139,23 +139,23 @@ advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman pa
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SERIAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SERIAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" ConcurrencyMode="None" />
           <Property Name="MODELO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="MARCA" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TIPO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_ADQ" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="EST_TW" Type="Boolean" />
-          <Property Name="EST_CC" Type="Boolean" />
-          <Property Name="EST_AV" Type="Boolean" />
-          <Property Name="EST_PD" Type="Boolean" />
-          <Property Name="EST_OF" Type="Boolean" />
-          <Property Name="EST_WN" Type="Boolean" />
-          <Property Name="EST_REG" Type="Boolean" />
-          <Property Name="SGI_SW" Type="Boolean" />
-          <Property Name="SGI_RES" Type="Boolean" />
-          <Property Name="F_UL_MAN" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ADQ" Type="DateTime" Nullable="false" />
+          <Property Name="EST_TW" Type="Boolean" Nullable="false" />
+          <Property Name="EST_CC" Type="Boolean" Nullable="false" />
+          <Property Name="EST_AV" Type="Boolean" Nullable="false" />
+          <Property Name="EST_PD" Type="Boolean" Nullable="false" />
+          <Property Name="EST_OF" Type="Boolean" Nullable="false" />
+          <Property Name="EST_WN" Type="Boolean" Nullable="false" />
+          <Property Name="EST_REG" Type="Boolean" Nullable="false" />
+          <Property Name="SGI_SW" Type="Boolean" Nullable="false" />
+          <Property Name="SGI_RES" Type="Boolean" Nullable="false" />
+          <Property Name="F_UL_MAN" Type="DateTime" Nullable="false" />
           <Property Name="DEVU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ASIGN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBRA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -171,17 +171,17 @@ advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman pa
           <Property Name="TIPO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_ADQ" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="EST_TW" Type="Boolean" />
-          <Property Name="EST_CC" Type="Boolean" />
-          <Property Name="EST_AV" Type="Boolean" />
-          <Property Name="EST_PD" Type="Boolean" />
-          <Property Name="EST_OF" Type="Boolean" />
-          <Property Name="EST_WN" Type="Boolean" />
-          <Property Name="EST_REG" Type="Boolean" />
-          <Property Name="SGI_SW" Type="Boolean" />
-          <Property Name="SGI_RES" Type="Boolean" />
-          <Property Name="F_UL_MAN" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_ADQ" Type="DateTime" Nullable="false" />
+          <Property Name="EST_TW" Type="Boolean" Nullable="false" />
+          <Property Name="EST_CC" Type="Boolean" Nullable="false" />
+          <Property Name="EST_AV" Type="Boolean" Nullable="false" />
+          <Property Name="EST_PD" Type="Boolean" Nullable="false" />
+          <Property Name="EST_OF" Type="Boolean" Nullable="false" />
+          <Property Name="EST_WN" Type="Boolean" Nullable="false" />
+          <Property Name="EST_REG" Type="Boolean" Nullable="false" />
+          <Property Name="SGI_SW" Type="Boolean" Nullable="false" />
+          <Property Name="SGI_RES" Type="Boolean" Nullable="false" />
+          <Property Name="F_UL_MAN" Type="DateTime" Nullable="false" />
           <Property Name="DEVU" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ASIGN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="OBRA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -205,7 +205,7 @@ advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman pa
           <Property Name="RUT_USUARIO" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="ID_PC" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TIPO_MOV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_MOV" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_MOV" Type="DateTime" Nullable="false" />
           <Property Name="OBS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UNE">
@@ -353,6 +353,7 @@ advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman pa
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
         <DesignerProperty Name="SynchronizePropertyFacets" Value="False" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

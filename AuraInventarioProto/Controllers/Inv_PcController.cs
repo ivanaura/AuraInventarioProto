@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using AuraInventarioProto.Models;
 
 using AuraInventarioProto.App_Start;
+using System.Globalization;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
@@ -57,8 +58,8 @@ namespace AuraInventarioProto.Controllers {
             inv.EST_AV = true;
             inv.SGI_RES = true;
             inv.SGI_SW = true;
-            inv.FECHA_ADQ = DateTime.Now.ToShortDateString().Replace("/", "-");
-            inv.F_UL_MAN = DateTime.Now.ToShortDateString().Replace("/", "-");
+            inv.FECHA_ADQ = DateTime.Today;
+            inv.F_UL_MAN = inv.FECHA_ADQ;
             //inv.FECHA_ADQ = DateTime.Today;
             //inv.F_UL_MAN = DateTime.Today;
 
@@ -100,6 +101,11 @@ namespace AuraInventarioProto.Controllers {
                 mOVIMIENTOS_PC.FECHA_MOV = iNV_PC.FECHA_ADQ;
                 db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
                 db.SaveChanges();
+
+                DETMAN dETMAN = new DETMAN();
+
+                 
+
 
                 return RedirectToAction("Index");
             }
@@ -165,6 +171,35 @@ namespace AuraInventarioProto.Controllers {
             iNV_PC.ESTADO = "De Baja";
             db.Entry(iNV_PC).State = EntityState.Modified;
             db.SaveChanges();
+
+            MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
+            mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
+            mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
+            mOVIMIENTOS_PC.TIPO_MOV = "De Baja";
+            mOVIMIENTOS_PC.FECHA_MOV = DateTime.Today;
+            db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost, ActionName("Recover")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Recover(int id) {
+            INV_PC iNV_PC = db.INV_PC.Find(id);
+            iNV_PC.ESTADO = "Activo";
+            db.Entry(iNV_PC).State = EntityState.Modified;
+            db.SaveChanges();
+
+            MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
+            mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
+            mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
+            mOVIMIENTOS_PC.TIPO_MOV = "Recuperacion";
+            mOVIMIENTOS_PC.FECHA_MOV = DateTime.Today;
+            db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+            db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

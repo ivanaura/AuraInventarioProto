@@ -1,20 +1,21 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@if (!String.IsNullOrEmpty(ViewBag.error)) {
+    @:<script type="text/javascript">alert('@ViewBag.error')</script>
+ }
 
 <div class="jumbotron">
     <h1>Aura Inventario</h1>
-    @*<p class="lead">TODO.</p>*@
-    @{ 
-        if (!(Session["UserID"]==null)) {
+    @{
+        if (!(Session["UserID"] == null)) {
             <p class="lead">Bienvenido: @Session["UserName"].ToString()</p>
         } else {
-            <p><a href="" data-toggle="modal" data-target="#LoginModal" class="btn btn-primary btn-lg">Login &raquo;</a></p>
+            <p><button data-toggle="modal" data-target="#LoginModal" class="btn btn-primary btn-lg">Login &raquo;</button></p>
         }
     }
-   
+
 </div>
 
 <div class="row">
-
 </div>

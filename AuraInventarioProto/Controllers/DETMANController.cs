@@ -37,7 +37,7 @@ namespace AuraInventarioProto.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DETMAN dETMAN = db.DETMAN.Find(id);
+            INV_PC dETMAN = db.INV_PC.Find(id);
             if (dETMAN == null) {
                 return HttpNotFound();
             }
@@ -49,20 +49,40 @@ namespace AuraInventarioProto.Controllers {
 
             //DateTime currentdate = DateTime.ParseExact(dETMAN.F_UL_MAN, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
+            //DateTime currentdate = DateTime.ParseExact(dETMAN.F_UL_MAN.ToShortDateString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-            //DETMAN oldmant = (from a in db.DETMAN where a.SERIAL == dETMAN.SERIAL sle
-                              
-                              
+            //DateTime oldmantdate = (from a in db.DETMAN where a.SERIAL == dETMAN.SERIAL select db.DETMAN.Max(x => x.F_UL_MAN)).FirstOrDefault();
 
+            //DateTime oldmantdate = (from a in db.DETMAN where a.SERIAL == dETMAN.SERIAL select  ).FirstOrDefault();
 
+            DateTime oldmantdate = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.F_UL_MAN);
+            int oldmantid = db.DETMAN.Where(a => a.F_UL_MAN == oldmantdate).Max(a => a.ID);
 
+            //int oldmantid = (from a in db.DETMAN where a.F_UL_MAN == oldmantdate select db.DETMAN.Max(x => x.ID)).FirstOrDefault();
 
+            DETMAN oldmant = db.DETMAN.Find(oldmantid);
+            ViewBag.serial = oldmant.SERIAL;
+            ViewBag.modelo = oldmant.MODELO;
+            ViewBag.marca = oldmant.MARCA;
+            ViewBag.tipo = oldmant.TIPO;
+            ViewBag.estado = oldmant.ESTADO;
+            ViewBag.obs = oldmant.OBS;
+            ViewBag.fecha_adq = oldmant.FECHA_ADQ;
+            ViewBag.est_tw = oldmant.EST_TW;
+            ViewBag.est_cc = oldmant.EST_CC;
+            ViewBag.est_av = oldmant.EST_AV;
+            ViewBag.est_pd = oldmant.EST_PD;
+            ViewBag.est_of = oldmant.EST_OF;
+            ViewBag.est_wn = oldmant.EST_WN;
+            ViewBag.est_reg = oldmant.EST_REG;
+            ViewBag.sgi_sw = oldmant.SGI_SW;
+            ViewBag.sgi_res = oldmant.SGI_RES;
+            ViewBag.f_ul_man = oldmant.F_UL_MAN;
+            ViewBag.devu = oldmant.DEVU;
+            ViewBag.asign = oldmant.ASIGN;
+            ViewBag.obr = oldmant.OBRA;
 
-
-
-
-
-            return View(dETMAN);
+            return View(oldmant);
         }
 
         // POST: DETMen/Create

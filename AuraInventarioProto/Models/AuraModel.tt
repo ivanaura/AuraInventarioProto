@@ -428,7 +428,7 @@ public class CodeStringGenerator
                 "{0}using System;{1}" +
                 "{2}",
                 inHeader ? Environment.NewLine : "",
-                includeCollections ? (Environment.NewLine + "using System.Collections.Generic;") : "",
+                includeCollections ? (Environment.NewLine + "using System.Collections.Generic;" + Environment.NewLine + "using System.ComponentModel.DataAnnotations;" + Environment.NewLine + "using System.Web.Mvc;") : "",
                 inHeader ? "" : Environment.NewLine)
             : "";
     }
