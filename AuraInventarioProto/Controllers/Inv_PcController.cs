@@ -7,9 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
+using AuraInventarioProto.ViewModels.ValidationViewModels;
 
 using AuraInventarioProto.App_Start;
 using System.Globalization;
+
+using AutoMapper;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
@@ -37,6 +40,8 @@ namespace AuraInventarioProto.Controllers {
             if (iNV_PC == null) {
                 return HttpNotFound();
             }
+            
+
             return View(iNV_PC);
         }
 
@@ -48,7 +53,7 @@ namespace AuraInventarioProto.Controllers {
             }
             ViewBag.Obra = Obras;
 
-            INV_PC inv = new INV_PC();
+            Inv_PcValidationViewModel inv = new Inv_PcValidationViewModel();
             inv.EST_TW = true;
             inv.EST_WN = true;
             inv.EST_REG = true;
@@ -60,8 +65,6 @@ namespace AuraInventarioProto.Controllers {
             inv.SGI_SW = true;
             inv.FECHA_ADQ = DateTime.Today;
             inv.F_UL_MAN = inv.FECHA_ADQ;
-            //inv.FECHA_ADQ = DateTime.Today;
-            //inv.F_UL_MAN = DateTime.Today;
 
             return View(inv);
         }
@@ -102,10 +105,14 @@ namespace AuraInventarioProto.Controllers {
                 db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
                 db.SaveChanges();
 
-                DETMAN dETMAN = new DETMAN();
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<INV_PC, DETMAN>();
+                });
+                IMapper mapper = config.CreateMapper();
+                var dETMAN = mapper.Map<INV_PC, DETMAN>(iNV_PC);
 
-                 
-
+                db.DETMAN.Add(dETMAN);
+                db.SaveChanges();                
 
                 return RedirectToAction("Index");
             }

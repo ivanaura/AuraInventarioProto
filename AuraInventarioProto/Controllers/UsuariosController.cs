@@ -11,6 +11,7 @@ using AuraInventarioProto.App_Start;
 using LinqToExcel;
 using System.Data.OleDb;
 using System.Data.Entity.Validation;
+using System.Text;
 
 namespace AuraInventarioProto.Controllers {
     //    [Authorize]
@@ -164,7 +165,7 @@ namespace AuraInventarioProto.Controllers {
         /// <param name="Path"></param>  
         /// <returns>file</returns>  
         public FileResult DownloadExcel() {
-            string path = "/Doc/Usuarios.xlsx";
+            string path = "/Format/Usuarios.xlsx";
             return File(path, "application/vnd.ms-excel", "Usuarios.xlsx");
         }
 
@@ -172,54 +173,46 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         public JsonResult UploadExcel(USUARIOS users, HttpPostedFileBase FileUpload) {
             List<string> data = new List<string>();
+            StringBuilder errors = new StringBuilder();
             if (FileUpload != null) {
                 // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
                 if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
 
-                    string filename = FileUpload.FileName;
-                    string targetpath = Server.MapPath("~/Doc/");
-                    FileUpload.SaveAs(targetpath + filename);
-                    string pathToExcelFile = targetpath + filename;
-                    var connectionString = "";
-                    if (filename.EndsWith(".xls")) {
-                        connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
-                    } else if (filename.EndsWith(".xlsx")) {
-                        connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
-                    }
+                    string pathToExcelFile = (Server.MapPath("~/Doc/")) + (FileUpload.FileName);
+                    FileUpload.SaveAs(pathToExcelFile);
+                    
+                    var excel = new ExcelQueryFactory(pathToExcelFile);
+                    var sheet = excel.GetWorksheetNames();
 
-                    var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
-                    var ds = new DataSet();
-                    adapter.Fill(ds, "ExcelTable");
-                    DataTable dtable = ds.Tables["ExcelTable"];
-                    string sheetName = "Sheet1";
-
-                    var excelFile = new ExcelQueryFactory(pathToExcelFile);
-                    var artistAlbums = from a in excelFile.Worksheet<USUARIOS>(sheetName) select a;
-
-                    foreach (var a in artistAlbums) {
+                    var contents = from c in excel.Worksheet<USUARIOS>(sheet.First()) select c;
+                    int counter = 0;
+                    int row = 2;
+                    
+                    errors.AppendLine();
+                    foreach (var a in contents) {
+                        if (row > 900) {
+                            break;
+                        }
                         try {
-                            if (a.NOMBRE_C != "" && a.RUT != "" && a.CORREO != "" && a.UNE != "" && a.ESTADO != "") {
-                                USUARIOS TU = new USUARIOS();
-                                TU.RUT = a.RUT;
-                                TU.NOMBRE_C = a.NOMBRE_C;
-                                TU.CORREO = a.CORREO;
-                                TU.UNE = a.UNE;
-                                TU.ESTADO = a.ESTADO;
+                            
+                            try {
+                                
+                                if (a.NOMBRE_C != "" && a.RUT != "" && a.CORREO != "" && a.UNE != "" && a.ESTADO != "") {
 
-                                db.USUARIOS.Add(TU);
-                                db.SaveChanges();
-                            } else {
-                                data.Add("<ul>");
-                                if (a.RUT == "" || a.RUT == null) data.Add("<li> Rut es requerido</li>");
-                                if (a.NOMBRE_C == "" || a.NOMBRE_C == null) data.Add("<li> Nombre es requerido</li>");
-                                if (a.CORREO == "" || a.CORREO == null) data.Add("<li>Correo es requerido</li>");
-                                if (a.UNE == "" || a.UNE == null) data.Add("<li>Une es requerida</li>");
-                                if (a.ESTADO == "" || a.ESTADO == null) data.Add("<li>Estado es requerido</li>");
-
-                                data.Add("</ul>");
-                                data.ToArray();
-                                return Json(data, JsonRequestBehavior.AllowGet);
+                                    insert(a);
+                                    row++;
+                                } else {
+                                    errors.AppendLine("Fila: " + row + " con errores.");
+                                    row++;
+                                    counter++;
+                                }
+                            } catch (Exception ex) {
+                                //string err = ex.Message;                                
+                                //errors.AppendLine("Rut: "+a.RUT+" con errores en fila: "+row+".");
+                                //row++;
+                                //counter++;
                             }
+
                         } catch (DbEntityValidationException ex) {
                             foreach (var entityValidationErrors in ex.EntityValidationErrors) {
                                 foreach (var validationError in entityValidationErrors.ValidationErrors) {
@@ -227,29 +220,48 @@ namespace AuraInventarioProto.Controllers {
                                 }
                             }
                         }
-                    }
+                    }                   
                     //deleting excel file from folder  
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    return Json("success", JsonRequestBehavior.AllowGet);
-                } else {
-                    //alert message for invalid file format  
-                    data.Add("<ul>");
-                    data.Add("<li>Only Excel file format is allowed</li>");
-                    data.Add("</ul>");
+                    if (counter < 0) {
+                        data.Add("¡Completado sin errores!");
+                    } else {
+                        data.Add(counter + " Filas con errores, por favor verificar datos." + Environment.NewLine + errors);
+                    }
+                    ViewBag.errors = data;
                     data.ToArray();
                     return Json(data, JsonRequestBehavior.AllowGet);
+                } else {
+                    //alert message for invalid file format  
+                    data.Add("Only Excel file format is allowed");
+                    return Json(data);
                 }
             } else {
-                data.Add("<ul>");
-                if (FileUpload == null) data.Add("<li>Please choose Excel file</li>");
-                data.Add("</ul>");
-                data.ToArray();
+                if (FileUpload == null) data.Add("Please choose Excel file");
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion
+
+        public void insert(USUARIOS a) {
+            try {
+
+                USUARIOS u = new USUARIOS();
+                u.RUT = a.RUT;
+                u.NOMBRE_C = a.NOMBRE_C;
+                u.CORREO = a.CORREO;
+                u.UNE = a.UNE;
+                u.ESTADO = a.ESTADO;
+
+                db.USUARIOS.Add(u);
+                db.SaveChanges();
+            } catch (Exception) {
+
+                throw;
+            }
+        }
 
     }
 }

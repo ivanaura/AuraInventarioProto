@@ -77,7 +77,7 @@
                         @Html.DisplayFor(modelItem => item.ESTADO)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FECHA_ADQ)
+                        @Html.ValueFor(modelItem => item.FECHA_ADQ, "{0:dd-MM-yyyy}")
                     </td>
                     <td style="text-align:center">
                         @Html.DisplayFor(modelItem => item.SGI_SW)
@@ -86,7 +86,7 @@
                         @Html.DisplayFor(modelItem => item.SGI_RES)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.F_UL_MAN)
+                        @Html.ValueFor(modelItem => item.F_UL_MAN, "{0:dd-MM-yyyy}")
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DEVU)

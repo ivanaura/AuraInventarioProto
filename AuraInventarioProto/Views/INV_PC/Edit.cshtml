@@ -209,42 +209,34 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script>
         $(document).ready(function () {
-            $('#RUT_USUARIO').chosen({
+            $('#OBRA').chosen({
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
+                max_shown_results: 7,
+                placeholder_text_single: "Seleccione",
+                width: 120
+
+            });
+            $('#ESTADO').chosen({
+                disable_search: "true",
                 placeholder_text_single: "Seleccione",
                 width: 120
             });
-
-            $('#ID_PC').chosen({
-                no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
-                placeholder_text_single: "Seleccione",
-                width: 120
-            });
-
-            $('#TIPO_MOV').chosen({
+            $('#TIPO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
                 width: 120
             });
 
+
             $('#date').datepicker({
-                format: "dd-mm-yy",
+                format: "dd-mm-yyyy",
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",
                 todayHighlight: true
             });
             $('#date2').datepicker({
-                format: "dd-mm-yy",
-                todayBtn: true,
-                clearBtn: true,
-                language: "es",
-                todayHighlight: true
-            });
-            $('#date3').datepicker({
-                format: "dd-mm-yy",
+                format: "dd-mm-yyyy",
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",

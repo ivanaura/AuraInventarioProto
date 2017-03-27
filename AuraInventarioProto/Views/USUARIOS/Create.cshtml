@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@if (!String.IsNullOrEmpty(ViewBag.error)) {
+    @:<script type="text/javascript">alert('@ViewBag.error')</script>
+ }
+
 <h2>Crear Nuevo</h2>
 
 @Html.Partial("_ImportExcel");
@@ -72,14 +77,63 @@
 
 @section Scripts {
 <script>
-        $(document).ready(function () {
-            $('#UNE').chosen({
-                no_results_text: "No hay resultados para ",
-                max_shown_results: 7,
-                placeholder_text_single: "Seleccione",
-                width: 120
-            });
+    $(document).ready(function () {
+        $('#UNE').chosen({
+            no_results_text: "No hay resultados para ",
+            max_shown_results: 7,
+            placeholder_text_single: "Seleccione",
+            width: 120
         });
+    });
 </script>
+
+@*<script>
+    $('#submitupload').on('click', function () {
+        var files = $("#fileUpload").get(0).files;
+
+        $.ajax({
+            url: '@Url.Action("Create_logic", "MOVIMIENTOS_PC")',
+            data: { selection: selectedValue },
+            cache: false,
+            type: "POST"
+        }).done(function (partialViewResult) {
+            $("#update").html(partialViewResult);
+            chose();
+        });
+    });
+</script>*@
+
+<script>
+    window.addEventListener("submit", function (e) {
+        var form = e.target;
+        if (form.getAttribute("enctype") === "multipart/form-data") {
+            if (form.dataset.ajax) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                var xhr = new XMLHttpRequest();
+                xhr.open(form.method, form.action);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        if (form.dataset.ajaxUpdate) {
+                            var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
+                            if (updateTarget) {
+                                updateTarget.innerHTML = xhr.responseText;
+                            }
+                        }
+                    }
+                };
+                xhr.send(new FormData(form));
+            }
+        }
+    }, true);
+</script>
+
+<script type="text/javascript">
+        var getresult = function (data) {
+            alert(data);
+        };
+</script> 
+
+
     @Scripts.Render("~/bundles/jqueryval")
 }

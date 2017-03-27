@@ -2,5 +2,5 @@
 
 -Arreglar Inhabilitar
 -Arreglar Excel Import
--Arreglar detalle de mantencion
+-Arreglar detalle de mantencion check
 -Limpieza General

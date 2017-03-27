@@ -47,7 +47,7 @@
                         @Html.DisplayFor(modelItem => item.TIPO_MOV)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FECHA_MOV)
+                        @Html.ValueFor(modelItem => item.FECHA_MOV, "{0:dd-MM-yyyy}")
                     </td>
                     <td style="text-align:center">
                         @{

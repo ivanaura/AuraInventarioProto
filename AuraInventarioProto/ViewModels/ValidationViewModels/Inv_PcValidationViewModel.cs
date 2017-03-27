@@ -42,7 +42,8 @@ namespace AuraInventarioProto.ViewModels.ValidationViewModels {
 
         [Display(Name = "Fecha Adquisicion:")]
         [Required(ErrorMessage = "Error, Campo es requerido.")]
-        [MaxLength(8, ErrorMessage = "Error, Campo tiene un limite de 8 caracteres.")]
+        [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FECHA_ADQ { get; set; }
 
         [Display(Name = "Estado TeamViewer:")]
@@ -83,7 +84,8 @@ namespace AuraInventarioProto.ViewModels.ValidationViewModels {
 
         [Display(Name = "Fecha Ultima Mantencion:")]
         [Required(ErrorMessage = "Error, Campo es requerido.")]
-        [MaxLength(8, ErrorMessage = "Error, Campo tiene un limite de 8 caracteres.")]
+        [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime F_UL_MAN { get; set; }
 
         public string DEVU { get; set; }

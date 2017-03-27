@@ -1,4 +1,4 @@
-﻿@model AuraInventarioProto.Models.DETMAN
+﻿@model AuraInventarioProto.ViewModels.ValidationViewModels.DetManValidationViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -83,7 +83,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FECHA_ADQ, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FECHA_ADQ, new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.FECHA_ADQ.ToString("dd-mm-yyyy"), new { htmlAttributes = new { @class = "form-control", @id = "date", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.FECHA_ADQ, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -165,7 +165,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.F_UL_MAN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.F_UL_MAN, new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.F_UL_MAN.ToString("dd-mm-yyyy"), new { htmlAttributes = new { @class = "form-control", @id = "date2", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.F_UL_MAN, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -207,42 +207,34 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         $(document).ready(function () {
-            $('#RUT_USUARIO').chosen({
+            $('#OBRA').chosen({
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
+                max_shown_results: 7,
+                placeholder_text_single: "Seleccione",
+                width: 120
+
+            });
+            $('#ESTADO').chosen({
+                disable_search: "true",
                 placeholder_text_single: "Seleccione",
                 width: 120
             });
-
-            $('#ID_PC').chosen({
-                no_results_text: "No hay resultados para ",
-                max_shown_results: 4,
-                placeholder_text_single: "Seleccione",
-                width: 120
-            });
-
-            $('#TIPO_MOV').chosen({
+            $('#TIPO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
                 width: 120
             });
 
+
             $('#date').datepicker({
-                format: "dd-mm-yy",
+                format: "dd-mm-yyyy",
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",
                 todayHighlight: true
             });
             $('#date2').datepicker({
-                format: "dd-mm-yy",
-                todayBtn: true,
-                clearBtn: true,
-                language: "es",
-                todayHighlight: true
-            });
-            $('#date3').datepicker({
-                format: "dd-mm-yy",
+                format: "dd-mm-yyyy",
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",

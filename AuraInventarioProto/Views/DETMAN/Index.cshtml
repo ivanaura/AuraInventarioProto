@@ -68,7 +68,7 @@
                     @Html.DisplayFor(modelItem => item.ESTADO)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FECHA_ADQ)
+                    @Html.ValueFor(modelItem => item.FECHA_ADQ, "{0:dd-MM-yyyy}")
                 </td>
                 <td style="text-align:center">
                     @Html.DisplayFor(modelItem => item.SGI_SW)
@@ -77,7 +77,7 @@
                     @Html.DisplayFor(modelItem => item.SGI_RES)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.F_UL_MAN)
+                    @Html.ValueFor(modelItem => item.F_UL_MAN, "{0:dd-MM-yyyy}")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DEVU)
@@ -97,6 +97,9 @@
 </table>
 
 @section scripts{
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-colvis-1.2.4/b-flash-1.2.4/b-html5-1.2.4/r-2.1.1/sc-1.4.2/se-1.2.0/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.13/b-1.2.4/b-colvis-1.2.4/b-flash-1.2.4/b-html5-1.2.4/r-2.1.1/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
+
     <script type="text/javascript">
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

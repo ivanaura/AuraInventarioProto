@@ -58,7 +58,7 @@
         @* Partial End *@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FECHA_MOV, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.FECHA_MOV.ToString("dd-mm-yyyy"), htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FECHA_MOV, new { htmlAttributes = new { @class = "form-control", @id = "date3", @readonly = "readonly", @value = ""+ViewBag.Fecha } })
                 @Html.ValidationMessageFor(model => model.FECHA_MOV, "", new { @class = "text-danger" })
@@ -131,7 +131,7 @@
         $(document).ready(function () {
             chose();
             $('#date3').datepicker({
-                format: "dd-mm-yy",
+                format: "dd-mm-yyyy",
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",
