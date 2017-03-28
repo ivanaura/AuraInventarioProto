@@ -6,13 +6,15 @@
 }
 
 
-@if (!String.IsNullOrEmpty(ViewBag.error)) {
+@*@if (!String.IsNullOrEmpty(ViewBag.error)) {
     @:<script type="text/javascript">alert('@ViewBag.error')</script>
- }
+ }*@
 
 <h2>Crear Nuevo</h2>
+@if (Session["UserRole"].ToString() != "ReadOnly") {
+    @Html.Partial("_ImportExcel");
+}
 
-@Html.Partial("_ImportExcel");
 
 @using (Html.BeginForm()) 
 {
@@ -128,11 +130,11 @@
     }, true);
 </script>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
         var getresult = function (data) {
             alert(data);
         };
-</script> 
+</script>*@ 
 
 
     @Scripts.Render("~/bundles/jqueryval")

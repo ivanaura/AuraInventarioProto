@@ -204,6 +204,7 @@
     <Content Include="Content\bootstrap-chosen.scss" />
     <Content Include="Content\bootstrap-chosen.less" />
     <Content Include="Format\Usuarios.xlsx" />
+    <Content Include="Format\Inv_pc.xlsx" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
@@ -361,6 +362,7 @@
     <Content Include="Views\DETMAN\Edit.cshtml" />
     <Content Include="Views\DETMAN\Index.cshtml" />
     <Content Include="Views\USUARIOS\_ImportExcel.cshtml" />
+    <Content Include="Views\INV_PC\_ImportExcel.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

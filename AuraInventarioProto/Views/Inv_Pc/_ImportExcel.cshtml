@@ -1,14 +1,14 @@
-﻿@using (Ajax.BeginForm("UploadExcel", "USUARIOS", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId= "result" }, new { enctype = "multipart/form-data" })) {
+﻿@using (Ajax.BeginForm("UploadExcel", "INV_PC", new AjaxOptions() { HttpMethod = "POST", UpdateTargetId= "result" }, new { enctype = "multipart/form-data" })) {
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Ingreso Masivo de Usuarios</h4>
+                    <h4 class="modal-title">Ingreso Masivo de Inventarios Pc</h4>
                 </div>
                 <div class="modal-body">
                     <p>Descargar Formato:</p>
-                    <a class="btn btn-primary" href="/USUARIOS/DownloadExcel/">Descargar</a>
+                    <a class="btn btn-primary" href="/INV_PC/DownloadExcel/">Descargar</a>
                     <hr />
                     <p>Cargar Excel:</p>
                     <input type="file" id="FileUpload" name="FileUpload" class="btn btn-primary" style="max-width:500px;border-radius:30px;"  />

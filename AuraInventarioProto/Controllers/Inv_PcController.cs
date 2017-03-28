@@ -13,6 +13,8 @@ using AuraInventarioProto.App_Start;
 using System.Globalization;
 
 using AutoMapper;
+using System.Text;
+using LinqToExcel;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
@@ -21,7 +23,7 @@ namespace AuraInventarioProto.Controllers {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
         // GET: INV_PC
-        
+
         public ActionResult Index() {
             return View(db.INV_PC.ToList());
         }
@@ -40,7 +42,7 @@ namespace AuraInventarioProto.Controllers {
             if (iNV_PC == null) {
                 return HttpNotFound();
             }
-            
+
 
             return View(iNV_PC);
         }
@@ -96,7 +98,7 @@ namespace AuraInventarioProto.Controllers {
 
                 db.INV_PC.Add(iNV_PC);
                 db.SaveChanges();
-              
+
                 MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
                 mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
                 mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
@@ -112,7 +114,7 @@ namespace AuraInventarioProto.Controllers {
                 var dETMAN = mapper.Map<INV_PC, DETMAN>(iNV_PC);
 
                 db.DETMAN.Add(dETMAN);
-                db.SaveChanges();                
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -223,5 +225,145 @@ namespace AuraInventarioProto.Controllers {
 
             return Json(serial == null);
         }
+
+        public FileResult DownloadExcel() {
+            string path = "/Format/Inv_pc.xlsx";
+            return File(path, "application/vnd.ms-excel", "Inv_pc.xlsx");
+        }
+
+
+
+
+        #region excel import
+        [HttpPost]
+        public JavaScriptResult UploadExcel(HttpPostedFileBase FileUpload) {
+            StringBuilder data = new StringBuilder();
+            StringBuilder errors = new StringBuilder();
+            if (FileUpload != null) {
+                if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+
+                    string pathToExcelFile = (Server.MapPath("~/Doc/")) + (FileUpload.FileName);
+                    FileUpload.SaveAs(pathToExcelFile);
+
+                    var excel = new ExcelQueryFactory(pathToExcelFile);
+                    var sheet = excel.GetWorksheetNames();
+                    var columns = excel.GetColumnNames(sheet.First());
+                    //int x = 0;
+
+                    //var tochange = from c in excel.Worksheet(sheet.First()) select c;
+                    //string stob;
+
+                    //
+                    //foreach (var item in tochange) {
+                    //    if (item[x].Value.ToString() == "ok" || item[x].Value.ToString() == "Ok") {
+                    //        test.Concat( new { })
+                    //    }
+                    //}
+                    //IQueryable<Inv_PcValidationViewModel> test;
+                    //    foreach (var item in ) {
+                    //        if (item.EST_TW) {
+                    //            item.EST_TW = true;
+                    //        }
+                    //    }
+                    
+
+                    var contents = from c in excel.Worksheet<Inv_PcValidationViewModel>(sheet.First()) select c;
+
+                    int counter = 0, row = 2;
+
+
+                    errors.AppendLine();
+                    try {
+                        foreach (var a in contents) {
+                            if (row > 500) {break; }
+                            row++;
+                            AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
+                            if (db.UNE.FirstOrDefault(p => p.OBRA == a.OBRA) == null) {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Une no Existe.");
+                                counter++;
+                            } else if (a.DEVU != "Si" && a.DEVU != "No") {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Estado devolucion Invalido.");
+                                counter++;
+                            } else if (a.TIPO != "AIO" && a.TIPO != "Notebook") {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Tipo Invalido.");
+                                counter++;
+                            } else if (a.ESTADO != "Operativo" && a.ESTADO != "De Baja" && a.ESTADO != "Malo") {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Estado Invalido.");
+                                counter++;
+                            } else if (db.INV_PC.FirstOrDefault(p => p.SERIAL == a.SERIAL) != null) {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Serial Duplicada.");
+                                counter++;
+                            } else if (a.FECHA_ADQ.Year <= 2005 || a.F_UL_MAN.Year <= 2005) {
+                                errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Fecha Invalida.");
+                                counter++;
+                            } else {
+
+                                try {
+                                    
+
+                                    Inv_PcValidationViewModel u = a;
+                                    //u.FECHA_ADQ = DateTime.ParseExact(a.FECHA_ADQ.ToShortDateString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+                                    //u.F_UL_MAN = DateTime.ParseExact(a.F_UL_MAN.ToShortDateString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+                                    ModelState.Clear();
+                                    
+                                    
+
+                                    var config = new MapperConfiguration(cfg => {
+                                        cfg.CreateMap<Inv_PcValidationViewModel, INV_PC>();
+                                    });
+                                    IMapper mapper = config.CreateMapper();
+                                    var inv = mapper.Map<Inv_PcValidationViewModel, INV_PC>(u);
+                                    if (inv.FECHA_ADQ.Year <= 2005 || inv.F_UL_MAN.Year <= 2005) {
+                                        errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Fecha Invalida.");
+                                        counter++;
+                                    } else {
+                                        ValidateModel(inv);
+                                        db.INV_PC.Add(inv);
+                                        db.SaveChanges();
+                                    }                                        
+                                } catch (Exception) {
+                                    db.Dispose();
+                                    //var error = ModelState.Values.Select(v => v.Errors.Select(b => b.ErrorMessage).ToString());
+                                    //string er = error.First().ToString();
+                                    var query = from state in ModelState.Values
+                                                from error in state.Errors
+                                                select error.ErrorMessage;
+                                    var er = query.ToArray();
+                                    errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: " + er.FirstOrDefault() + ".");
+                                    counter++;
+                                }
+                            }
+                        }
+                    } catch (Exception) {
+                        db.Dispose();
+                        if ((System.IO.File.Exists(pathToExcelFile))) {
+                            System.IO.File.Delete(pathToExcelFile);
+                        }
+                        return JavaScript("Error de formato, No se pudieron cargar registros.");
+                    }
+                    
+                    //deleting excel file from folder  
+                    if ((System.IO.File.Exists(pathToExcelFile))) {
+                        System.IO.File.Delete(pathToExcelFile);
+                    }
+
+                    if (counter <= 0) {
+                        data.AppendLine("¡Completado sin errores!");
+                    } else {
+                        data.AppendLine(counter + " Filas con errores, por favor verificar datos." + Environment.NewLine + errors);
+                    }
+                    return JavaScript(data.ToString());
+
+                } else {
+                    return JavaScript("Solo archivos con formato Excel son permitidos.");
+                }
+            } else {
+                return JavaScript("Por favor seleccione un archivo.");
+            }
+        }
+        #endregion
+
     }
 }

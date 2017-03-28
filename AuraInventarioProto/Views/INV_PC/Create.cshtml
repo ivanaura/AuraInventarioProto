@@ -6,25 +6,9 @@
 }
 
 <h2>Crear Nuevo</h2>
-<form>
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Ingreso Masivo de Inventario Pc</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Todo.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+@if (Session["UserRole"].ToString() != "ReadOnly") {
+    @Html.Partial("_ImportExcel");
+}
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -64,7 +48,7 @@
                        new List<Object>{
                            new { value = "AIO" , text = "All in One"  },
                            new { value = "Notebook" , text = "Notebook" },
-                       }, "value", "text", 2),new { htmlAttributes = new { @class = "form-control" } })
+                       }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TIPO, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -182,7 +166,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control" , @style= "margin: 0px; width: 308px; height: 109px; "} })
+                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control", @style = "margin: 0px; width: 308px; height: 109px; " } })
                 @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -201,6 +185,31 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        window.addEventListener("submit", function (e) {
+            var form = e.target;
+            if (form.getAttribute("enctype") === "multipart/form-data") {
+                if (form.dataset.ajax) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open(form.method, form.action);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (form.dataset.ajaxUpdate) {
+                                var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
+                                if (updateTarget) {
+                                    updateTarget.innerHTML = xhr.responseText;
+                                }
+                            }
+                        }
+                    };
+                    xhr.send(new FormData(form));
+                }
+            }
+        }, true);
+    </script>
     <script>
         $(document).ready(function () {
 
