@@ -7,11 +7,10 @@
 
 <h2>Editar</h2>
 
-
 @using (Html.BeginForm(new { id = "Edit" })) {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="form-horizontal well bs-component animated fadeInLeftBig">
         <h4>Usuarios</h4>
         <hr />
         @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -73,15 +72,15 @@
 @section Scripts {
 
     @Scripts.Render("~/bundles/jqueryval")
-<script>
-    $(document).ready(function () {
-        $('#UNE').chosen({
-            no_results_text: "No hay resultados para ",
-            max_shown_results: 7,
-            placeholder_text_single: "Seleccione",
-            width: 120
+    <script>
+        $(document).ready(function () {
+            $('#UNE').chosen({
+                no_results_text: "No hay resultados para ",
+                max_shown_results: 7,
+                placeholder_text_single: "Seleccione",
+                width: "31%"
+            });
         });
-    });
-</script>
+    </script>
 
 }

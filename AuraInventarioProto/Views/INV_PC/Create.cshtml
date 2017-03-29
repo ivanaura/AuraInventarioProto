@@ -13,15 +13,15 @@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal well bs-component">
+    <div class="form-horizontal well bs-component animated fadeInLeftBig">
         <h4>Inventario de Pc</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.SERIAL, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SERIAL, new { htmlAttributes = new { @class = "form-control", @style = "text-transform:uppercase" } })
-                @Html.ValidationMessageFor(model => model.SERIAL, "", new { @class = "text-danger" })
+            <div class="col-md-10" >
+                @Html.EditorFor(model => model.SERIAL, new { htmlAttributes = new { @class = "form-control text-danger", @style = "text-transform:uppercase" } })
+                @Html.ValidationMessageFor(model => model.SERIAL, "", new { @class = "text-danger has-error" })
             </div>
         </div>
 
@@ -166,7 +166,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control", @style = "margin: 0px; width: 308px; height: 109px; " } })
+                @Html.TextAreaFor(model => model.OBS ,5, 100, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -187,7 +187,22 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        $('#cer').on('click', function () {
+            $('#submitupload').attr('disabled', false);
+            $('#result').html('');
+            $('#FileUpload').val("");
+        });
+    </script>
+
+    <script type="text/javascript">
+        var getresult = function () {
+            $('#submitupload').attr('disabled', false);
+        };
+    </script>
+
+    <script>
         window.addEventListener("submit", function (e) {
+            $('#submitupload').attr('disabled', true);
             var form = e.target;
             if (form.getAttribute("enctype") === "multipart/form-data") {
                 if (form.dataset.ajax) {
@@ -217,18 +232,18 @@
                 no_results_text: "No hay resultados para ",
                 max_shown_results: 7,
                 placeholder_text_single: "Seleccione",
-                width: 120
+                width: "31%"
 
             });
             $('#ESTADO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
-                width: 120
+                width: "31%"
             });
             $('#TIPO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
-                width: 120
+                width: "31%"
             });
 
 
@@ -237,7 +252,7 @@
                 todayBtn: true,
                 clearBtn: true,
                 language: "es",
-                todayHighlight: true
+                todayHighlight: true                
             });
             $('#date2').datepicker({
                 format: "dd-mm-yyyy",

@@ -12,7 +12,10 @@ namespace AuraInventarioProto.App_Start {
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+                        "~/Scripts/jquery.validate*",
+                        "~/Scripts/SiteScripts/FormValidator.js",
+                        "~/Scripts/SiteScripts/DateValidatorOverride.js"
+                        ));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -34,7 +37,8 @@ namespace AuraInventarioProto.App_Start {
                       "~/Content/bootstrap-paper.css",
                       "~/Content/bootstrap-chosen.css",
                       //"~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/animate.css"));
 
 
 

@@ -136,7 +136,14 @@ namespace AuraInventarioProto.Controllers {
                 Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
             }
             ViewBag.Obra = Obras;
-            return View(iNV_PC);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<INV_PC, Inv_PcValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var inv = mapper.Map<INV_PC, Inv_PcValidationViewModel>(iNV_PC);
+
+            return View(inv);
         }
 
         // POST: INV_PC/Edit/5
@@ -343,12 +350,21 @@ namespace AuraInventarioProto.Controllers {
                         }
                         return JavaScript("Error de formato, No se pudieron cargar registros.");
                     }
+
                     
                     //deleting excel file from folder  
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
+                    try {
+                        if (contents.First() == null) {
+                            
+                        }
+                    } catch (Exception) {
+                        return JavaScript("Archivo Invalido");
+                    }
 
+                    
                     if (counter <= 0) {
                         data.AppendLine("¡Completado sin errores!");
                     } else {

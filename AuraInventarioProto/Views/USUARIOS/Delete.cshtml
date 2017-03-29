@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Eliminar</h2>
+<h2>Inhabilitar</h2>
 
-<h3>¿Esta Seguro de que desear eliminar este registro?</h3>
-<div>
+<h3>¿Esta Seguro de que desear inhabilitar este registro?</h3>
+<div class="well bs-component animated fadeInLeftBig">
     <h4>Usuarios</h4>
     <hr />
-    <dl class="dl-horizontal well bs-component">
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.RUT)
         </dt>
@@ -50,7 +50,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            <input type="submit" value="Inhabilitar" class="btn btn-danger" /> |
             @Html.ActionLink("Volver al Listado", "Index")
         </div>
     }

@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using AuraInventarioProto.Models;
 
 using AuraInventarioProto.App_Start;
+using AutoMapper;
+using AuraInventarioProto.ViewModels.ValidationViewModels;
 
 namespace AuraInventarioProto.Controllers {
     //[Authorize]
@@ -54,9 +56,8 @@ namespace AuraInventarioProto.Controllers {
             ViewBag.Pc = Equipos;
             #endregion
 
-            MOVIMIENTOS_PC mov = new MOVIMIENTOS_PC();
-            //mov.FECHA_MOV = DateTime.Now.ToShortDateString().Replace("/","-");
-            
+            Movimientos_PcValidationViewModel mov = new Movimientos_PcValidationViewModel();
+            mov.FECHA_MOV = DateTime.Today;
             return View(mov);
         }
 
@@ -214,7 +215,13 @@ namespace AuraInventarioProto.Controllers {
             ViewBag.Rut = Usuarios;
             ViewBag.Pc = Equipos;
 
-            return View(mOVIMIENTOS_PC);
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<MOVIMIENTOS_PC, Movimientos_PcValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var mov = mapper.Map<MOVIMIENTOS_PC, Movimientos_PcValidationViewModel>(mOVIMIENTOS_PC);
+
+            return View(mov);
         }
 
         // POST: MOVIMIENTOS_PC/Edit/5

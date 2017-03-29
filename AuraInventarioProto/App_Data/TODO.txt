@@ -4,3 +4,9 @@
 -Arreglar Excel Import
 -Arreglar detalle de mantencion check
 -Limpieza General
+
+
+
+Notas:
+
+Habilitar programas 32bit en ISS Pool

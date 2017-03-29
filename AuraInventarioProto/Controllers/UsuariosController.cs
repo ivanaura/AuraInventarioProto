@@ -79,6 +79,7 @@ namespace AuraInventarioProto.Controllers {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             USUARIOS uSUARIOS = db.USUARIOS.Find(id);
             if (uSUARIOS == null) {
                 return HttpNotFound();
@@ -90,7 +91,13 @@ namespace AuraInventarioProto.Controllers {
             }
             ViewBag.Obra = Obras;
 
-            return View(uSUARIOS);
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<USUARIOS, UsuariosValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var usuarios = mapper.Map<USUARIOS, UsuariosValidationViewModel>(uSUARIOS);
+
+            return View(usuarios);
         }
 
         // POST: USUARIOS/Edit/5

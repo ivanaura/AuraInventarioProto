@@ -7,12 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
-
+using AuraInventarioProto.ViewModels.ValidationViewModels;
 using System.Web.Security;
 using System.Security.Cryptography;
 using System.Text;
 using static AuraInventarioProto.App_Start.HashClass;
 using AuraInventarioProto.App_Start;
+using AutoMapper;
 
 namespace AuraInventarioProto.Controllers {
     [SessionExpire]
@@ -78,7 +79,14 @@ namespace AuraInventarioProto.Controllers {
                 return HttpNotFound();
             }
             lOGIN.PASS = null;
-            return View(lOGIN);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<LOGIN, LoginValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var login = mapper.Map<LOGIN, LoginValidationViewModel>(lOGIN);
+
+            return View(login);
         }
 
         // POST: LOGIN/Edit/5

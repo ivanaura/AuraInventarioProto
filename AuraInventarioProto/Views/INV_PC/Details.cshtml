@@ -6,9 +6,9 @@
 }
 
 <h2>Detalles</h2>
-<div class="well bs-component">
-    <h4>Inventario de Pc</h4>
-    <hr />
+<div class="well bs-component animated fadeInLeftBig" id="det">
+    <h4 id="title">Inventario de Pc</h4>
+    @*<hr />*@
     <dl class="dl-horizontal">
         <dt>
             Serial:
@@ -147,7 +147,7 @@
         </dd>
 
         <dt>
-            Asignado Devolucion:
+            Asignado:
         </dt>
 
         <dd>
@@ -174,9 +174,89 @@
 
     </dl>
 </div>
+<hr />
+<button class="btn btn-primary" id="Report" onclick="generatePDF()">Crear Reporte</button>
+<hr />
 <p>
     @if (Session["UserRole"].ToString() != "ReadOnly") {
         @Html.ActionLink("Editar", "Edit", new { id = Model.ID }) <text>|</text>
     }
     @Html.ActionLink("Volver al Listado", "Index")
 </p>
+
+@section scripts{
+    <script src="~/js/datatables/pdfmake.min.js"></script>
+    <script src="~/js/datatables/vfs_fonts.js"></script>
+<script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+
+    @*<script>
+        var generatePDF = function () {
+            kendo.drawing.drawDOM($("#det")).then(function (group) {
+                kendo.drawing.pdf.saveAs(group, "Detalle de @Model.SERIAL.ToString() .pdf");
+            });
+        }
+    </script>*@
+
+    <script>
+        var generatePDF = function () {
+            $('#det').removeClass('well');
+            $('#title').css('text-align', 'center');
+            $('#cont').css("width", "400px");
+            kendo.drawing.drawDOM($("#det")).then(function (group) {
+
+                return kendo.drawing.exportPDF(group, {
+                    paperSize: "Letter",
+                    margin: { left: "20cm", top: "1cm", right: "1cm", bottom: "1cm" },
+                    title: "Detalle de Inventario de @Model.SERIAL.ToString()",
+                    date: "@DateTime.Today"
+
+                });
+
+            }).done(function (data) {
+                kendo.saveAs({
+                    dataURI: data,
+                    fileName: "Detalle de @Model.SERIAL.ToString() .pdf"
+                });
+                });
+            $('#cont').css("width", "1170px");
+            $('#title').css('text-align', 'inherit');
+            $('#det').addClass('well');
+        }
+    </script>
+    @*<script>
+
+        $('#Report').on('click', function () {
+            htmlToPdfMake('#det');
+        });
+
+        function htmlToPdfMake(elementID) {
+            var fullText = "";
+            //var x = document.getElementById('htmlContent').elements;
+            //var x = $("a").parent(elementID)
+            var x = $(elementID).children();
+            $.each(x, function (index, value) {
+                console.log(value);
+                fullText += $(this).context.innerHTML + ",";
+                console.log($(this).context.innerHTML);
+            });
+
+            var dd = {
+                content: [
+                    fullText
+                ]
+            };
+            pdfMake.createPdf(dd).download('optionalName.pdf');
+            console.log(dd.content);
+
+            //console.log(x);
+
+            //var html = $(elementID).html();
+
+            //$("#result").text(html);
+
+            //var p = $(elementID).html();
+
+            //$("#resultPDF").text(p);
+        }
+    </script>*@
+}

@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using AuraInventarioProto.ViewModels.ValidationViewModels;
+using AutoMapper;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
 
@@ -61,7 +63,14 @@ namespace AuraInventarioProto.Controllers {
             if (uNE == null) {
                 return HttpNotFound();
             }
-            return View(uNE);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UNE, UneValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var une = mapper.Map<UNE, UneValidationViewModel>(uNE);
+
+            return View(une);
         }
 
         // POST: UNE/Edit/5

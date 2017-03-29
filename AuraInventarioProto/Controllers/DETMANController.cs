@@ -49,42 +49,63 @@ namespace AuraInventarioProto.Controllers {
             }
             ViewBag.Obra = Obras;
 
-            DateTime oldmantdate = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.F_UL_MAN);
-            int oldmantid = db.DETMAN.Where(a => a.F_UL_MAN == oldmantdate).Max(a => a.ID);
+            try {
+                DateTime oldmantdate = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.F_UL_MAN);
+                int oldmantid = db.DETMAN.Where(a => a.F_UL_MAN == oldmantdate).Max(a => a.ID);
 
-            DETMAN oldmant = db.DETMAN.Find(oldmantid);
-            
-            ViewBag.serial = oldmant.SERIAL;
-            ViewBag.modelo = oldmant.MODELO;
-            ViewBag.marca = oldmant.MARCA;
-            ViewBag.tipo = oldmant.TIPO;
-            ViewBag.estado = oldmant.ESTADO;
-            ViewBag.obs = oldmant.OBS;
-            ViewBag.fecha_adq = oldmant.FECHA_ADQ.ToString("dd-MM-yyyy");
-            ViewBag.est_tw = oldmant.EST_TW;
-            ViewBag.est_cc = oldmant.EST_CC;
-            ViewBag.est_av = oldmant.EST_AV;
-            ViewBag.est_pd = oldmant.EST_PD;
-            ViewBag.est_of = oldmant.EST_OF;
-            ViewBag.est_wn = oldmant.EST_WN;
-            ViewBag.est_reg = oldmant.EST_REG;
-            ViewBag.sgi_sw = oldmant.SGI_SW;
-            ViewBag.sgi_res = oldmant.SGI_RES;
-            ViewBag.f_ul_man = oldmant.F_UL_MAN.ToString("dd-MM-yyyy");
-            ViewBag.devu = oldmant.DEVU;
-            ViewBag.asign = oldmant.ASIGN;
-            ViewBag.obr = oldmant.OBRA;  
+                DETMAN oldmant = db.DETMAN.Find(oldmantid);
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<DETMAN, DetManValidationViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-            var mant = mapper.Map<DETMAN, DetManValidationViewModel>(oldmant);
-            mant.F_UL_MAN = DateTime.Today;
-            return View(mant);
+                ViewBag.serial = oldmant.SERIAL;
+                ViewBag.modelo = oldmant.MODELO;
+                ViewBag.marca = oldmant.MARCA;
+                ViewBag.tipo = oldmant.TIPO;
+                ViewBag.estado = oldmant.ESTADO;
+                ViewBag.obs = oldmant.OBS;
+                ViewBag.fecha_adq = oldmant.FECHA_ADQ.ToString("dd-MM-yyyy");
+                ViewBag.est_tw = oldmant.EST_TW;
+                ViewBag.est_cc = oldmant.EST_CC;
+                ViewBag.est_av = oldmant.EST_AV;
+                ViewBag.est_pd = oldmant.EST_PD;
+                ViewBag.est_of = oldmant.EST_OF;
+                ViewBag.est_wn = oldmant.EST_WN;
+                ViewBag.est_reg = oldmant.EST_REG;
+                ViewBag.sgi_sw = oldmant.SGI_SW;
+                ViewBag.sgi_res = oldmant.SGI_RES;
+                ViewBag.f_ul_man = oldmant.F_UL_MAN.ToString("dd-MM-yyyy");
+                ViewBag.devu = oldmant.DEVU;
+                ViewBag.asign = oldmant.ASIGN;
+                ViewBag.obr = oldmant.OBRA;
 
-
-
+                var config = new MapperConfiguration(cfg => {
+                    cfg.CreateMap<DETMAN, DetManValidationViewModel>();
+                });
+                IMapper mapper = config.CreateMapper();
+                var mant = mapper.Map<DETMAN, DetManValidationViewModel>(oldmant);
+                mant.F_UL_MAN = DateTime.Today;
+                return View(mant);
+            } catch (Exception) {
+                ViewBag.serial = "null";
+                ViewBag.modelo = "null";
+                ViewBag.marca = "null";
+                ViewBag.tipo = "null";
+                ViewBag.estado = "null";
+                ViewBag.obs = "null";
+                ViewBag.fecha_adq = "null"; ;
+                ViewBag.est_tw = "null";
+                ViewBag.est_cc = "null";
+                ViewBag.est_av = "null";
+                ViewBag.est_pd = "null";
+                ViewBag.est_of = "null";
+                ViewBag.est_wn = "null";
+                ViewBag.est_reg = "null";
+                ViewBag.sgi_sw = "null";
+                ViewBag.sgi_res = "null";
+                ViewBag.f_ul_man = "null";
+                ViewBag.devu = "null";
+                ViewBag.asign = "null";
+                ViewBag.obr = "null";
+                return View();
+            }
         }
 
         // POST: DETMen/Create
@@ -111,7 +132,14 @@ namespace AuraInventarioProto.Controllers {
             if (dETMAN == null) {
                 return HttpNotFound();
             }
-            return View(dETMAN);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<DETMAN, DetManValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var detman = mapper.Map<DETMAN, DetManValidationViewModel>(dETMAN);
+
+            return View(detman);
         }
 
         // POST: DETMen/Edit/5

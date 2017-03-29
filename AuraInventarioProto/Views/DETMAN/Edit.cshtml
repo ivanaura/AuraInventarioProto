@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal well bs-component animated fadeInLeftBig ">
         <h4>DETMAN</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -187,7 +187,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.OBS, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.OBS, 5, 100, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.OBS, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -211,18 +211,17 @@
                 no_results_text: "No hay resultados para ",
                 max_shown_results: 7,
                 placeholder_text_single: "Seleccione",
-                width: 120
-
+                width: "31%"
             });
             $('#ESTADO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
-                width: 120
+                width: "31%"
             });
             $('#TIPO').chosen({
                 disable_search: "true",
                 placeholder_text_single: "Seleccione",
-                width: 120
+                width: "31%"
             });
 
 

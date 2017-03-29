@@ -5,29 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@*@if (!String.IsNullOrEmpty(ViewBag.error)) {
-    @:<script type="text/javascript">alert('@ViewBag.error')</script>
- }*@
-
 <h2>Crear Nuevo</h2>
 @if (Session["UserRole"].ToString() != "ReadOnly") {
     @Html.Partial("_ImportExcel");
 }
 
-
-@using (Html.BeginForm()) 
-{
+@using (Html.BeginForm()){
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal well bs-component">
+    <div class="form-horizontal well bs-component animated fadeInLeftBig">
         <h4>Usuarios</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        <div class="form-group  ">
             @Html.LabelFor(model => model.RUT, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RUT, new { htmlAttributes = new { @class = "form-control", @pattern = "[0-9]{2}.[0-9]{3}.[0-9]{3}-[k-k0-9]{1}", @title= "Rut con dv y puntos.", @style = "text-transform:uppercase", @maxlength = "12" } })
+            <div class="col-md-10 ">
+                @Html.EditorFor(model => model.RUT, new { htmlAttributes = new { @class = "form-control ", @pattern = "[0-9]{2}.[0-9]{3}.[0-9]{3}-[k-k0-9]{1}", @title= "Rut con dv y puntos.", @style = "text-transform:uppercase", @maxlength = "12" } })
                 @Html.ValidationMessageFor(model => model.RUT, "", new { @class = "text-danger" })
                 
             </div>
@@ -78,64 +71,40 @@
 </div>
 
 @section Scripts {
-<script>
-    $(document).ready(function () {
-        $('#UNE').chosen({
-            no_results_text: "No hay resultados para ",
-            max_shown_results: 7,
-            placeholder_text_single: "Seleccione",
-            width: 120
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $('#UNE').chosen({
+                no_results_text: "No hay resultados para ",
+                max_shown_results: 7,
+                placeholder_text_single: "Seleccione",
+                width: "31%"
+            });
         });
-    });
-</script>
+    </script>
 
-@*<script>
-    $('#submitupload').on('click', function () {
-        var files = $("#fileUpload").get(0).files;
-
-        $.ajax({
-            url: '@Url.Action("Create_logic", "MOVIMIENTOS_PC")',
-            data: { selection: selectedValue },
-            cache: false,
-            type: "POST"
-        }).done(function (partialViewResult) {
-            $("#update").html(partialViewResult);
-            chose();
-        });
-    });
-</script>*@
-
-<script>
-    window.addEventListener("submit", function (e) {
-        var form = e.target;
-        if (form.getAttribute("enctype") === "multipart/form-data") {
-            if (form.dataset.ajax) {
-                e.preventDefault();
-                e.stopImmediatePropagation();
-                var xhr = new XMLHttpRequest();
-                xhr.open(form.method, form.action);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        if (form.dataset.ajaxUpdate) {
-                            var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
-                            if (updateTarget) {
-                                updateTarget.innerHTML = xhr.responseText;
+    <script>
+        window.addEventListener("submit", function (e) {
+            var form = e.target;
+            if (form.getAttribute("enctype") === "multipart/form-data") {
+                if (form.dataset.ajax) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open(form.method, form.action);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            if (form.dataset.ajaxUpdate) {
+                                var updateTarget = document.querySelector(form.dataset.ajaxUpdate);
+                                if (updateTarget) {
+                                    updateTarget.innerHTML = xhr.responseText;
+                                }
                             }
                         }
-                    }
-                };
-                xhr.send(new FormData(form));
+                    };
+                    xhr.send(new FormData(form));
+                }
             }
-        }
-    }, true);
-</script>
-
-@*<script type="text/javascript">
-        var getresult = function (data) {
-            alert(data);
-        };
-</script>*@ 
-
-
-    @Scripts.Render("~/bundles/jqueryval")
+        }, true);
+    </script>
 }
