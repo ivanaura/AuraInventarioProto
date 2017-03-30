@@ -99,7 +99,23 @@
                 type: "POST"
             }).done(function (partialViewResult) {
                 $("#update").html(partialViewResult);
-                chose();
+                if (selectedValue == "Devolucion") {
+                    $('#rut_').hide();
+                    $('#ID_PC').chosen({
+                        no_results_text: "No hay resultados para ",
+                        max_shown_results: 7,
+                        placeholder_text_single: "Seleccione",
+                        width: "31%"
+                    });
+
+                    $('#TIPO_MOV').chosen({
+                        disable_search: "true",
+                        placeholder_text_single: "Seleccione",
+                        width: "31%"
+                    });
+                } else {
+                    chose();
+                }                
             });
         });
     </script>
@@ -112,7 +128,7 @@
                 placeholder_text_single: "Seleccione",
                 width: "31%"
             });
-
+           
             $('#ID_PC').chosen({
                 no_results_text: "No hay resultados para ",
                 max_shown_results: 7,

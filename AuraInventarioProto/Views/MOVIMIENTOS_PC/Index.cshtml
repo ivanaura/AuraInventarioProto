@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AuraInventarioProto.Models.MOVIMIENTOS_PC>
+﻿@model AuraInventarioProto.ViewModels.Movimientos_PcIndexViewModel
 
 @{
     ViewBag.Title = "Movimientos";
@@ -12,33 +12,40 @@
         @Html.ActionLink("Crear Nuevo", "Create")
     }    
 </p>
-@if (!Model.Any()) {
+@if (!Model.Movimientos_Pc.Any()) {
+
     <text>No hay Movimientos.</text>
 } else {
     <table class="table table-striped table-bordered table-hover table-responsive display compact" id="Movimientos">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.RUT_USUARIO)
+                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().RUT_USUARIO)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ID_PC)
+                    @Html.DisplayNameFor(model => model.Usuarios.First().NOMBRE_C)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TIPO_MOV)
+                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().ID_PC)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.FECHA_MOV)
+                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().TIPO_MOV)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().FECHA_MOV)
                 </th>
                 <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model) {
+            @foreach (var item in Model.Movimientos_Pc) {
                 <tr>
-
                     <td>
                         @Html.DisplayFor(modelItem => item.RUT_USUARIO)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => Model.Usuarios.Select(a => a.RUT == item.RUT_USUARIO))*@     
+                        
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ID_PC)

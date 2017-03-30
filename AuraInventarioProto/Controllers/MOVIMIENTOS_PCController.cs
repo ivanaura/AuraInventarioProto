@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
-
+using AuraInventarioProto.ViewModels;
 using AuraInventarioProto.App_Start;
 using AutoMapper;
 using AuraInventarioProto.ViewModels.ValidationViewModels;
@@ -20,7 +20,11 @@ namespace AuraInventarioProto.Controllers {
 
         // GET: MOVIMIENTOS_PC
         public ActionResult Index() {
-            return View(db.MOVIMIENTOS_PC.ToList());
+            var ind = new Movimientos_PcIndexViewModel();
+            ind.Usuarios = db.USUARIOS.ToList();
+            ind.Movimientos_Pc = db.MOVIMIENTOS_PC.ToList();
+            
+            return View(ind);
         }
 
         // GET: MOVIMIENTOS_PC/Details/5
@@ -77,7 +81,7 @@ namespace AuraInventarioProto.Controllers {
                     }
                 }
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                    if (equipo.ESTADO == "Operativo" && equipo.ASIGN == "Informatica") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -100,6 +104,7 @@ namespace AuraInventarioProto.Controllers {
 
                 ViewBag.Rut = Usuarios;
                 ViewBag.Pc = Equipos;
+                ViewBag.occ = 1;
                 return PartialView("_Create_Mov");
 
             } else if (selection == "De Baja") {

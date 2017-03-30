@@ -328,6 +328,7 @@
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Movimientos_PcIndexViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModels\DetManValidationViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModels\Inv_PcValidationViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModels\LoginValidationViewModel.cs" />
