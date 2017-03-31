@@ -204,7 +204,7 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Recover(int id) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
-            iNV_PC.ESTADO = "Activo";
+            iNV_PC.ESTADO = "Operativo";
             db.Entry(iNV_PC).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -356,15 +356,11 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    try {
-                        if (contents.First() == null) {
-                            
-                        }
-                    } catch (Exception) {
+                    if (!contents.Any()) {
                         return JavaScript("Archivo Invalido");
                     }
 
-                    
+
                     if (counter <= 0) {
                         data.AppendLine("¡Completado sin errores!");
                     } else {

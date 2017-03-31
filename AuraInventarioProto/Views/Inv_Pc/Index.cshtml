@@ -13,6 +13,7 @@
     }
     
 </p>
+<hr />
 @if (!Model.Any()) {
     <text>No hay Inventario.</text>
 } else {
@@ -47,7 +48,7 @@
                     Ultima mant.
                 </th>
                 <th>
-                    Salida
+                    Devuelto a TI
                 </th>
                 <th>
                     Asignado
@@ -114,7 +115,7 @@
                         }
                     </td>
                 </tr>
-            }
+                            }
         </tbody>
     </table>
     @section scripts{
@@ -129,10 +130,11 @@
 </script>
 
 <script>
-            $(document).ready(function () {
+            $(function () {
                 var table = $('#Inventario_PC').DataTable({
                     "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
                     "processing": true,
+                    "order": [[10, "desc"]],
                     dom: 'Bfrtlip',
                     buttons: [
                         {

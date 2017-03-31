@@ -251,6 +251,9 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
+                    if (!contents.Any()) {
+                        return JavaScript("Archivo Invalido");
+                    }
 
                     if (counter <= 0) {
                         data.AppendLine("¡Completado sin errores!");

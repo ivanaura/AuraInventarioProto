@@ -12,8 +12,11 @@
             <p class="lead">Bienvenido: @Session["UserName"].ToString()</p>
         } else {
             <p><button data-toggle="modal" data-target="#LoginModal" class="btn btn-primary btn-lg startup">Login &raquo;</button></p>
-        }
+            <hr />
+            @Html.ActionLink("Test", "testing", "Home")
+
     }
+}
 
 </div>
 

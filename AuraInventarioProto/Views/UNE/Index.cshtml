@@ -10,14 +10,18 @@
 <p>
     @Html.ActionLink("Crear Nuevo", "Create")
 </p>
+<hr />
 <table class="table table-striped table-bordered table-hover table-responsive display compact" id="Obras">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OBRA)
+                Obra
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DESCRIPCION)
+                Descripcion
+            </th>
+            <th>
+                Estado
             </th>
             <th></th>
         </tr>
@@ -30,6 +34,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTADO)
                 </td>
                 <td style="text-align:center">
                     @if (Session["UserRole"].ToString() != "ReadOnly") {
@@ -56,7 +63,7 @@
         })
     </script>    
     <script>
-        $(document).ready(function () {
+        $(function () {
             var table = $('#Obras').DataTable({
                 "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
                 dom: 'Bfrtip',

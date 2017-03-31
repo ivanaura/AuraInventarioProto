@@ -13,6 +13,7 @@
     }
 
 </p>
+<hr />
 @if (!Model.Any()) {
     <text>No hay Usuarios.</text>
 } else {
@@ -20,19 +21,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.NOMBRE)
+                    Nombre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PASS)
+                    Password
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.SALT)
+                    Salt
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ROL)
+                    Rol
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ESTADO)
+                    Estado
                 </th>
                 <th>Opciones</th>
             </tr>
@@ -85,11 +86,26 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+        $(function () {
             $('#Logins').DataTable({
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json"
-                },
+                "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            orthogonal: 'sort',
+                            columns: [':not(:last-child)'],
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            orthogonal: 'sort',
+                            columns: [0, 1, 2, 3]
+                        }
+                    }
+                ],
             });
         });
     </script>

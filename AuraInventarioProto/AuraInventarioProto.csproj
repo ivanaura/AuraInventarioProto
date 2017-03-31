@@ -148,6 +148,7 @@
     <Content Include="Content\chosen.css" />
     <Content Include="Content\chosen.min.css" />
     <Content Include="Content\Img\logo.gif" />
+    <Content Include="Content\PageLayout.css" />
     <Content Include="Content\site.css" />
     <Content Include="Default.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -196,6 +197,7 @@
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Models\AuraModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AuraModel.Designer.cs</LastGenOutput>
@@ -336,6 +338,13 @@
     <Compile Include="ViewModels\ValidationViewModels\UneValidationViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModels\UsuariosValidationViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -374,6 +383,7 @@
     <Content Include="Views\DETMAN\Index.cshtml" />
     <Content Include="Views\USUARIOS\_ImportExcel.cshtml" />
     <Content Include="Views\INV_PC\_ImportExcel.cshtml" />
+    <Content Include="Views\Home\ViewPage1.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

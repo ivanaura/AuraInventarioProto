@@ -12,6 +12,7 @@
         @Html.ActionLink("Crear Nuevo", "Create")
     }    
 </p>
+<hr />
 @if (!Model.Movimientos_Pc.Any()) {
 
     <text>No hay Movimientos.</text>
@@ -20,19 +21,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().RUT_USUARIO)
+                    Rut Usuario
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Usuarios.First().NOMBRE_C)
+                    Nombre Completo
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().ID_PC)
+                    Serial PC
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().TIPO_MOV)
+                    Tipo Movimiento
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Movimientos_Pc.First().FECHA_MOV)
+                    Fecha Movimiento
                 </th>
                 <th>Opciones</th>
             </tr>
@@ -44,8 +45,7 @@
                         @Html.DisplayFor(modelItem => item.RUT_USUARIO)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => Model.Usuarios.Select(a => a.RUT == item.RUT_USUARIO))*@     
-                        
+                        @Html.DisplayFor(model => model.Usuarios.FirstOrDefault(x => x.RUT == item.RUT_USUARIO).NOMBRE_C)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ID_PC)
@@ -59,7 +59,7 @@
                     <td style="text-align:center">
                         @{
                             if (Session["UserRole"].ToString() != "ReadOnly") {
-                                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
+                                @*@Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>*@
                                 @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" }) @*<text>|</text>*@
                                 @*@Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Eliminar" })*@
                             } else {
@@ -82,9 +82,10 @@
             })
 </script>
         <script>
-            $(document).ready(function () {
+            $(function () {
                 $('#Movimientos').DataTable({
                     "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                    "order": [[4, "desc"]],
                     dom: 'Bfrtip',
                     buttons: [
                         {

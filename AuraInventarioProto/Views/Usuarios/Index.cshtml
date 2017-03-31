@@ -12,6 +12,7 @@
         @Html.ActionLink("Crear Nuevo", "Create")
     }
 </p>
+<hr />
 
 @if (!Model.Any()) {
     <text>No hay Usuarios.</text>
@@ -20,16 +21,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.RUT)
+                    Rut
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.NOMBRE_C)
+                    Nombre Completo
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CORREO)
+                    Correo
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.UNE)
+                    Une
+                </th>
+                <th>
+                    Estado
                 </th>
                 <th>Opciones</th>
             </tr>
@@ -49,16 +53,22 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.UNE)
                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ESTADO)
+                    </td>
                     <td style="text-align:center">
                         @if (Session["UserRole"].ToString() != "ReadOnly") {
-                            @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
-                            @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
-                            if (item.ESTADO == "Activo") {
-                               <text>|</text> @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Inhabilitar" })
-                            }else{
-                                <text>|</text>
+                            if (item.NOMBRE_C != "Informatica" || item.RUT != "00000000-0") {
+                                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
+                                if (item.ESTADO == "Activo") {
+                                    <text>|</text> @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-remove", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Inhabilitar" })
+                                } else {
+                                   <text>|</text> @Html.ActionLink(" ", "Recover", new { id = item.ID }, new { @class = "glyphicon glyphicon-plus-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Rehabilitar" })
+        }
+    } else {
+                                @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
                             }
-
                         } else {
                             @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
                         }
@@ -77,7 +87,7 @@
         })
     </script>
     <script>
-        $(document).ready(function () {
+        $(function () {
             var table = $('#Usuarios').DataTable({
                 "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
                 "processing": true,

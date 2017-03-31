@@ -21,6 +21,7 @@
             @Html.LabelFor(model => model.SERIAL, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" >
                 @Html.EditorFor(model => model.SERIAL, new { htmlAttributes = new { @class = "form-control text-danger", @style = "text-transform:uppercase" } })
+                <span class="help-block">Por favor verifique que la serial Este correcta.</span>
                 @Html.ValidationMessageFor(model => model.SERIAL, "", new { @class = "text-danger has-error" })
             </div>
         </div>

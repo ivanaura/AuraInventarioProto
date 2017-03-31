@@ -40,8 +40,11 @@ namespace AuraInventarioProto.Controllers {
                     }                    
                 }
             }
-
             return View();
+        }
+
+        public ActionResult testing() {
+            return View("ViewPage1");
         }
 
         [HttpPost]

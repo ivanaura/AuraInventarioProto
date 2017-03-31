@@ -5,46 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Mantenciones</h2>
+
+<div>Para crear una nueva mantencion debe hacerlo en la vista de inventarios con el icono: <div class="glyphicon glyphicon-wrench"></div></div>
+<hr />
 
 <table class="table table-striped table-bordered table-hover table-responsive display compact" id="Detalles_PC">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.SERIAL)
+                Serial
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MODELO)
+                Modelo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MARCA)
+                Marca
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TIPO)
+                Tipo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ESTADO)
+                Estado
             </th>           
             <th>
-                @Html.DisplayNameFor(model => model.FECHA_ADQ)
+                Fecha ADQ
             </th>           
             <th>
-                @Html.DisplayNameFor(model => model.SGI_SW)
+                SGI Sw
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SGI_RES)
+                SGI Res
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.F_UL_MAN)
+                Ultima mant.
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DEVU)
+                Salida
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ASIGN)
+                Asignado
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OBRA)
+                Obra
             </th>
             <th style="text-align:center"></th>
         </tr>
@@ -107,9 +110,11 @@
 </script>
 
 <script>
-            $(document).ready(function () {
+            //$(document).ready(function () {
+             $(function () {
                 var table = $('#Detalles_PC').DataTable({
                     "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
+                    "order": [[8, "desc"]],
                     dom: 'Bfrtlip',
                     buttons: [
                         {

@@ -10,3 +10,5 @@
 Notas:
 
 Habilitar programas 32bit en ISS Pool
+
+actualizar estado inv-Pc de baja

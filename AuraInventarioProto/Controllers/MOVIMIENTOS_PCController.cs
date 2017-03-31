@@ -111,7 +111,7 @@ namespace AuraInventarioProto.Controllers {
                 Usuarios.Add(new SelectListItem { Text = "Informatica", Value = "00000000-0" });
 
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.DEVU == "Si") {
+                    if (equipo.DEVU == "Si" && equipo.ESTADO !="De Baja") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -155,7 +155,7 @@ namespace AuraInventarioProto.Controllers {
 
                 if (mOVIMIENTOS_PC.TIPO_MOV == "Devolucion") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
-                    INV_PC iNV_PC =  db.INV_PC.Find(idpc);
+                    INV_PC iNV_PC = db.INV_PC.Find(idpc);
 
                     string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN).RUT;
 
@@ -188,9 +188,22 @@ namespace AuraInventarioProto.Controllers {
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
+                } else if (mOVIMIENTOS_PC.TIPO_MOV == "De Baja") {
+                    int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
+                    INV_PC iNV_PC = db.INV_PC.Find(idpc);
+
+                    iNV_PC.ESTADO = "De Baja";
+                    iNV_PC.F_UL_MAN = DateTime.Today;
+
+                    db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                    db.SaveChanges();
+
+                    db.Entry(iNV_PC).State = EntityState.Modified;
+                    db.SaveChanges();
+
                 }
 
-                db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                    db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
