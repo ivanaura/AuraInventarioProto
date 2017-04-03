@@ -190,6 +190,8 @@
       <DependentUpon>AuraModel.edmx</DependentUpon>
       <LastGenOutput>AuraModel.cs</LastGenOutput>
     </Content>
+    <Content Include="PdfLayout.html" />
+    <Content Include="PDFStyleSheet.css" />
     <Content Include="ProtoDB.sql" />
     <Content Include="Content\animate.css" />
     <Content Include="Scripts\bootstrap-datepicker.es.min.js" />

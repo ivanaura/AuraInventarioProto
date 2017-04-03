@@ -1,0 +1,64 @@
+﻿.pdf-page {
+    margin: 15px auto;
+    box-shadow: 0 0 5px 5px rgba(0,0,0,.3);
+    background-color: #fff;
+    color: #333;
+    position: relative;
+}
+
+
+.pdf-header {
+    margin: 30px 15px 30px 15px;
+    height: 60px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.pdf-body {
+    margin: 40px 50px 50px 50px;
+}
+
+.pdf-signature {
+    margin: 50px 50px 50px 50px;
+}
+
+.pdf-footer {
+    position: absolute;
+    bottom: .5in;
+    height: .6in;
+    left: .5in;
+    right: .5in;
+    padding-top: 10px;
+    border-top: 1px solid #e5e5e5;
+    text-align: left;
+    color: #787878;
+    font-size: 12px;
+}
+
+
+
+
+
+.size-letter {
+    width: 8.5in;
+    height: 11in;
+}
+
+.company-logo {
+    height: 50px;
+}
+
+.doc-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #758088;
+    height: 50px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.invoice-number {
+    padding-top: 20px;
+    height: 50px;
+}
+
+
