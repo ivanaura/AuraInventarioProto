@@ -1,0 +1,112 @@
+﻿@model AuraInventarioProto.Models.INV_PC
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/PDFStyleSheet.css" rel="stylesheet" />
+<div class="box wide hidden-on-narrow">
+    <div class="box-col">
+        <h4>Obtener PDF</h4>
+        <button class="export-pdf k-button" onclick="getPDF('.pdf-page')">Export</button>
+    </div>
+</div>
+<div class="container pdf-page size-letter" id="MainPage">
+    <div class="row pdf-header" id="Header">
+        <div class="col-md-2 company-logo "><img src="/Content/Img/logo.gif" class="company-logo"></div>
+        <div class="col-md-8 doc-title">Registro de Adquisicion de Equipo</div>
+        <div class="col-md-2 invoice-number" >Folio: ID - @Html.DisplayFor(model => model.ID)</div>
+    </div>
+
+    <div class="row pdf-body" id="Body">
+        <div class="col-md-12" >
+        </div>
+        <div class="col-md-6">
+            <h5 style="text-align:center;">Descripción del Equipo</h5>
+            <dl class="dl-horizontal">
+                <dt>Serial:</dt>
+                <dd>@Html.DisplayFor(model => model.SERIAL)</dd>
+                <dt>Marca:</dt>
+                <dd>@Html.DisplayFor(model => model.MARCA)</dd>
+                <dt>Modelo:</dt>
+                <dd>@Html.DisplayFor(model => model.MODELO)</dd>
+                <dt>Tipo:</dt>
+                <dd>@Html.DisplayFor(model => model.TIPO)</dd>
+                <dt>Estado:</dt>
+                <dd>@Html.DisplayFor(model => model.ESTADO)</dd>
+                <dt>Asignado:</dt>
+                <dd>@Html.DisplayFor(model => model.ASIGN)</dd>
+                <dt>Obra:</dt>
+                <dd>@Html.DisplayFor(model => model.OBRA)</dd>
+                <dt>Fecha:</dt>
+                <dd>@Html.DisplayFor(model => model.FECHA_ADQ)</dd>
+
+            </dl>
+            <br />
+            <h5>Observaciones:</h5>
+            <h8>
+                @Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))
+            </h8>
+        </div>
+        <div class="col-md-6" >
+            <h5 style="text-align:center;">Estado del Equipo</h5>
+            <dl class="dl-horizontal">
+                <dt>TeamViewer:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_TW)</dd>
+                <dt>Registros:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_REG)</dd>
+                <dt>Anti Virus:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_AV)</dd>
+                <dt>PDF:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_PD)</dd>
+                <dt>Lic. Windows:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_WN)</dd>
+                <dt>Lic. Office:</dt>
+                <dd>@Html.DisplayFor(model => model.EST_OF)</dd>
+                <dt>SGI-P30 (Sw):</dt>
+                <dd>@Html.DisplayFor(model => model.SGI_SW)</dd>
+                <dt>SGI-P30 (Res):</dt>
+                <dd>@Html.DisplayFor(model => model.SGI_RES)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="row pdf-signature " id="Signature">
+        <p>_______________</p>
+        <p>Recibi Conforme</p>
+        <p>@Html.DisplayFor(model => model.ASIGN)</p>
+    </div>
+
+    <div class="row pdf-footer" id="Footer">
+        <div class="col-md-12" >
+            <p>© @DateTime.Today.ToLongDateString() - Aura Ingenieria.</p>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="http://kendo.cdn.telerik.com/2017.1.118/js/jszip.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
+
+<style>
+        .pdf-page {
+            font-family: "DejaVu Sans", "Arial", sans-serif;
+        }
+</style>
+
+<script>
+    kendo.pdf.defineFont({
+        "DejaVu Sans": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
+        "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+        "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+        "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+    });
+</script>
+
+    <script>
+        function getPDF(selector) {
+            kendo.drawing.drawDOM($(selector)).then(function (group) {
+                kendo.drawing.pdf.saveAs(group, "Mantencion de @Model.SERIAL .pdf");
+            });
+        }
+    </script>
+}

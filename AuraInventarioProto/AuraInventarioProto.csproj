@@ -190,8 +190,8 @@
       <DependentUpon>AuraModel.edmx</DependentUpon>
       <LastGenOutput>AuraModel.cs</LastGenOutput>
     </Content>
-    <Content Include="PdfLayout.html" />
-    <Content Include="PDFStyleSheet.css" />
+    <Content Include="Content\PdfLayout.html" />
+    <Content Include="Content\PDFStyleSheet.css" />
     <Content Include="ProtoDB.sql" />
     <Content Include="Content\animate.css" />
     <Content Include="Scripts\bootstrap-datepicker.es.min.js" />
@@ -385,7 +385,14 @@
     <Content Include="Views\DETMAN\Index.cshtml" />
     <Content Include="Views\USUARIOS\_ImportExcel.cshtml" />
     <Content Include="Views\INV_PC\_ImportExcel.cshtml" />
-    <Content Include="Views\Home\ViewPage1.cshtml" />
+    <Content Include="Views\DETMAN\PDFpage.cshtml" />
+    <Content Include="Views\INV_PC\PDFpage.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\PDFpageAsign.cshtml" />
+    <Content Include="Views\MOVIMIENTOS_PC\PDFpageDevu.cshtml" />
+    <Content Include="Views\INV_PC\Recover.cshtml" />
+    <Content Include="Views\USUARIOS\Recover.cshtml" />
+    <Content Include="Views\UNE\Recover.cshtml" />
+    <Content Include="Views\LOGIN\Recover.cshtml" />
     <None Include="Web.CustomProfile.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

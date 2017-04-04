@@ -47,6 +47,17 @@ namespace AuraInventarioProto.Controllers {
             return View(iNV_PC);
         }
 
+        public ActionResult PDFpage(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            INV_PC dETMAN = db.INV_PC.Find(id);
+            if (dETMAN == null) {
+                return HttpNotFound();
+            }
+            return View(dETMAN);
+        }
+
         // GET: INV_PC/Create
         public ActionResult Create() {
             List<SelectListItem> Obras = new List<SelectListItem>();
@@ -116,7 +127,7 @@ namespace AuraInventarioProto.Controllers {
                 db.DETMAN.Add(dETMAN);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("PDFpage", new { id = iNV_PC.ID });
             }
             //return RedirectToAction("Index");
             return View(iNV_PC);
@@ -200,9 +211,20 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        public ActionResult Recover(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            INV_PC iNV_PC = db.INV_PC.Find(id);
+            if (iNV_PC == null) {
+                return HttpNotFound();
+            }
+            return View(iNV_PC);
+        }
+
         [HttpPost, ActionName("Recover")]
         [ValidateAntiForgeryToken]
-        public ActionResult Recover(int id) {
+        public ActionResult RecoverConfirmed(int id) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
             iNV_PC.ESTADO = "Operativo";
             db.Entry(iNV_PC).State = EntityState.Modified;

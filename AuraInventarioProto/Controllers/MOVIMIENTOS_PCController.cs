@@ -39,6 +39,36 @@ namespace AuraInventarioProto.Controllers {
             return View(mOVIMIENTOS_PC);
         }
 
+        public ActionResult PDFpageAsign(string id, string rut, string fechamov) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == id).ID;
+            INV_PC dETMAN = db.INV_PC.Find(idpc);
+            dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
+            ViewBag.date = fechamov;
+            if (dETMAN == null) {
+                return HttpNotFound();
+            }
+            return View(dETMAN);
+        }
+
+
+        public ActionResult PDFpageDevu(string id, string rut, string fechamov) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == id).ID;
+            INV_PC dETMAN = db.INV_PC.Find(idpc);
+            dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
+            ViewBag.date = fechamov;
+            if (dETMAN == null) {
+                return HttpNotFound();
+            }
+            return View(dETMAN);
+        }
+
+
         // GET: MOVIMIENTOS_PC/Create
         public ActionResult Create(string selection) {
             List<SelectListItem> Usuarios = new List<SelectListItem>();
@@ -174,7 +204,7 @@ namespace AuraInventarioProto.Controllers {
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PDFpageDevu", new { id = idpc });
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "Asignacion") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
@@ -187,7 +217,7 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PDFpageAsign", new { id = idpc });
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "De Baja") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);

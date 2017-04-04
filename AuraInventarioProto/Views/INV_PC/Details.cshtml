@@ -175,7 +175,8 @@
     </dl>
 </div>
 <hr />
-<button class="btn btn-primary" id="Report" onclick="generatePDF()">Crear Reporte</button>
+@*<button class="btn btn-primary" id="Report" onclick="generatePDF()">Crear Reporte</button>*@
+@Html.ActionLink("Reporte", "PDFpage", new { id = Model.ID }, new { @class = "btn btn-primary" }) 
 <hr />
 <p>
     @if (Session["UserRole"].ToString() != "ReadOnly") {

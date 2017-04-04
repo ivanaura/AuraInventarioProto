@@ -111,6 +111,28 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        public ActionResult Recover(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            UNE uNE = db.UNE.Find(id);
+            if (uNE == null) {
+                return HttpNotFound();
+            }
+            return View(uNE);
+        }
+
+        [HttpPost, ActionName("Recover")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RecoverConfirmed(int id) {
+            UNE uNE = db.UNE.Find(id);
+            uNE.ESTADO = "Activo";
+            db.Entry(uNE).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing) {
             if (disposing) {
                 db.Dispose();

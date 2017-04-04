@@ -47,7 +47,10 @@
 </div>
 <p>
     @if (Session["UserRole"].ToString() != "ReadOnly") {
-        @Html.ActionLink("Editar", "Edit", new { id = Model.ID })        <text>|</text>
+        if (Model.RUT != "00000000-0") {
+            @Html.ActionLink("Editar", "Edit", new { id = Model.ID })        <text>|</text>
+        }
+
     }        
     @Html.ActionLink("Volver al Listado", "Index")
 </p>

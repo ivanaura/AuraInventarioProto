@@ -137,6 +137,28 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        public ActionResult Recover(int? id) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            if (lOGIN == null) {
+                return HttpNotFound();
+            }
+            return View(lOGIN);
+        }
+
+        [HttpPost, ActionName("Recover")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RecoverConfirmed(int id) {
+            LOGIN lOGIN = db.LOGIN.Find(id);
+            lOGIN.ESTADO = "Activo";
+            db.Entry(lOGIN).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing) {
             if (disposing) {
                 db.Dispose();

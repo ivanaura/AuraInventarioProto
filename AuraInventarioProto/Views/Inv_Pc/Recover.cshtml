@@ -1,16 +1,17 @@
-﻿@model AuraInventarioProto.Models.DETMAN
+﻿@model AuraInventarioProto.Models.INV_PC
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Eliminar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Recuperar</h2>
 
+<h3>¿Esta Seguro de que desear Recuperar a este registro?</h3>
 <div class="well bs-component animated fadeInLeftBig">
-    <h4>DETMAN</h4>
+    <h4>Inventario de Pc</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal ">
         <dt>
             @Html.DisplayNameFor(model => model.SERIAL)
         </dt>
@@ -168,15 +169,17 @@
         </dt>
 
         <dd>
-            @Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))
+            @Html.DisplayFor(model => model.OBRA)
         </dd>
 
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Recuperar" class="btn btn-success" /> | 
+            @Html.ActionLink("Volver al Listado", "Index")
+        </div>
+    }
 </div>
-<hr />
-@Html.ActionLink("Reporte", "PDFpage", new { id = Model.ID }, new { @class = "btn btn-primary"}) 
-<hr />
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
-    @Html.ActionLink("Back to List", "Index")
-</p>

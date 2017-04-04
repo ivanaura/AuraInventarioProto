@@ -53,6 +53,16 @@
 
     </dl>
 </div>
+<hr />
+@if (Model.TIPO_MOV == "Asignacion") {
+    @Html.ActionLink("Reporte de Asignación", "PDFpageAsign", new { id = Model.ID_PC, rut = Model.RUT_USUARIO, fecha = Model.FECHA_MOV }, new { @class = "btn btn-primary" })
+} else if (Model.TIPO_MOV == "Devolucion") {
+    @Html.ActionLink("Reporte de Devolución", "PDFpageDevu", new { id = Model.ID_PC, rut = Model.RUT_USUARIO, fecha = Model.FECHA_MOV }, new { @class = "btn btn-primary" })
+} else if (Model.TIPO_MOV == "Adquisicion") {
+
+    //Html.ActionLink("Reporte de Adquisición", "PDFpage","INV_PC", new { id = Model.ID_PC }, new { @class = "btn btn-primary" })
+}
+<hr />
 <p>
     @if (Session["UserRole"].ToString() != "ReadOnly") {
         @Html.ActionLink("Editar", "Edit", new { id = Model.ID })        <text>|</text>

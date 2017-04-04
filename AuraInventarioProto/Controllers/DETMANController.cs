@@ -34,15 +34,38 @@ namespace AuraInventarioProto.Controllers {
             return View(dETMAN);
         }
 
-        // GET: DETMen/Create
-        public ActionResult Create(int? id) {
+        public ActionResult PDFpage(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            DETMAN dETMAN = db.DETMAN.Find(id);
+            if (dETMAN == null) {
+                return HttpNotFound();
+            }
+            return View(dETMAN);
+        }
+
+        // GET: DETMen/Create
+        public ActionResult Create(int? id, string serial) {
+            if (id == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             INV_PC dETMAN = db.INV_PC.Find(id);
             if (dETMAN == null) {
                 return HttpNotFound();
             }
+
+            int idd = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
+            INV_PC invdet = db.INV_PC.Find(idd);
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<INV_PC, DetManValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var invman = mapper.Map<INV_PC, DetManValidationViewModel>(invdet);
+
+
             List<SelectListItem> Obras = new List<SelectListItem>();
             foreach (var obra in db.UNE) {
                 Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
@@ -76,11 +99,11 @@ namespace AuraInventarioProto.Controllers {
                 ViewBag.asign = oldmant.ASIGN;
                 ViewBag.obr = oldmant.OBRA;
 
-                var config = new MapperConfiguration(cfg => {
+                var config1 = new MapperConfiguration(cfg => {
                     cfg.CreateMap<DETMAN, DetManValidationViewModel>();
                 });
-                IMapper mapper = config.CreateMapper();
-                var mant = mapper.Map<DETMAN, DetManValidationViewModel>(oldmant);
+                IMapper mapper1 = config1.CreateMapper();
+                var mant = mapper1.Map<DETMAN, DetManValidationViewModel>(oldmant);
                 mant.F_UL_MAN = DateTime.Today;
                 return View(mant);
             } catch (Exception) {
@@ -104,7 +127,8 @@ namespace AuraInventarioProto.Controllers {
                 ViewBag.devu = "null";
                 ViewBag.asign = "null";
                 ViewBag.obr = "null";
-                return View();
+                invman.F_UL_MAN = DateTime.Today;
+                return View(invman);
             }
         }
 
@@ -117,7 +141,14 @@ namespace AuraInventarioProto.Controllers {
             if (ModelState.IsValid) {
                 db.DETMAN.Add(dETMAN);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                INV_PC pc = new INV_PC();
+                pc = db.INV_PC.Find(db.INV_PC.FirstOrDefault(p => p.SERIAL == dETMAN.SERIAL).ID);
+                pc.F_UL_MAN = dETMAN.F_UL_MAN;
+                db.Entry(pc).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("PDFpage", new { id = dETMAN.ID });
             }
 
             return View(dETMAN);
