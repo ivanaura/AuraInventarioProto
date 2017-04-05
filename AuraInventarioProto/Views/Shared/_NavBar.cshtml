@@ -50,7 +50,7 @@
                     }
                 }
 
-                @if (CurrentURL.Contains("Create")) {
+                @if ((CurrentURL.Contains("Create")) && CurrentURL.Contains("INV_PC") || CurrentURL.Contains("USUARIOS") ) {
                     <li><a href="#" data-toggle="modal" data-target="#myModal">Ingresos Masivos</a></li>
                 }
             </ul>

@@ -188,11 +188,11 @@ namespace AuraInventarioProto.Controllers {
             }
             return View(iNV_PC);
         }
-
+        
         // POST: INV_PC/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id) {
+        public ActionResult DeleteConfirmed(int id, string OBSMov) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
             //db.INV_PC.Remove(iNV_PC);
             iNV_PC.ESTADO = "De Baja";
@@ -204,6 +204,7 @@ namespace AuraInventarioProto.Controllers {
             mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
             mOVIMIENTOS_PC.TIPO_MOV = "De Baja";
             mOVIMIENTOS_PC.FECHA_MOV = DateTime.Today;
+            mOVIMIENTOS_PC.OBS = OBSMov;
             db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
             db.SaveChanges();
 
@@ -304,7 +305,7 @@ namespace AuraInventarioProto.Controllers {
                     errors.AppendLine();
                     try {
                         foreach (var a in contents) {
-                            if (row > 500) {break; }
+                            if (row > 200) {break; }
                             row++;
                             AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
                             if (db.UNE.FirstOrDefault(p => p.OBRA == a.OBRA) == null) {
@@ -378,7 +379,7 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    if (!contents.Any()) {
+                    if (!(contents.Any())) {
                         return JavaScript("Archivo Invalido");
                     }
 

@@ -186,17 +186,17 @@
 </p>
 
 @section scripts{
-    <script src="~/js/datatables/pdfmake.min.js"></script>
+    @*<script src="~/js/datatables/pdfmake.min.js"></script>
     <script src="~/js/datatables/vfs_fonts.js"></script>
-<script src="//kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2016.3.914/js/kendo.all.min.js"></script>
 
-    @*<script>
+    <script>
         var generatePDF = function () {
             kendo.drawing.drawDOM($("#det")).then(function (group) {
                 kendo.drawing.pdf.saveAs(group, "Detalle de @Model.SERIAL.ToString() .pdf");
             });
         }
-    </script>*@
+    </script>
 
     <script>
         var generatePDF = function () {
@@ -223,7 +223,7 @@
             $('#title').css('text-align', 'inherit');
             $('#det').addClass('well');
         }
-    </script>
+    </script>*@
     @*<script>
 
         $('#Report').on('click', function () {

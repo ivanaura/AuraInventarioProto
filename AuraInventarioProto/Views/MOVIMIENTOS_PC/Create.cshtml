@@ -32,7 +32,7 @@
 @*@using (Html.BeginForm()) {*@
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+    <input hidden="hidden" value="@Model.FECHA_MOV" name="fechamov" id="fechamov"/>
     <div class="form-horizontal well bs-component animated fadeInLeftBig">
         <h4>Movimientos de Pc</h4>
         <hr />
@@ -103,8 +103,8 @@
                     $('#rut_').hide();
                     $('#ID_PC').chosen({
                         no_results_text: "No hay resultados para ",
-                        max_shown_results: 7,
-                        placeholder_text_single: "Seleccione",
+                        
+                        placeholder_text_single: "Seleccione",                        
                         width: "31%"
                     });
 
@@ -133,7 +133,7 @@
                     $('#rut_').hide();
                     $('#ID_PC').chosen({
                         no_results_text: "No hay resultados para ",
-                        max_shown_results: 7,
+                        
                         placeholder_text_single: "Seleccione",
                         width: "31%"
                     });
@@ -154,14 +154,14 @@
         function chose() {
             $('#RUT_USUARIO').chosen({
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 7,
+                
                 placeholder_text_single: "Seleccione",
                 width: "31%"
             });
            
             $('#ID_PC').chosen({
                 no_results_text: "No hay resultados para ",
-                max_shown_results: 7,
+                
                 placeholder_text_single: "Seleccione",
                 width: "31%"
             });

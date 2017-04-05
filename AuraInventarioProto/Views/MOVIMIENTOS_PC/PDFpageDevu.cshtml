@@ -13,7 +13,7 @@
     <div class="row pdf-header" id="Header">
         <div class="col-md-2 company-logo "><img src="/Content/Img/logo.gif" class="company-logo"></div>
         <div class="col-md-8 doc-title">Registro de Devolucion de Equipo</div>
-        <div class="col-md-2 invoice-number" >Folio: ID - @Html.DisplayFor(model => model.ID) Fecha: @ViewBag.date</div>
+        <div class="col-md-2 invoice-number" >Folio: ID - @Html.DisplayFor(model => model.ID)</div>
     </div>
 
     <div class="row pdf-body" id="Body">
@@ -36,7 +36,8 @@
                 <dd>@Html.DisplayFor(model => model.ASIGN)</dd>
                 <dt>Obra:</dt>
                 <dd>@Html.DisplayFor(model => model.OBRA)</dd>
-
+                <dt>Fecha Devolucion:</dt>
+                <dd>@ViewBag.date</dd>
             </dl>
             <br />
             <h5>Observaciones:</h5>
@@ -75,7 +76,7 @@
 
     <div class="row pdf-footer" id="Footer">
         <div class="col-md-12" >
-            <p>© @DateTime.Today.ToLongDateString() - Aura Ingenieria.</p>
+            <p>©Aura Ingenieria - @DateTime.Today.ToLongDateString()</p>
         </div>
     </div>
 </div>

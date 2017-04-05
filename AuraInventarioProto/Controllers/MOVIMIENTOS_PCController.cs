@@ -39,14 +39,14 @@ namespace AuraInventarioProto.Controllers {
             return View(mOVIMIENTOS_PC);
         }
 
-        public ActionResult PDFpageAsign(string id, string rut, string fechamov) {
-            if (id == null) {
+        public ActionResult PDFpageAsign(string serial, string fechamov, string rut) {
+            if (serial == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == id).ID;
+            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
             INV_PC dETMAN = db.INV_PC.Find(idpc);
             dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
-            ViewBag.date = fechamov;
+            ViewBag.date = fechamov; 
             if (dETMAN == null) {
                 return HttpNotFound();
             }
@@ -54,13 +54,26 @@ namespace AuraInventarioProto.Controllers {
         }
 
 
-        public ActionResult PDFpageDevu(string id, string rut, string fechamov) {
-            if (id == null) {
+        public ActionResult PDFpageDevu(string id, string serial, string fechamov) {
+            if (serial == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == id).ID;
+            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
             INV_PC dETMAN = db.INV_PC.Find(idpc);
-            dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
+            ViewBag.date = fechamov;
+            if (dETMAN == null) {
+                return HttpNotFound();
+            }
+            return View(dETMAN);
+        }
+
+        public ActionResult PDFpageBaja(string id, string serial, string fechamov) {
+            if (serial == null) {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
+            INV_PC dETMAN = db.INV_PC.Find(idpc);
+            //dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
             ViewBag.date = fechamov;
             if (dETMAN == null) {
                 return HttpNotFound();
@@ -127,7 +140,7 @@ namespace AuraInventarioProto.Controllers {
 
 
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.DEVU == "No") {
+                    if (equipo.DEVU == "No" && equipo.ASIGN != "Informatica") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -141,7 +154,7 @@ namespace AuraInventarioProto.Controllers {
                 Usuarios.Add(new SelectListItem { Text = "Informatica", Value = "00000000-0" });
 
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.DEVU == "Si" && equipo.ESTADO !="De Baja") {
+                    if (equipo.ASIGN == "Informatica" && equipo.ESTADO !="De Baja") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -187,12 +200,10 @@ namespace AuraInventarioProto.Controllers {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
 
+
                     string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN).RUT;
 
-
                     mOVIMIENTOS_PC.RUT_USUARIO = user;
-
-
 
                     iNV_PC.DEVU = "Si";
                     iNV_PC.ASIGN = "Informatica";
@@ -204,11 +215,13 @@ namespace AuraInventarioProto.Controllers {
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return RedirectToAction("PDFpageDevu", new { id = idpc });
+                    return RedirectToAction("PDFpageDevu", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString() });
+
+
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "Asignacion") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
-
+                    string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN).RUT;
                     iNV_PC.DEVU = "No";
                     iNV_PC.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == mOVIMIENTOS_PC.RUT_USUARIO).NOMBRE_C;
 
@@ -217,7 +230,9 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("PDFpageAsign", new { id = idpc });
+                    return RedirectToAction("PDFpageAsign", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rut = user });
+
+
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "De Baja") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
@@ -230,6 +245,8 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
+                    return RedirectToAction("PDFpageBaja", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString() });
+
 
                 }
 

@@ -53,14 +53,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.OBS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OBS)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.FECHA_ADQ)
         </dt>
 
@@ -172,14 +164,31 @@
             @Html.DisplayFor(model => model.OBRA)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.OBS)
+        </dt>
+
+        <dd>
+            @Html.Raw(Html.Encode(Html.DisplayFor(model => model.OBS)).Replace("\n", "<br />"))
+        </dd>
+
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Dar de Baja" class="btn btn-danger" /> | 
-            @Html.ActionLink("Volver al Listado", "Index")
+    <hr />
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.OBS, htmlAttributes: new { @class = "control-label col-md-2" })*@
+        <label for="OBSMov" class="control-label col-md-2">Observaciones:</label>
+        <div class="col-md-10">
+            @*@Html.TextAreaFor(model => model.OBS, 5, 100, new { htmlAttributes = new { @class = "form-control" } })*@
+            <textarea  id="OBSMov" name="OBSMov" rows="5" cols="100" maxlength="255"></textarea>
+            <span class="help-block">Observaciones de Baja.</span>            
         </div>
-    }
+    </div>
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Dar de Baja" class="btn btn-danger" /> |
+        @Html.ActionLink("Volver al Listado", "Index")
+    </div>
+}
 </div>

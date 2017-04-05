@@ -105,12 +105,20 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE,ESTADO")] USUARIOS uSUARIOS) {
+        public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE,ESTADO")] USUARIOS uSUARIOS, string oldName) {
             if (ModelState.IsValid) {
                 try {
 
                     db.Entry(uSUARIOS).State = EntityState.Modified;
                     db.SaveChanges();
+                                        
+                    foreach (var pc in db.INV_PC.ToList()) {
+                        if (pc.ASIGN == oldName) {
+                            pc.ASIGN = uSUARIOS.NOMBRE_C;
+                            db.Entry(pc).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
 
                 } catch (Exception) {
                     ModelState.AddModelError("", "Error, Problema de coincidencias ( Usuario ya existe )");
@@ -222,7 +230,7 @@ namespace AuraInventarioProto.Controllers {
 
                     errors.AppendLine();
                     foreach (var a in contents) {
-                        if (row > 500) { break; }
+                        if (row > 200) { break; }
                         row++;
                         AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
                         if (db.UNE.FirstOrDefault(p => p.OBRA == a.UNE) == null) {
@@ -273,7 +281,7 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    if (!contents.Any()) {
+                    if (!(contents.Any())) {
                         return JavaScript("Archivo Invalido");
                     }
 
