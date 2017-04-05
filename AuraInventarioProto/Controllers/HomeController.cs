@@ -70,7 +70,7 @@ namespace AuraInventarioProto.Controllers {
                 }
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewBag.error = "Error general.";
+            ViewBag.error = errors;
             //return RedirectToAction("Index");
             return View("Index");
         }

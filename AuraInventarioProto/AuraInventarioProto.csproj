@@ -200,7 +200,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\SiteScripts\ddmmyyyformat.js" />
-    <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Models\AuraModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AuraModel.Designer.cs</LastGenOutput>
@@ -341,13 +340,6 @@
     <Compile Include="ViewModels\ValidationViewModels\UneValidationViewModel.cs" />
     <Compile Include="ViewModels\ValidationViewModels\UsuariosValidationViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -431,7 +423,7 @@
           <IISUrl>http://localhost:11884/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>http://192.168.1.15:80</CustomServerUrl>
+          <CustomServerUrl>http://192.168.1.240:80</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
