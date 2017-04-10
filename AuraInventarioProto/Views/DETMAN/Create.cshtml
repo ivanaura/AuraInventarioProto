@@ -5,13 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Gestionar Mantencion</h2>
+<h2>Gestionar Mantención</h2>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         <div class="col-lg-6">
             <div class="form-horizontal well bs-component animated fadeInLeftBig ">
-                <h4>Mantencion</h4>
+                <h4>Mantención</h4>
                 <hr />
                 @Html.HiddenFor(model => model.DEVU)
                 @Html.HiddenFor(model => model.ASIGN)
@@ -47,7 +47,7 @@
                         @Html.DropDownListFor(model => model.TIPO, new SelectList(
                        new List<Object>{
                            new { value = "AIO" , text = "All in One"  },
-                           new { value = "Notebook" , text = "Notebook" },
+                           new { value = "NOTEBOOK" , text = "Notebook" },
                        }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.TIPO, "", new { @class = "text-danger" })
                     </div>
@@ -170,68 +170,68 @@
 
 <div class="col-lg-6">
     <div class="well bs-component animated fadeInRightBig">
-        <h4>Detalle De Ultima Mantencion</h4>
+        <h4>Detalle De Última Mantención</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>Serial:</dt>
-            <dd>@ViewBag.serial</dd>
+            <dd>@ViewBag.vserial</dd>
 
             <dt>Modelo:</dt>
-            <dd>@ViewBag.modelo</dd>
+            <dd>@ViewBag.vmodelo</dd>
 
             <dt>Marca:</dt>
-            <dd>@ViewBag.marca</dd>
+            <dd>@ViewBag.vmarca</dd>
 
             <dt>Tipo:</dt>
-            <dd>@ViewBag.tipo</dd>
+            <dd>@ViewBag.vtipo</dd>
 
             <dt>Estado:</dt>
-            <dd>@ViewBag.estado</dd>
+            <dd>@ViewBag.vestado</dd>
 
-            <dt>Fecha Adquisicion:</dt>
-            <dd>@ViewBag.fecha_adq</dd>
+            <dt>Fecha Adquisición:</dt>
+            <dd>@ViewBag.vfecha_adq</dd>
 
             <dt>Estado TeamViewer:</dt>
-            <dd>@ViewBag.est_tw</dd>
+            <dd>@ViewBag.vest_tw</dd>
 
             <dt>Estado Ccleaner:</dt>
-            <dd>@ViewBag.est_cc</dd>
+            <dd>@ViewBag.vest_cc</dd>
 
             <dt>Estado Anti Virus:</dt>
-            <dd>@ViewBag.est_av</dd>
+            <dd>@ViewBag.vest_av</dd>
 
             <dt>Estado PDF:</dt>
-            <dd>@ViewBag.est_pd</dd>
+            <dd>@ViewBag.vest_pd</dd>
 
             <dt>Estado Registros:</dt>
-            <dd>@ViewBag.est_reg</dd>
+            <dd>@ViewBag.vest_reg</dd>
 
             <dt>Licencia Office:<dt>
-            <dd>@ViewBag.est_of</dd>
+            <dd>@ViewBag.vest_of</dd>
 
             <dt>Licencia Windows:</dt>
-            <dd>@ViewBag.est_wn</dd>
+            <dd>@ViewBag.vest_wn</dd>
 
             <dt>SGI P-30 Software:</dt>
-            <dd>@ViewBag.sgi_sw</dd>
+            <dd>@ViewBag.vsgi_sw</dd>
 
             <dt>SGI P-30 Restricciones:</dt>
-            <dd>@ViewBag.sgi_res</dd>
+            <dd>@ViewBag.vsgi_res</dd>
 
-            <dt>Fecha Ultima Mantencion:</dt>
-            <dd>@ViewBag.f_ul_man</dd>
+            <dt>Fecha Última Mantencion:</dt>
+            <dd>@ViewBag.vf_ul_man</dd>
 
             <dt>Devuelto:</dt>
-            <dd>@ViewBag.devu</dd>
+            <dd>@ViewBag.vdevu</dd>
 
-            <dt>Asignado Devolucion:</dt>
-            <dd>@ViewBag.asign</dd>
+            <dt>Asignado Devolución:</dt>
+            <dd>@ViewBag.vasign</dd>
 
             <dt>Obra:</dt>
-            <dd>@ViewBag.obr</dd>
+            <dd>@ViewBag.vobr</dd>
 
             <dt>Observaciones:</dt>
-            <dd>@ViewBag.obs</dd>
+            <dd>@ViewBag.vobs</dd>
         </dl>
     </div>
 </div>

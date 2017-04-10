@@ -94,7 +94,7 @@ namespace AuraInventarioProto.Controllers {
                 }                
             }
             foreach (var equipo in db.INV_PC) {
-                if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                if (equipo.ESTADO == "OPERATIVO" && equipo.DEVU == "NO") {
                     Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                 }                
             }
@@ -124,7 +124,7 @@ namespace AuraInventarioProto.Controllers {
                     }
                 }
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.ESTADO == "Operativo" && equipo.ASIGN == "Informatica") {
+                    if (equipo.ESTADO == "OPERATIVO" && equipo.ASIGN == "Informatica") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -140,7 +140,7 @@ namespace AuraInventarioProto.Controllers {
 
 
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.DEVU == "No" && equipo.ASIGN != "Informatica") {
+                    if (equipo.DEVU == "NO" && equipo.ASIGN != "Informatica") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -154,7 +154,7 @@ namespace AuraInventarioProto.Controllers {
                 Usuarios.Add(new SelectListItem { Text = "Informatica", Value = "00000000-0" });
 
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.ASIGN == "Informatica" && equipo.ESTADO !="De Baja") {
+                    if (equipo.ASIGN == "Informatica" && equipo.ESTADO !="DE BAJA") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }
@@ -174,7 +174,7 @@ namespace AuraInventarioProto.Controllers {
                 }
             }
             foreach (var equipo in db.INV_PC) {
-                if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                if (equipo.ESTADO == "OPERATIVO" && equipo.DEVU == "NO") {
                     Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                 }
             }
@@ -194,7 +194,13 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_MOV,OBS")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
-            if (ModelState.IsValid) {
+            var config1 = new MapperConfiguration(cfg => {
+                cfg.CreateMap<MOVIMIENTOS_PC, Movimientos_PcValidationViewModel>();
+            });
+            IMapper mapper1 = config1.CreateMapper();
+            var movpc = mapper1.Map<MOVIMIENTOS_PC, Movimientos_PcValidationViewModel>(mOVIMIENTOS_PC);
+
+            if (TryValidateModel(movpc)) {               
 
                 if (mOVIMIENTOS_PC.TIPO_MOV == "Devolucion") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
@@ -205,7 +211,7 @@ namespace AuraInventarioProto.Controllers {
 
                     mOVIMIENTOS_PC.RUT_USUARIO = user;
 
-                    iNV_PC.DEVU = "Si";
+                    iNV_PC.DEVU = "SI";
                     iNV_PC.ASIGN = "Informatica";
                     iNV_PC.OBRA = "OF";
 
@@ -222,7 +228,7 @@ namespace AuraInventarioProto.Controllers {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
                     string user = db.USUARIOS.FirstOrDefault(u => u.NOMBRE_C == iNV_PC.ASIGN).RUT;
-                    iNV_PC.DEVU = "No";
+                    iNV_PC.DEVU = "NO";
                     iNV_PC.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == mOVIMIENTOS_PC.RUT_USUARIO).NOMBRE_C;
 
                     db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
@@ -230,14 +236,14 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("PDFpageAsign", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rut = user });
+                    return RedirectToAction("PDFpageAsign", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rut = mOVIMIENTOS_PC.RUT_USUARIO });
 
 
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "De Baja") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
 
-                    iNV_PC.ESTADO = "De Baja";
+                    iNV_PC.ESTADO = "DE BAJA";
                     iNV_PC.F_UL_MAN = DateTime.Today;
 
                     db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
@@ -357,7 +363,7 @@ namespace AuraInventarioProto.Controllers {
             if (selection == "Asignacion") {
                 List<SelectListItem> Equipos = new List<SelectListItem>();                
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.ESTADO == "Operativo" && equipo.DEVU == "No") {
+                    if (equipo.ESTADO == "OPERATIVO" && equipo.DEVU == "NO") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }                    
                 }
@@ -365,7 +371,7 @@ namespace AuraInventarioProto.Controllers {
             } else if (selection == "Devolucion") {
                 List<SelectListItem> Equipos = new List<SelectListItem>();
                 foreach (var equipo in db.INV_PC) {
-                    if (equipo.DEVU == "No") {
+                    if (equipo.DEVU == "NO") {
                         Equipos.Add(new SelectListItem { Text = equipo.SERIAL, Value = equipo.SERIAL });
                     }
                 }

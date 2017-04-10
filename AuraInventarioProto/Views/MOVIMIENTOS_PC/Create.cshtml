@@ -43,8 +43,8 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.TIPO_MOV, new SelectList(
                 new List<Object>{
-                               new { value = "Asignacion" , text = "Asignacion" },
-                               new { value = "Devolucion" , text = "Devolucion" },
+                               new { value = "Asignacion" , text = "Asignación" },
+                               new { value = "Devolucion" , text = "Devolución" },
                                new { value = "De Baja" , text = "De Baja" },
                      }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TIPO_MOV, "", new { @class = "text-danger" })

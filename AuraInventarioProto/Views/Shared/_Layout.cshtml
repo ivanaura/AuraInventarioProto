@@ -31,7 +31,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Aura Ingenieria.</p>
+            <p>@ViewContext.GetType().Assembly.GetName().Version  &copy; @DateTime.Now.Year - Aura Ingenieria.</p>
         </footer>
     </div>
 

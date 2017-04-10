@@ -55,7 +55,13 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
-            if (ModelState.IsValid) {
+            var config1 = new MapperConfiguration(cfg => {
+                cfg.CreateMap<USUARIOS, UsuariosValidationViewModel>();
+            });
+            IMapper mapper1 = config1.CreateMapper();
+            var validatedusuarios = mapper1.Map<USUARIOS, UsuariosValidationViewModel>(uSUARIOS);
+
+            if (TryValidateModel(validatedusuarios)) {
                 if (db.USUARIOS.Any(o => o.RUT == uSUARIOS.RUT)) {
                     ModelState.AddModelError(uSUARIOS.RUT, "Error");
                     return View(uSUARIOS);
@@ -64,7 +70,7 @@ namespace AuraInventarioProto.Controllers {
                 uSUARIOS.NOMBRE_C = uSUARIOS.NOMBRE_C.ToUpper();
                 uSUARIOS.UNE = uSUARIOS.UNE.ToUpper();
                 uSUARIOS.RUT = uSUARIOS.RUT.ToUpper();
-                uSUARIOS.ESTADO = "Activo";
+                uSUARIOS.ESTADO = "Activo";                
 
                 db.USUARIOS.Add(uSUARIOS);
                 db.SaveChanges();
@@ -114,7 +120,7 @@ namespace AuraInventarioProto.Controllers {
                                         
                     foreach (var pc in db.INV_PC.ToList()) {
                         if (pc.ASIGN == oldName) {
-                            pc.ASIGN = uSUARIOS.NOMBRE_C;
+                            pc.ASIGN = uSUARIOS.NOMBRE_C.ToUpper();
                             db.Entry(pc).State = EntityState.Modified;
                             db.SaveChanges();
                         }
@@ -281,9 +287,7 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    if (!(contents.Any())) {
-                        return JavaScript("Archivo Invalido");
-                    }
+
 
                     if (counter <= 0) {
                         data.AppendLine("¡Completado sin errores!");

@@ -74,30 +74,34 @@ namespace AuraInventarioProto.Controllers {
 
             try {
                 DateTime oldmantdate = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.F_UL_MAN);
-                int oldmantid = db.DETMAN.Where(a => a.F_UL_MAN == oldmantdate).Max(a => a.ID);
+                int idpc = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.ID);
+                int oldmantid = db.DETMAN.Where(a => a.F_UL_MAN == oldmantdate && a.ID == idpc).Max(a => a.ID);
+                
+
+
 
                 DETMAN oldmant = db.DETMAN.Find(oldmantid);
 
-                ViewBag.serial = oldmant.SERIAL;
-                ViewBag.modelo = oldmant.MODELO;
-                ViewBag.marca = oldmant.MARCA;
-                ViewBag.tipo = oldmant.TIPO;
-                ViewBag.estado = oldmant.ESTADO;
-                ViewBag.obs = oldmant.OBS;
-                ViewBag.fecha_adq = oldmant.FECHA_ADQ.ToString("dd-MM-yyyy");
-                ViewBag.est_tw = oldmant.EST_TW;
-                ViewBag.est_cc = oldmant.EST_CC;
-                ViewBag.est_av = oldmant.EST_AV;
-                ViewBag.est_pd = oldmant.EST_PD;
-                ViewBag.est_of = oldmant.EST_OF;
-                ViewBag.est_wn = oldmant.EST_WN;
-                ViewBag.est_reg = oldmant.EST_REG;
-                ViewBag.sgi_sw = oldmant.SGI_SW;
-                ViewBag.sgi_res = oldmant.SGI_RES;
-                ViewBag.f_ul_man = oldmant.F_UL_MAN.ToString("dd-MM-yyyy");
-                ViewBag.devu = oldmant.DEVU;
-                ViewBag.asign = oldmant.ASIGN;
-                ViewBag.obr = oldmant.OBRA;
+                ViewBag.vserial = oldmant.SERIAL;
+                ViewBag.vmodelo = oldmant.MODELO;
+                ViewBag.vmarca = oldmant.MARCA;
+                ViewBag.vtipo = oldmant.TIPO;
+                ViewBag.vestado = oldmant.ESTADO;
+                ViewBag.vobs = oldmant.OBS;
+                ViewBag.vfecha_adq = oldmant.FECHA_ADQ.ToString("dd-MM-yyyy");
+                ViewBag.vest_tw = oldmant.EST_TW;
+                ViewBag.vest_cc = oldmant.EST_CC;
+                ViewBag.vest_av = oldmant.EST_AV;
+                ViewBag.vest_pd = oldmant.EST_PD;
+                ViewBag.vest_of = oldmant.EST_OF;
+                ViewBag.vest_wn = oldmant.EST_WN;
+                ViewBag.vest_reg = oldmant.EST_REG;
+                ViewBag.vsgi_sw = oldmant.SGI_SW;
+                ViewBag.vsgi_res = oldmant.SGI_RES;
+                ViewBag.vf_ul_man = oldmant.F_UL_MAN.ToString("dd-MM-yyyy");
+                ViewBag.vdevu = oldmant.DEVU;
+                ViewBag.vasign = oldmant.ASIGN;
+                ViewBag.vobr = oldmant.OBRA;
 
                 var config1 = new MapperConfiguration(cfg => {
                     cfg.CreateMap<DETMAN, DetManValidationViewModel>();
@@ -106,28 +110,30 @@ namespace AuraInventarioProto.Controllers {
                 var mant = mapper1.Map<DETMAN, DetManValidationViewModel>(oldmant);
                 mant.F_UL_MAN = DateTime.Today;
                 return View(mant);
+
             } catch (Exception) {
-                ViewBag.serial = "null";
-                ViewBag.modelo = "null";
-                ViewBag.marca = "null";
-                ViewBag.tipo = "null";
-                ViewBag.estado = "null";
-                ViewBag.obs = "null";
-                ViewBag.fecha_adq = "null"; ;
-                ViewBag.est_tw = "null";
-                ViewBag.est_cc = "null";
-                ViewBag.est_av = "null";
-                ViewBag.est_pd = "null";
-                ViewBag.est_of = "null";
-                ViewBag.est_wn = "null";
-                ViewBag.est_reg = "null";
-                ViewBag.sgi_sw = "null";
-                ViewBag.sgi_res = "null";
-                ViewBag.f_ul_man = "null";
-                ViewBag.devu = "null";
-                ViewBag.asign = "null";
-                ViewBag.obr = "null";
+                ViewBag.vserial = "null";
+                ViewBag.vmodelo = "null";
+                ViewBag.vmarca = "null";
+                ViewBag.vtipo = "null";
+                ViewBag.vestado = "null";
+                ViewBag.vobs = "null";
+                ViewBag.vfecha_adq = "null"; ;
+                ViewBag.vest_tw = "null";
+                ViewBag.vest_cc = "null";
+                ViewBag.vest_av = "null";
+                ViewBag.vest_pd = "null";
+                ViewBag.vest_of = "null";
+                ViewBag.vest_wn = "null";
+                ViewBag.vest_reg = "null";
+                ViewBag.vsgi_sw = "null";
+                ViewBag.vsgi_res = "null";
+                ViewBag.vf_ul_man = "null";
+                ViewBag.vdevu = "null";
+                ViewBag.vasign = "null";
+                ViewBag.vobr = "null";
                 invman.F_UL_MAN = DateTime.Today;
+
                 return View(invman);
             }
         }
@@ -138,20 +144,56 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] DETMAN dETMAN) {
+            var config1 = new MapperConfiguration(cfg => {
+                cfg.CreateMap<DETMAN, DetManValidationViewModel>();
+            });
+            IMapper mapper1 = config1.CreateMapper();
+            var der = mapper1.Map<DETMAN, DetManValidationViewModel>(dETMAN);
+
             if (ModelState.IsValid) {
-                db.DETMAN.Add(dETMAN);
-                db.SaveChanges();
+                try {
+                    db.DETMAN.Add(dETMAN);
+                    db.SaveChanges();
 
-                INV_PC pc = new INV_PC();
-                pc = db.INV_PC.Find(db.INV_PC.FirstOrDefault(p => p.SERIAL == dETMAN.SERIAL).ID);
-                pc.F_UL_MAN = dETMAN.F_UL_MAN;
-                db.Entry(pc).State = EntityState.Modified;
-                db.SaveChanges();
 
-                return RedirectToAction("PDFpage", new { id = dETMAN.ID });
+
+                    //var cfg = new MapperConfiguration(cfge => { cfge.CreateMap<DETMAN, INV_PC>(); });
+                    //IMapper map1 = cfg.CreateMapper();
+                    //var pc = map1.Map<DETMAN, INV_PC>(dETMAN);
+
+                    INV_PC pc = new INV_PC();
+                    pc = db.INV_PC.Find(db.INV_PC.FirstOrDefault(p => p.SERIAL == dETMAN.SERIAL).ID);
+                    pc.MARCA = dETMAN.MARCA;
+                    pc.MODELO = dETMAN.MODELO;
+                    pc.OBRA = dETMAN.OBRA;
+                    pc.TIPO = dETMAN.TIPO;
+                    pc.EST_AV = dETMAN.EST_AV;
+                    pc.EST_CC = dETMAN.EST_CC;
+                    pc.EST_OF = dETMAN.EST_OF;
+                    pc.EST_PD = dETMAN.EST_PD;
+                    pc.EST_REG = dETMAN.EST_REG;
+                    pc.EST_TW = dETMAN.EST_TW;
+                    pc.EST_WN = dETMAN.EST_WN;
+                    pc.SGI_RES = dETMAN.SGI_RES;
+                    pc.SGI_SW = dETMAN.SGI_SW;
+                    pc.OBS = dETMAN.OBS;
+                    pc.F_UL_MAN = dETMAN.F_UL_MAN;
+
+
+
+                    db.Entry(pc).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("PDFpage", new { id = dETMAN.ID });
+                } catch (Exception) {
+                    return RedirectToAction("Create");
+                }
+
+
+                
             }
 
-            return View(dETMAN);
+            return RedirectToAction("Create");
         }
 
         // GET: DETMen/Edit/5
@@ -180,6 +222,10 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] DETMAN dETMAN) {
             if (ModelState.IsValid) {
+
+
+
+
                 db.Entry(dETMAN).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

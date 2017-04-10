@@ -99,37 +99,86 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
+            var config1 = new MapperConfiguration(cfg => {
+                cfg.CreateMap<INV_PC, Inv_PcValidationViewModel>();
+            });
+            IMapper mapper1 = config1.CreateMapper();
+            Inv_PcValidationViewModel validatedinv_pc = mapper1.Map<INV_PC, Inv_PcValidationViewModel>(iNV_PC);
+            List<SelectListItem> Obras = new List<SelectListItem>();
+            Inv_PcValidationViewModel inv = new Inv_PcValidationViewModel();
             if (ModelState.IsValid) {
+                try {
+                    iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
+                    iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
+                    iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
 
-                iNV_PC.SERIAL = iNV_PC.SERIAL.ToUpper();
-                iNV_PC.MODELO = iNV_PC.MODELO.ToUpper();
-                iNV_PC.MARCA = iNV_PC.MARCA.ToUpper();
-                iNV_PC.DEVU = "No";
-                iNV_PC.ASIGN = "Informatica";
+                    iNV_PC.DEVU = "NO";
+                    iNV_PC.ASIGN = "Informatica";
 
-                db.INV_PC.Add(iNV_PC);
-                db.SaveChanges();
 
-                MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
-                mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
-                mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
-                mOVIMIENTOS_PC.TIPO_MOV = "Adquisicion";
-                mOVIMIENTOS_PC.FECHA_MOV = iNV_PC.FECHA_ADQ;
-                db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
-                db.SaveChanges();
 
-                var config = new MapperConfiguration(cfg => {
-                    cfg.CreateMap<INV_PC, DETMAN>();
-                });
-                IMapper mapper = config.CreateMapper();
-                var dETMAN = mapper.Map<INV_PC, DETMAN>(iNV_PC);
+                    db.INV_PC.Add(iNV_PC);
+                    db.SaveChanges();
 
-                db.DETMAN.Add(dETMAN);
-                db.SaveChanges();
+                    MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
+                    mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
+                    mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
+                    mOVIMIENTOS_PC.TIPO_MOV = "Adquisicion";
+                    mOVIMIENTOS_PC.FECHA_MOV = iNV_PC.FECHA_ADQ;
+                    db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
+                    db.SaveChanges();
 
-                return RedirectToAction("PDFpage", new { id = iNV_PC.ID });
+                    var config = new MapperConfiguration(cfg => {
+                        cfg.CreateMap<INV_PC, DETMAN>();
+                    });
+                    IMapper mapper = config.CreateMapper();
+                    var dETMAN = mapper.Map<INV_PC, DETMAN>(iNV_PC);
+
+                    db.DETMAN.Add(dETMAN);
+                    db.SaveChanges();
+
+                    return RedirectToAction("PDFpage", new { id = iNV_PC.ID });
+                } catch (Exception) {
+                    
+                    foreach (var obra in db.UNE) {
+                        Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+                    }
+                    ViewBag.Obra = Obras;
+
+                    
+                    inv.EST_TW = true;
+                    inv.EST_WN = true;
+                    inv.EST_REG = true;
+                    inv.EST_PD = true;
+                    inv.EST_OF = true;
+                    inv.EST_CC = true;
+                    inv.EST_AV = true;
+                    inv.SGI_RES = true;
+                    inv.SGI_SW = true;
+                    inv.FECHA_ADQ = DateTime.Today;
+                    inv.F_UL_MAN = inv.FECHA_ADQ;
+                    //return RedirectToAction("Create");
+                    return View(iNV_PC);
+                }                
             }
-            //return RedirectToAction("Index");
+            
+            foreach (var obra in db.UNE) {
+                Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
+            }
+            ViewBag.Obra = Obras;
+            
+            inv.EST_TW = true;
+            inv.EST_WN = true;
+            inv.EST_REG = true;
+            inv.EST_PD = true;
+            inv.EST_OF = true;
+            inv.EST_CC = true;
+            inv.EST_AV = true;
+            inv.SGI_RES = true;
+            inv.SGI_SW = true;
+            inv.FECHA_ADQ = DateTime.Today;
+            inv.F_UL_MAN = inv.FECHA_ADQ;
+
             return View(iNV_PC);
         }
 
@@ -165,6 +214,7 @@ namespace AuraInventarioProto.Controllers {
         public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
                 try {
+                    
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
                 } catch (Exception) {
@@ -195,14 +245,14 @@ namespace AuraInventarioProto.Controllers {
         public ActionResult DeleteConfirmed(int id, string OBSMov) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
             //db.INV_PC.Remove(iNV_PC);
-            iNV_PC.ESTADO = "De Baja";
+            iNV_PC.ESTADO = "DE BAJA";
             db.Entry(iNV_PC).State = EntityState.Modified;
             db.SaveChanges();
 
             MOVIMIENTOS_PC mOVIMIENTOS_PC = new MOVIMIENTOS_PC();
             mOVIMIENTOS_PC.RUT_USUARIO = "00000000-0";
             mOVIMIENTOS_PC.ID_PC = iNV_PC.SERIAL;
-            mOVIMIENTOS_PC.TIPO_MOV = "De Baja";
+            mOVIMIENTOS_PC.TIPO_MOV = "DE BAJA";
             mOVIMIENTOS_PC.FECHA_MOV = DateTime.Today;
             mOVIMIENTOS_PC.OBS = OBSMov;
             db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
@@ -227,7 +277,7 @@ namespace AuraInventarioProto.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult RecoverConfirmed(int id) {
             INV_PC iNV_PC = db.INV_PC.Find(id);
-            iNV_PC.ESTADO = "Operativo";
+            iNV_PC.ESTADO = "OPERATIVO";
             db.Entry(iNV_PC).State = EntityState.Modified;
             db.SaveChanges();
 
@@ -260,6 +310,7 @@ namespace AuraInventarioProto.Controllers {
             string path = "/Format/Inv_pc.xlsx";
             return File(path, "application/vnd.ms-excel", "Inv_pc.xlsx");
         }
+
 
 
 
@@ -311,13 +362,13 @@ namespace AuraInventarioProto.Controllers {
                             if (db.UNE.FirstOrDefault(p => p.OBRA == a.OBRA) == null) {
                                 errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Une no Existe.");
                                 counter++;
-                            } else if (a.DEVU != "Si" && a.DEVU != "No") {
+                            } else if (a.DEVU != "SI" && a.DEVU != "NO") {
                                 errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Estado devolucion Invalido.");
                                 counter++;
-                            } else if (a.TIPO != "AIO" && a.TIPO != "Notebook") {
+                            } else if (a.TIPO != "AIO" && a.TIPO != "NOTEBOOK") {
                                 errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Tipo Invalido.");
                                 counter++;
-                            } else if (a.ESTADO != "Operativo" && a.ESTADO != "De Baja" && a.ESTADO != "Malo") {
+                            } else if (a.ESTADO != "OPERATIVO" && a.ESTADO != "DE BAJA" && a.ESTADO != "MALO") {
                                 errors.AppendLine("Serial: " + a.SERIAL + " con errores en fila: " + row + " Causa: Estado Invalido.");
                                 counter++;
                             } else if (db.INV_PC.FirstOrDefault(p => p.SERIAL == a.SERIAL) != null) {
@@ -379,9 +430,7 @@ namespace AuraInventarioProto.Controllers {
                     if ((System.IO.File.Exists(pathToExcelFile))) {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    if (!(contents.Any())) {
-                        return JavaScript("Archivo Invalido");
-                    }
+
 
 
                     if (counter <= 0) {

@@ -38,7 +38,7 @@ namespace AuraInventarioProto.ViewModels.ValidationViewModels {
         [MaxLength(255, ErrorMessage = "Error, Campo tiene un limite de 255 caracteres.")]
         public string OBS { get; set; }
 
-        [Display(Name = "Fecha Adquisicion:")]
+        [Display(Name = "Fecha Adquisición:")]
         [Required(ErrorMessage = "Error, Campo es requerido.")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
@@ -80,7 +80,7 @@ namespace AuraInventarioProto.ViewModels.ValidationViewModels {
         [Required(ErrorMessage = "Error, Campo es requerido.")]
         public bool SGI_RES { get; set; }
 
-        [Display(Name = "Fecha Ultima Mantencion:")]
+        [Display(Name = "Fecha Última Mantención:")]
         [Required(ErrorMessage = "Error, Campo es requerido.")]
         [MaxLength(10, ErrorMessage = "Error, Campo tiene un limite de 10 caracteres.")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]

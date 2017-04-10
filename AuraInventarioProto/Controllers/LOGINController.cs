@@ -48,7 +48,15 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS,ROL")] LOGIN lOGIN) {
-            if (ModelState.IsValid) {
+            var config1 = new MapperConfiguration(cfg => {
+                cfg.CreateMap<LOGIN, LoginValidationViewModel>();
+            });
+            IMapper mapper1 = config1.CreateMapper();
+            var login = mapper1.Map<LOGIN, LoginValidationViewModel>(lOGIN);
+
+            if (TryValidateModel(login)) {
+                
+
                 lOGIN.NOMBRE = lOGIN.NOMBRE.ToUpper();
                 string salt = CreateSalt();
                 lOGIN.SALT = salt;
@@ -64,7 +72,7 @@ namespace AuraInventarioProto.Controllers {
                 return RedirectToAction("Index");
             }
 
-            return View(lOGIN);
+            return View(login);
         }
 
 

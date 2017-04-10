@@ -43,14 +43,23 @@ namespace AuraInventarioProto.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,OBRA,DESCRIPCION")] UNE uNE) {
-            if (ModelState.IsValid) {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<UNE, UneValidationViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+            var uNE1 = mapper.Map<UNE, UneValidationViewModel>(uNE);
+
+            if (TryValidateModel(uNE1)) {
                 uNE.OBRA = uNE.OBRA.ToUpper();
                 uNE.ESTADO = "Activo";
+
+                
+
                 db.UNE.Add(uNE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
             return View(uNE);
         }
 

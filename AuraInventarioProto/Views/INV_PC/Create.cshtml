@@ -48,7 +48,7 @@
                 @Html.DropDownListFor(model => model.TIPO, new SelectList(
                        new List<Object>{
                            new { value = "AIO" , text = "All in One"  },
-                           new { value = "Notebook" , text = "Notebook" },
+                           new { value = "NOTEBOOK" , text = "Notebook" },
                        }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.TIPO, "", new { @class = "text-danger" })
             </div>
@@ -59,9 +59,9 @@
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ESTADO, new SelectList(
                        new List<Object>{
-                           new { value = "Operativo" , text = "Operativo"  },
-                           new { value = "De Baja" , text = "De Baja" },
-                           new { value = "Malo" , text = "Malo" },
+                           new { value = "OPERATIVO" , text = "Operativo"  },
+                           new { value = "DE BAJA" , text = "De Baja" },
+                           new { value = "MALO" , text = "Malo" },
                        }, "value", "text", 2), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ESTADO, "", new { @class = "text-danger" })
             </div>

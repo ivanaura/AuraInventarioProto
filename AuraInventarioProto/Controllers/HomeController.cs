@@ -70,7 +70,7 @@ namespace AuraInventarioProto.Controllers {
                 }
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewBag.error = errors;
+            ViewBag.error = "Error, Datos invalidos.";
             //return RedirectToAction("Index");
             return View("Index");
         }

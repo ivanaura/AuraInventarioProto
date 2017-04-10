@@ -12,7 +12,7 @@
 <div class="container pdf-page size-letter" id="MainPage">
     <div class="row pdf-header" id="Header">
         <div class="col-md-2 company-logo "><img src="/Content/Img/logo.gif" class="company-logo"></div>
-        <div class="col-md-8 doc-title">Registro de Adquisicion de Equipo</div>
+        <div class="col-md-8 doc-title">Registro de Equipo</div>
         <div class="col-md-2 invoice-number" >Folio: ID - @Html.DisplayFor(model => model.ID)</div>
     </div>
 
@@ -37,7 +37,7 @@
                 <dt>Obra:</dt>
                 <dd>@Html.DisplayFor(model => model.OBRA)</dd>
                 <dt>Fecha:</dt>
-                <dd>@Html.DisplayFor(model => model.FECHA_ADQ)</dd>
+                <dd>@Html.DisplayFor(model => model.FECHA_ADQ, "{0:dd-MM-yyyy}")</dd>
 
             </dl>
             <br />
@@ -69,11 +69,11 @@
         </div>
     </div>
 
-    <div class="row pdf-signature " id="Signature">
+    @*<div class="row pdf-signature " id="Signature">
         <p>_______________</p>
         <p>Recibi Conforme</p>
         <p>@Html.DisplayFor(model => model.ASIGN)</p>
-    </div>
+    </div>*@
 
     <div class="row pdf-footer" id="Footer">
         <div class="col-md-12" >

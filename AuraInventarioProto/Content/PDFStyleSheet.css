@@ -24,7 +24,8 @@
     padding-bottom: 0px;
     padding-top: 200px;
     border-top-width: 50px;
-    margin-left: 100px;
+    /*margin-left: 100px;*/
+    text-align: center;
 }
 
 .pdf-footer {
