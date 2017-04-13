@@ -16,6 +16,14 @@
     white-space: normal;
 }
 
+.navbar-brand {
+    float: left;
+    padding: 7.5px 10px;
+    font-size: 17px;
+    line-height: 23px;
+    height: 64px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -30,8 +38,10 @@ textarea {
 
 .dataTables_info{
     white-space:normal;
+    color:none;
 }
 
-.dataTables_paginate{
-    white-space:normal;
+.dataTables_paginate {
+    white-space: normal;
+    color: none;
 }

@@ -43,6 +43,13 @@ namespace AuraInventarioProto.Controllers {
             return View();
         }
 
+        //[HttpPost]
+        public ActionResult ThemeChanger(string selection) {
+            var userCookie = new HttpCookie("Theme", selection);
+            HttpContext.Response.Cookies.Add(userCookie);
+            return View("Index");
+        }
+
         public ActionResult testing() {
             return View("ViewPage1");
         }

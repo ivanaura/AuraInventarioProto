@@ -44,7 +44,7 @@ namespace AuraInventarioProto.App_Start {
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-datepicker3.standalone.min.css",
                       "~/Content/chosen.css",
-                      "~/Content/bootstrap-paper.css",
+//                      "~/Content/bootstrap-paper.css",
                       "~/Content/bootstrap-chosen.css",
                       //"~/Content/bootstrap.css",
                       "~/Content/site.css",
