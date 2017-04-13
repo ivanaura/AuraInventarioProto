@@ -13,8 +13,8 @@ namespace AuraInventarioProto
     {
         protected void Application_Start()
         {
-            SqlConnectionClass sql = new SqlConnectionClass();
-            sql.Connect();
+            //SqlConnectionClass sql = new SqlConnectionClass();
+            //sql.Connect();
 
             //GlobalFilters.Filters.Add(new SessionExpireAttribute());
             AreaRegistration.RegisterAllAreas();

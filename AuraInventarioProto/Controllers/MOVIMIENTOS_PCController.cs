@@ -39,13 +39,16 @@ namespace AuraInventarioProto.Controllers {
             return View(mOVIMIENTOS_PC);
         }
 
-        public ActionResult PDFpageAsign(string serial, string fechamov, string rut) {
+        public ActionResult PDFpageAsign(int idmov, string serial, string fechamov, string rut) {
             if (serial == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
             INV_PC dETMAN = db.INV_PC.Find(idpc);
             dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
+
+            dETMAN.OBS = db.MOVIMIENTOS_PC.FirstOrDefault(m => m.ID == idmov).OBS;
+
             ViewBag.date = fechamov; 
             if (dETMAN == null) {
                 return HttpNotFound();
@@ -54,25 +57,33 @@ namespace AuraInventarioProto.Controllers {
         }
 
 
-        public ActionResult PDFpageDevu(string id, string serial, string fechamov) {
+        public ActionResult PDFpageDevu(int idmov, string serial, string fechamov, string rutusu) {
             if (serial == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
-            INV_PC dETMAN = db.INV_PC.Find(idpc);
+            INV_PC pc = db.INV_PC.Find(idpc);
+            string user = db.MOVIMIENTOS_PC.FirstOrDefault(m => m.ID == idmov).RUT_USUARIO;
+
+            pc.ASIGN = db.USUARIOS.FirstOrDefault(u => u.RUT == user).NOMBRE_C;
+            pc.OBS = db.MOVIMIENTOS_PC.FirstOrDefault(m => m.ID == idmov).OBS;
+            //int iddetalle = db.DETMAN.FirstOrDefault(f => f.F_UL_MAN == pc.F_UL_MAN).ID;
+            //DETMAN mantencion = db.DETMAN.Find(iddetalle);
+
             ViewBag.date = fechamov;
-            if (dETMAN == null) {
+            if (pc == null) {
                 return HttpNotFound();
             }
-            return View(dETMAN);
+            return View(pc);
         }
 
-        public ActionResult PDFpageBaja(string id, string serial, string fechamov) {
+        public ActionResult PDFpageBaja(int idmov, string serial, string fechamov) {
             if (serial == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == serial).ID;
             INV_PC dETMAN = db.INV_PC.Find(idpc);
+            dETMAN.OBS = db.MOVIMIENTOS_PC.FirstOrDefault(m => m.ID == idmov).OBS;
             //dETMAN.ASIGN = db.USUARIOS.FirstOrDefault(p => p.RUT == rut).NOMBRE_C;
             ViewBag.date = fechamov;
             if (dETMAN == null) {
@@ -83,6 +94,7 @@ namespace AuraInventarioProto.Controllers {
 
 
         // GET: MOVIMIENTOS_PC/Create
+        [AccessValidator]
         public ActionResult Create(string selection) {
             List<SelectListItem> Usuarios = new List<SelectListItem>();
             List<SelectListItem> Equipos = new List<SelectListItem>();
@@ -192,6 +204,7 @@ namespace AuraInventarioProto.Controllers {
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AccessValidator]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_MOV,OBS")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             var config1 = new MapperConfiguration(cfg => {
@@ -221,7 +234,7 @@ namespace AuraInventarioProto.Controllers {
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    return RedirectToAction("PDFpageDevu", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString() });
+                    return RedirectToAction("PDFpageDevu", new { idmov = mOVIMIENTOS_PC.ID , serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rutusu = mOVIMIENTOS_PC.RUT_USUARIO });
 
 
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "Asignacion") {
@@ -236,14 +249,14 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("PDFpageAsign", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rut = mOVIMIENTOS_PC.RUT_USUARIO });
+                    return RedirectToAction("PDFpageAsign", new { idmov = mOVIMIENTOS_PC.ID, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString(), rut = mOVIMIENTOS_PC.RUT_USUARIO });
 
 
                 } else if (mOVIMIENTOS_PC.TIPO_MOV == "De Baja") {
                     int idpc = db.INV_PC.FirstOrDefault(p => p.SERIAL == mOVIMIENTOS_PC.ID_PC).ID;
                     INV_PC iNV_PC = db.INV_PC.Find(idpc);
 
-                    iNV_PC.ESTADO = "DE BAJA";
+                    iNV_PC.ESTADO = "De Baja";
                     iNV_PC.F_UL_MAN = DateTime.Today;
 
                     db.MOVIMIENTOS_PC.Add(mOVIMIENTOS_PC);
@@ -251,7 +264,7 @@ namespace AuraInventarioProto.Controllers {
 
                     db.Entry(iNV_PC).State = EntityState.Modified;
                     db.SaveChanges();
-                    return RedirectToAction("PDFpageBaja", new { id = idpc, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString() });
+                    return RedirectToAction("PDFpageBaja", new { idmov = mOVIMIENTOS_PC.ID, serial = iNV_PC.SERIAL, fechamov = mOVIMIENTOS_PC.FECHA_MOV.ToShortDateString() });
 
 
                 }
@@ -265,6 +278,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: MOVIMIENTOS_PC/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -300,6 +314,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Edit([Bind(Include = "ID,RUT_USUARIO,ID_PC,TIPO_MOV,FECHA_MOV,OBS")] MOVIMIENTOS_PC mOVIMIENTOS_PC) {
             if (ModelState.IsValid) {
                 try {
@@ -315,6 +330,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: MOVIMIENTOS_PC/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -327,6 +344,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // POST: MOVIMIENTOS_PC/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {

@@ -5,15 +5,19 @@
 <link href="~/Content/PDFStyleSheet.css" rel="stylesheet" />
 <div class="box wide hidden-on-narrow">
     <div class="box-col">
-        <h4>Obtener PDF</h4>
-        <button class="export-pdf k-button" onclick="getPDF('.pdf-page')">Export</button>
+        @Html.ActionLink("Volver al Listado", "Index") &nbsp;|&nbsp;
+        @if (Session["UserRole"].ToString() != "ReadOnly") {
+            @Html.ActionLink("Crear Nuevo", "Create") <text> &nbsp;| &nbsp;</text>
+}
+       
+        <button class="export-pdf k-button btn-info" onclick="getPDF('.pdf-page')">Obtener PDF</button>
     </div>
 </div>
 <div class="container pdf-page size-letter" id="MainPage">
     <div class="row pdf-header" id="Header">
         <div class="col-md-2 company-logo "><img src="/Content/Img/logo.gif" class="company-logo"></div>
         <div class="col-md-8 doc-title">Registro de Equipo</div>
-        <div class="col-md-2 invoice-number" >Folio: ID - @Html.DisplayFor(model => model.ID)</div>
+        <div class="col-md-2 invoice-number" >Equipo: ID - @Html.DisplayFor(model => model.ID)</div>
     </div>
 
     <div class="row pdf-body" id="Body">
@@ -105,7 +109,7 @@
     <script>
         function getPDF(selector) {
             kendo.drawing.drawDOM($(selector)).then(function (group) {
-                kendo.drawing.pdf.saveAs(group, "Mantencion de @Model.SERIAL .pdf");
+                kendo.drawing.pdf.saveAs(group, "Detalle de @Model.SERIAL .pdf");
             });
         }
     </script>

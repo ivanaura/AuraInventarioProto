@@ -106,9 +106,9 @@
                                     @Html.ActionLink(" ", "Create", "DETMAN", new { id = item.ID, serial = item.SERIAL }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantencion" }) <text>|</text>
                                     @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
                                     @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
-                                    if (item.ESTADO == "De Baja") {
+                                    if (item.ESTADO == "DE BAJA" || item.ESTADO == "De Baja" && Session["UserRole"].ToString() == "Admin") {
                                         <text>|</text> @Html.ActionLink(" ", "Recover", new { id = item.ID }, new { @class = "glyphicon glyphicon-plus-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Recuperar" })
-                                    } else if (item.ASIGN == "Informatica") {
+                                    } else if (item.ASIGN == "Informatica" && Session["UserRole"].ToString() == "Admin") {
                                         <text>|</text> @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "glyphicon glyphicon-minus-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Dar de Baja" })
                                     }
                                 } else {
@@ -134,7 +134,7 @@
     })
 </script>
 <script>
-        
+    
             $(function () {
                 var table = $('#Inventario_PC').DataTable({
                     "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },

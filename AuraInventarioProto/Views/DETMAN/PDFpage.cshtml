@@ -5,8 +5,8 @@
 <link href="~/Content/PDFStyleSheet.css" rel="stylesheet" />
 <div class="box wide hidden-on-narrow">
     <div class="box-col">
-        <h4>Obtener PDF</h4>
-        <button class="export-pdf k-button" onclick="getPDF('.pdf-page')">Export</button>
+        @Html.ActionLink("Volver al Listado", "Index") &nbsp;|&nbsp; 
+        <button class="export-pdf k-button btn-info" onclick="getPDF('.pdf-page')">Obtener PDF</button>
     </div>
 </div>
 <div class="container pdf-page size-letter" id="MainPage">
@@ -113,7 +113,7 @@
                         }).done(function (data) {
                             kendo.saveAs({
                                 dataURI: data,
-                    fileName: "Detalle de @Model.SERIAL.ToString() .pdf"
+                    fileName: "Mantencion de @Model.SERIAL.ToString() .pdf"
                             });
                         });
 

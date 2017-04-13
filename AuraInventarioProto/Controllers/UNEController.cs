@@ -9,9 +9,11 @@ using AuraInventarioProto.ViewModels.ValidationViewModels;
 using AutoMapper;
 using System.Web.Mvc;
 using AuraInventarioProto.Models;
-
+using AuraInventarioProto.App_Start;
 
 namespace AuraInventarioProto.Controllers {
+    [SessionExpire]
+    [AdminValidator]
     public class UNEController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -32,6 +34,7 @@ namespace AuraInventarioProto.Controllers {
             return View(uNE);
         }
 
+        [AccessValidator]
         // GET: UNE/Create
         public ActionResult Create() {
             return View();
@@ -42,6 +45,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Create([Bind(Include = "ID,OBRA,DESCRIPCION")] UNE uNE) {
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<UNE, UneValidationViewModel>();
@@ -64,6 +68,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: UNE/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +92,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Edit([Bind(Include = "ID,OBRA,DESCRIPCION,ESTADO")] UNE uNE) {
             if (ModelState.IsValid) {
                 db.Entry(uNE).State = EntityState.Modified;
@@ -97,6 +103,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: UNE/Delete/5
+        [AccessValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +118,7 @@ namespace AuraInventarioProto.Controllers {
         // POST: UNE/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult DeleteConfirmed(int id) {
             UNE uNE = db.UNE.Find(id);
             //db.UNE.Remove(uNE);
@@ -119,7 +127,7 @@ namespace AuraInventarioProto.Controllers {
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [AccessValidator]
         public ActionResult Recover(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,7 +138,7 @@ namespace AuraInventarioProto.Controllers {
             }
             return View(uNE);
         }
-
+        [AccessValidator]
         [HttpPost, ActionName("Recover")]
         [ValidateAntiForgeryToken]
         public ActionResult RecoverConfirmed(int id) {

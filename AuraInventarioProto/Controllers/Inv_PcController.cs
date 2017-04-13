@@ -59,6 +59,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: INV_PC/Create
+        [AccessValidator]
         public ActionResult Create() {
             List<SelectListItem> Obras = new List<SelectListItem>();
             foreach (var obra in db.UNE) {
@@ -98,6 +99,7 @@ namespace AuraInventarioProto.Controllers {
         //}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
             var config1 = new MapperConfiguration(cfg => {
                 cfg.CreateMap<INV_PC, Inv_PcValidationViewModel>();
@@ -183,6 +185,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: INV_PC/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -195,7 +198,7 @@ namespace AuraInventarioProto.Controllers {
             foreach (var obra in db.UNE) {
                 Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
             }
-            ViewBag.Obra = Obras;
+            ViewBag.vObra = Obras;
 
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<INV_PC, Inv_PcValidationViewModel>();
@@ -210,6 +213,7 @@ namespace AuraInventarioProto.Controllers {
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AccessValidator]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] INV_PC iNV_PC) {
             if (ModelState.IsValid) {
@@ -228,6 +232,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: INV_PC/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -238,8 +244,10 @@ namespace AuraInventarioProto.Controllers {
             }
             return View(iNV_PC);
         }
-        
+
         // POST: INV_PC/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id, string OBSMov) {
@@ -262,6 +270,8 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Recover(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -273,6 +283,8 @@ namespace AuraInventarioProto.Controllers {
             return View(iNV_PC);
         }
 
+        [AccessValidator]
+        [AdminValidator]
         [HttpPost, ActionName("Recover")]
         [ValidateAntiForgeryToken]
         public ActionResult RecoverConfirmed(int id) {

@@ -1,4 +1,5 @@
 use master
+select * from AuraInventarioProtoDB.INFORMATION_SCHEMA.COLUMNS
 drop database AuraInventarioProtoDB;
 
 Create database AuraInventarioProtoDB;

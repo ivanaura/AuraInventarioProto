@@ -49,9 +49,12 @@
                         </li>
                     }
                 }
-
-                @if ((CurrentURL.Contains("Create")) && CurrentURL.Contains("INV_PC") || CurrentURL.Contains("USUARIOS") ) {
-                    <li><a href="#" data-toggle="modal" data-target="#myModal">Ingresos Masivos</a></li>
+                @if (!(Session["UserID"] == null)) {
+                    if (Session["UserRole"].ToString() == "Admin") {
+                        if ((CurrentURL.Contains("Create")) && CurrentURL.Contains("INV_PC") || CurrentURL.Contains("USUARIOS")) {
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">Ingresos Masivos</a></li>
+                        }
+                    }
                 }
             </ul>
 

@@ -99,20 +99,38 @@
           <Property Name="UNE" Type="varchar" MaxLength="10" />
           <Property Name="ESTADO" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_DETMAN_INV_PC' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AuraInventarioProtoDB.dbo.View_serial_correo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="View_serial_correo">
+          <Key>
+            <PropertyRef Name="NOMBRE_C" />
+            <PropertyRef Name="SERIAL" />
+            <PropertyRef Name="MARCA" />
+            <PropertyRef Name="RUT" />
+            <PropertyRef Name="CORREO" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NOMBRE_C" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="SERIAL" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="MARCA" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="RUT" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CORREO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_DETMAN_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_DETMAN_INV_PC" />-->
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_INV_PC_UNE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_INV_PC_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_INV_PC_UNE" />-->
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_MOVIMIENTOS_PC_INV_PC' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_INV_PC' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_MOVIMIENTOS_PC_INV_PC" />-->
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_MOVIMIENTOS_PC_USUARIOS' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_MOVIMIENTOS_PC_USUARIOS' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_MOVIMIENTOS_PC_USUARIOS" />-->
-        <!--Errors Found During Generation:
-warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <!--Errores durante la generación:
+advertencia 6035: La relación 'FK_USUARIOS_UNE' tiene columnas que no forman parte de la clave de la tabla en el lado principal de la relación. Se excluyó la relación.
         <Association Name="FK_USUARIOS_UNE" />-->
         <EntityContainer Name="AuraInventarioProtoDBModelStoreContainer">
           <EntitySet Name="DETMAN" EntityType="Self.DETMAN" Schema="dbo" store:Type="Tables" />
@@ -121,6 +139,16 @@ warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part o
           <EntitySet Name="MOVIMIENTOS_PC" EntityType="Self.MOVIMIENTOS_PC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UNE" EntityType="Self.UNE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_serial_correo" EntityType="Self.View_serial_correo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_serial_correo].[NOMBRE_C] AS [NOMBRE_C], 
+    [View_serial_correo].[SERIAL] AS [SERIAL], 
+    [View_serial_correo].[MARCA] AS [MARCA], 
+    [View_serial_correo].[RUT] AS [RUT], 
+    [View_serial_correo].[CORREO] AS [CORREO], 
+    [View_serial_correo].[ID] AS [ID]
+    FROM [dbo].[View_serial_correo] AS [View_serial_correo]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -133,6 +161,7 @@ warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part o
           <EntitySet Name="MOVIMIENTOS_PC" EntityType="AuraInventarioProtoDBModel.MOVIMIENTOS_PC" />
           <EntitySet Name="UNE" EntityType="AuraInventarioProtoDBModel.UNE" />
           <EntitySet Name="USUARIOS" EntityType="AuraInventarioProtoDBModel.USUARIOS" />
+          <EntitySet Name="View_serial_correo" EntityType="AuraInventarioProtoDBModel.View_serial_correo" />
         </EntityContainer>
         <EntityType Name="DETMAN">
           <Key>
@@ -227,6 +256,22 @@ warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part o
           <Property Name="CORREO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="UNE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_serial_correo">
+          <Key>
+            <PropertyRef Name="NOMBRE_C" />
+            <PropertyRef Name="SERIAL" />
+            <PropertyRef Name="MARCA" />
+            <PropertyRef Name="RUT" />
+            <PropertyRef Name="CORREO" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="NOMBRE_C" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="SERIAL" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MARCA" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RUT" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -331,6 +376,18 @@ warning 6035: The relationship 'FK_USUARIOS_UNE' has columns that are not part o
                 <ScalarProperty Name="NOMBRE_C" ColumnName="NOMBRE_C" />
                 <ScalarProperty Name="RUT" ColumnName="RUT" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_serial_correo">
+            <EntityTypeMapping TypeName="AuraInventarioProtoDBModel.View_serial_correo">
+              <MappingFragment StoreEntitySet="View_serial_correo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="SERIAL" ColumnName="SERIAL" />
+                <ScalarProperty Name="NOMBRE_C" ColumnName="NOMBRE_C" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

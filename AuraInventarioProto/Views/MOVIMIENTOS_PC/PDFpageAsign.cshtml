@@ -5,8 +5,11 @@
 <link href="~/Content/PDFStyleSheet.css" rel="stylesheet" />
 <div class="box wide hidden-on-narrow">
     <div class="box-col">
-        <h4>Obtener PDF</h4>
-        <button class="export-pdf k-button" onclick="getPDF('.pdf-page')">Export</button>
+        @Html.ActionLink("Volver al Listado", "Index") &nbsp;|&nbsp;
+        @if (Session["UserRole"].ToString() != "ReadOnly") {
+            @Html.ActionLink("Crear Nuevo", "Create") <text> &nbsp;| &nbsp;</text>
+}
+        <button class="export-pdf k-button btn-info" onclick="getPDF('.pdf-page')">Obtener PDF</button>
     </div>
 </div>
 <div class="container pdf-page size-letter" id="MainPage">
@@ -36,7 +39,7 @@
                 <dd>@Html.DisplayFor(model => model.ASIGN)</dd>
                 <dt>Obra:</dt>
                 <dd>@Html.DisplayFor(model => model.OBRA)</dd>
-                <dt>Fecha Asignacion:</dt>
+                <dt>Fecha Asignación:</dt>
                 <dd>@ViewBag.date</dd>
 
             </dl>
@@ -105,7 +108,7 @@
     <script>
         function getPDF(selector) {
             kendo.drawing.drawDOM($(selector)).then(function (group) {
-                kendo.drawing.pdf.saveAs(group, "Mantencion de @Model.SERIAL .pdf");
+                kendo.drawing.pdf.saveAs(group, "Asignacion de @Model.SERIAL .pdf");
             });
         }
     </script>

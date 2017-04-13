@@ -273,6 +273,8 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AccessValidatorAttribute.cs" />
+    <Compile Include="App_Start\AdminValidatorAttribute.cs" />
     <Compile Include="App_Start\Attributes\EmailAddressAttribute.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -329,6 +331,9 @@
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIOS.cs">
+      <DependentUpon>AuraModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_serial_correo.cs">
       <DependentUpon>AuraModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

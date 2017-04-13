@@ -14,13 +14,13 @@ namespace AuraInventarioProto.Models
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     
-    public partial class LOGIN
+    public partial class View_serial_correo
     {
+        public string NOMBRE_C { get; set; }
+        public string SERIAL { get; set; }
+        public string MARCA { get; set; }
+        public string RUT { get; set; }
+        public string CORREO { get; set; }
         public int ID { get; set; }
-        public string NOMBRE { get; set; }
-        public string PASS { get; set; }
-        public string SALT { get; set; }
-        public string ROL { get; set; }
-        public string ESTADO { get; set; }
     }
 }

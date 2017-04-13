@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.MOVIMIENTOS_PC" Width="1.5" PointX="4.875" PointY="3.5" />
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.UNE" Width="1.5" PointX="6.875" PointY="0.5" />
         <EntityTypeShape EntityType="AuraInventarioProtoDBModel.USUARIOS" Width="1.5" PointX="7.25" PointY="3.375" />
+        <EntityTypeShape EntityType="AuraInventarioProtoDBModel.View_serial_correo" Width="1.5" PointX="9.5" PointY="2.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

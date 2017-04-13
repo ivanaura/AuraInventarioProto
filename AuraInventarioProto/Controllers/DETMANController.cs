@@ -13,7 +13,7 @@ using System.Globalization;
 using AutoMapper;
 
 namespace AuraInventarioProto.Controllers {
-    [SessionExpire]
+    [SessionExpire]    
     public class DETMANController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -46,6 +46,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: DETMen/Create
+        [AccessValidator]
         public ActionResult Create(int? id, string serial) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -70,7 +71,7 @@ namespace AuraInventarioProto.Controllers {
             foreach (var obra in db.UNE) {
                 Obras.Add(new SelectListItem { Text = obra.OBRA + " " + obra.DESCRIPCION, Value = obra.OBRA });
             }
-            ViewBag.Obra = Obras;
+            ViewBag.Obrav = Obras;
 
             try {
                 DateTime oldmantdate = db.DETMAN.Where(a => a.SERIAL == dETMAN.SERIAL).Max(a => a.F_UL_MAN);
@@ -109,6 +110,7 @@ namespace AuraInventarioProto.Controllers {
                 IMapper mapper1 = config1.CreateMapper();
                 var mant = mapper1.Map<DETMAN, DetManValidationViewModel>(oldmant);
                 mant.F_UL_MAN = DateTime.Today;
+                mant.ASIGN = dETMAN.ASIGN;
                 return View(mant);
 
             } catch (Exception) {
@@ -133,7 +135,7 @@ namespace AuraInventarioProto.Controllers {
                 ViewBag.vasign = "null";
                 ViewBag.vobr = "null";
                 invman.F_UL_MAN = DateTime.Today;
-
+                invman.ASIGN = dETMAN.ASIGN;
                 return View(invman);
             }
         }
@@ -143,6 +145,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Create([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] DETMAN dETMAN) {
             var config1 = new MapperConfiguration(cfg => {
                 cfg.CreateMap<DETMAN, DetManValidationViewModel>();
@@ -197,6 +200,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: DETMen/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -220,6 +224,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Edit([Bind(Include = "ID,SERIAL,MODELO,MARCA,TIPO,ESTADO,OBS,FECHA_ADQ,EST_TW,EST_CC,EST_AV,EST_PD,EST_OF,EST_WN,EST_REG,SGI_SW,SGI_RES,F_UL_MAN,DEVU,ASIGN,OBRA")] DETMAN dETMAN) {
             if (ModelState.IsValid) {
 
@@ -234,6 +239,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: DETMen/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -248,6 +255,8 @@ namespace AuraInventarioProto.Controllers {
         // POST: DETMen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult DeleteConfirmed(int id) {
             DETMAN dETMAN = db.DETMAN.Find(id);
             db.DETMAN.Remove(dETMAN);

@@ -55,11 +55,11 @@
 </div>
 <hr />
 @if (Model.TIPO_MOV == "Asignacion") {
-    @Html.ActionLink("Reporte de Asignación", "PDFpageAsign", new { serial = Model.ID_PC, rut = Model.RUT_USUARIO, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reporte de Asignación", "PDFpageAsign", new { idmov = Model.ID, serial = Model.ID_PC, rut = Model.RUT_USUARIO, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
 } else if (Model.TIPO_MOV == "Devolucion") {
-    @Html.ActionLink("Reporte de Devolución", "PDFpageDevu", new { serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reporte de Devolución", "PDFpageDevu", new { idmov = Model.ID, serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString(), rutusu = Model.RUT_USUARIO }, new { @class = "btn btn-primary" })
 } else if (Model.TIPO_MOV == "De Baja") {
-    @Html.ActionLink("Reporte de Devolución", "PDFpageBaja", new { serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reporte de Baja", "PDFpageBaja", new { idmov = Model.ID, serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
     //Html.ActionLink("Reporte de Adquisición", "PDFpage","INV_PC", new { id = Model.ID_PC }, new { @class = "btn btn-primary" })
 }
 <hr />

@@ -90,6 +90,10 @@
                     $('#Movimientos').DataTable({
                         "language": { "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Spanish.json" },
                         "aoColumnDefs": [{ "sType": "date-dmy", "aTargets": [4] }],
+                        bAutoWidth: false,
+                        scrollY: "900px",
+                        scrollX: true,
+                        scrollCollapse: true,
                         "order": [4, 'desc'],
                         dom: 'Bfrtip',
                         buttons: [

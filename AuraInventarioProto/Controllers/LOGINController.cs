@@ -17,6 +17,7 @@ using AutoMapper;
 
 namespace AuraInventarioProto.Controllers {
     [SessionExpire]
+    [AdminValidator]
     public class LOGINController : Controller {
         private AuraInventarioProtoDBEntities db = new AuraInventarioProtoDBEntities();
 
@@ -38,6 +39,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: LOGIN/Create
+        [AccessValidator]
         public ActionResult Create() {
             return View();
         }
@@ -46,6 +48,7 @@ namespace AuraInventarioProto.Controllers {
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AccessValidator]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,NOMBRE,PASS,ROL")] LOGIN lOGIN) {
             var config1 = new MapperConfiguration(cfg => {
@@ -78,6 +81,7 @@ namespace AuraInventarioProto.Controllers {
 
 
         // GET: LOGIN/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -102,6 +106,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Edit([Bind(Include = "ID,NOMBRE,PASS,ROL,ESTADO")] LOGIN lOGIN) {
             if (ModelState.IsValid) {
                 try {
@@ -122,6 +127,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: LOGIN/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -136,6 +143,8 @@ namespace AuraInventarioProto.Controllers {
         // POST: LOGIN/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult DeleteConfirmed(int id) {
             LOGIN lOGIN = db.LOGIN.Find(id);
             //db.LOGIN.Remove(lOGIN);
@@ -145,6 +154,8 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Recover(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -155,9 +166,10 @@ namespace AuraInventarioProto.Controllers {
             }
             return View(lOGIN);
         }
-
+        [AccessValidator]
         [HttpPost, ActionName("Recover")]
         [ValidateAntiForgeryToken]
+        [AdminValidator]
         public ActionResult RecoverConfirmed(int id) {
             LOGIN lOGIN = db.LOGIN.Find(id);
             lOGIN.ESTADO = "Activo";

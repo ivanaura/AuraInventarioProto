@@ -39,6 +39,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: USUARIOS/Create
+        [AccessValidator]
         public ActionResult Create() {
             List<SelectListItem> Obras = new List<SelectListItem>();
             foreach (var obra in db.UNE) {
@@ -54,6 +55,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Create([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE")] USUARIOS uSUARIOS) {
             var config1 = new MapperConfiguration(cfg => {
                 cfg.CreateMap<USUARIOS, UsuariosValidationViewModel>();
@@ -81,6 +83,7 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: USUARIOS/Edit/5
+        [AccessValidator]
         public ActionResult Edit(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +114,7 @@ namespace AuraInventarioProto.Controllers {
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessValidator]
         public ActionResult Edit([Bind(Include = "ID,RUT,NOMBRE_C,CORREO,UNE,ESTADO")] USUARIOS uSUARIOS, string oldName) {
             if (ModelState.IsValid) {
                 try {
@@ -136,6 +140,8 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // GET: USUARIOS/Delete/5
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Delete(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -148,8 +154,10 @@ namespace AuraInventarioProto.Controllers {
         }
 
         // POST: USUARIOS/Delete/5
+        [AccessValidator]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [AdminValidator]
         public ActionResult DeleteConfirmed(int id) {
             USUARIOS uSUARIOS = db.USUARIOS.Find(id);
             //db.USUARIOS.Remove(uSUARIOS);
@@ -159,6 +167,8 @@ namespace AuraInventarioProto.Controllers {
             return RedirectToAction("Index");
         }
 
+        [AccessValidator]
+        [AdminValidator]
         public ActionResult Recover(int? id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -170,8 +180,10 @@ namespace AuraInventarioProto.Controllers {
             return View(uSURAIOS);
         }
 
+        [AccessValidator]
         [HttpPost, ActionName("Recover")]
         [ValidateAntiForgeryToken]
+        [AdminValidator]
         public ActionResult RecoverConfirmed(int id) {
             USUARIOS uSURAIOS = db.USUARIOS.Find(id);
             uSURAIOS.ESTADO = "Activo";
