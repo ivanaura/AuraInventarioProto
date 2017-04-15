@@ -103,7 +103,7 @@
                         <td>
                             @{
                                 if (Session["UserRole"].ToString() != "ReadOnly") {
-                                    @Html.ActionLink(" ", "Create", "DETMAN", new { id = item.ID, serial = item.SERIAL }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantencion" }) <text>|</text>
+                                    @Html.ActionLink(" ", "Create", "DETMAN", new { id = item.ID, serial = item.SERIAL }, new { @class = "glyphicon glyphicon-wrench", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Realizar mantención" }) <text>|</text>
                                     @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "glyphicon glyphicon-edit", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Editar" }) <text>|</text>
                                     @Html.ActionLink(" ", "Details", new { id = item.ID }, new { @class = "glyphicon glyphicon-info-sign", @data_toggle = "tooltip", @data_placement = "left", @data_original_title = "Detalles" })
                                     if (item.ESTADO == "DE BAJA" || item.ESTADO == "De Baja" && Session["UserRole"].ToString() == "Admin") {

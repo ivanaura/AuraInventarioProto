@@ -20,7 +20,7 @@ MARCA varchar(30) not null,
 TIPO varchar(10) not null,
 ESTADO varchar(30) not null,
 OBS varchar(255),
-FECHA_ADQ date not null,
+FECHA_ADQ datetime not null,
 EST_TW  Bit not null,
 EST_CC  Bit not null,
 EST_AV  Bit not null,
@@ -30,7 +30,7 @@ EST_WN  Bit not null,
 EST_REG Bit not null,
 SGI_SW  Bit not null,
 SGI_RES Bit not null,
-F_UL_MAN date not null,
+F_UL_MAN datetime not null,
 DEVU varchar(10),
 ASIGN varchar(30),
 OBRA varchar(10),
@@ -52,7 +52,7 @@ ID int identity(1,1) primary key not null,
 RUT_USUARIO varchar(12) not null,
 ID_PC varchar(30) not null,
 TIPO_MOV varchar(30) not null,
-FECHA_MOV date not null,
+FECHA_MOV datetime not null,
 OBS varchar(255),
 CONSTRAINT [FK_MOVIMIENTOS_PC_USUARIOS] foreign key(RUT_USUARIO) references USUARIOS(RUT),
 CONSTRAINT [FK_MOVIMIENTOS_PC_INV_PC] foreign key(ID_PC) references INV_PC(SERIAL)
@@ -75,7 +75,7 @@ MARCA varchar(30) not null,
 TIPO varchar(10) not null,
 ESTADO varchar(30) not null,
 OBS varchar(255),
-FECHA_ADQ date not null,
+FECHA_ADQ datetime not null,
 EST_TW  Bit not null,
 EST_CC  Bit not null,
 EST_AV  Bit not null,
@@ -85,7 +85,7 @@ EST_WN  Bit not null,
 EST_REG Bit not null,
 SGI_SW  Bit not null,
 SGI_RES Bit not null,
-F_UL_MAN date not null,
+F_UL_MAN datetime not null,
 DEVU varchar(10),
 ASIGN varchar(30),
 OBRA varchar(10),
@@ -108,20 +108,20 @@ insert into LOGIN values('RRHH','60c920b7bb63dcc53a2d690cf37bd688ae3e0d48efde2ca
 insert into LOGIN values('SGI','141d945fee0d78aceee3c6cf5d6c072a799572ebdebe9308f911487ecb65589b','LnSqbkSTV6VVcwm9a/2xaLuxUlrWAH710Ugq9zVUR6g=', 'ReadOnly', 'Activo');
 
 
-insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into INV_PC values('XXX67890','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','Si','Informatica','OF');
-insert into INV_PC values('XXX67891','ModeloX','MarcaX','Notebook','Operativo','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','Si','Informatica','OF');
+insert into INV_PC values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-1-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into INV_PC values('XXX67890','ModeloX','MarcaX','NOTEBOOK','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','SI','Informatica','OF');
+insert into INV_PC values('XXX67891','ModeloX','MarcaX','NOTEBOOK','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','true','true','false','true','true','11-1-2017','SI','Informatica','OF');
 
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-1-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-2-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-3-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-4-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-6-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','9-7-2017','No','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-1-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-2-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-3-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-4-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','11-6-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX12345','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','9-7-2017','NO','IVAN GUZMAN CAVIERES','OF');
 
-insert into DETMAN values('XXX67891','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-5-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX67891','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-6-2017','No','IVAN GUZMAN CAVIERES','OF');
-insert into DETMAN values('XXX67890','ModeloX','MarcaX','AIO','Operativo','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-3-2017','No','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX67891','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-5-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX67891','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-6-2017','NO','IVAN GUZMAN CAVIERES','OF');
+insert into DETMAN values('XXX67890','ModeloX','MarcaX','AIO','OPERATIVO','Con cargador.','11-1-2017','true','true','true','true','false','true','true','true','false','10-3-2017','NO','IVAN GUZMAN CAVIERES','OF');
 
 
 drop table INV_PC

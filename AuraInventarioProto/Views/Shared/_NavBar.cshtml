@@ -60,13 +60,13 @@
 
             @if (Session["UserID"] == null) {
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" data-toggle="modal" data-target="#LoginModal">Login</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#LoginModal">Iniciar Sesión</a></li>
                 </ul>
             } else {
                 <ul class="nav navbar-nav navbar-right ">
                     <li><div class="navbar-text">Usuario: @Session["UserName"]</div></li>
                     @*<li>@Ajax.ActionLink("Desloguear","Logout", new AjaxOptions { HttpMethod = "POST" })</li>*@
-                    <li>@Html.ActionLink("Desloguear", "Logout", "Home")</li>
+                    <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Home")</li>
                 </ul>
             }
         </div>

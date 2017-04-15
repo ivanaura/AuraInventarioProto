@@ -9,12 +9,12 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
-.dl-horizontal dt {
+/*.dl-horizontal dt {
     white-space: normal;
-}
+}*/
 
 .navbar-brand {
     float: left;
@@ -28,7 +28,8 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    width:inherit;
+    max-width: 250px;
 }
 
 .startup:hover {
@@ -38,10 +39,63 @@ textarea {
 
 .dataTables_info{
     white-space:normal;
-    color:none;
+    color:inherit !important;
 }
 
 .dataTables_paginate {
     white-space: normal;
-    color: none;
+    color: inherit !important;
 }
+
+.dataTables_length {
+    white-space: normal;
+    color: inherit !important;
+}
+
+.dataTables_filter{
+    color: inherit !important;
+}
+
+input[type="search"] {
+    -webkit-appearance: inherit;
+}
+
+.navbar-nav{
+    margin: 10px 10px 10px 10px;
+}
+
+.navbar-toggle{
+    margin: 15px 15px 15px 15px;
+}
+
+.chosen-container{
+    width: 100% !important;
+    max-width:250px;
+}
+
+.box-col{
+    padding-left: 10%;
+}
+
+
+/*select, select.form-control {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+    -webkit-box-shadow: inset 1px -1px 5px #dddddd;
+    box-shadow: inset 1px -1px 5px #dddddd;
+}*/
+
+
+
+/*.odd{
+    background-color: inherit !important;
+}
+
+.even{
+    background-color: inherit !important;
+}
+
+.sorting_1{
+    background-color: inherit !important;
+}*/

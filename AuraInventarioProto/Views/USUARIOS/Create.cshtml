@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm()){
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal well bs-component animated fadeInLeftBig">
         <h4>Usuarios</h4>
         <hr />
@@ -23,7 +23,6 @@
                 @Html.EditorFor(model => model.RUT, new { htmlAttributes = new { @class = "form-control ", @pattern = "[0-9]{2}.[0-9]{3}.[0-9]{3}-[k-k0-9]{1}", @title= "Rut con dv y puntos.", @style = "text-transform:uppercase", @maxlength = "12" } })
                 <span class="help-block">Por favor verifique que el rut este correcto.</span>
                 @Html.ValidationMessageFor(model => model.RUT, "", new { @class = "text-danger" })
-                
             </div>
         </div>
 

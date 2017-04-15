@@ -3,90 +3,89 @@
     HttpContext.Current.Response.AddHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     HttpContext.Current.Response.AddHeader("Pragma", "no-cache");
     HttpContext.Current.Response.AddHeader("Expires", "0");
+    string name;
 }
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <meta name="viewport" content="width=device-width" />
     <title>Aura Inventario</title>
-    @{
-        //var themeName = ViewBag.ThemeName;
-        string name = "paper";
-        var test = Request.Cookies["Theme"].Value;
-    }
-    @if (Request.Cookies["Theme"].Value == "") {
+
+    @if (Request.Cookies["Theme"] == null) {
         name = "paper";
     } else {
         name = Request.Cookies["Theme"].Value;
     }
-    @*<link href="@Url.Content(String.Format("~/themes/{0}.css", themeName))" type="text/stylesheet" />*@
-        @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">*@
-        @*<link href="https://bootswatch.com/paper/bootstrap.css" rel="stylesheet" />*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">*@
 
-        <link href="https://bootswatch.com/@name/bootstrap.css" rel="stylesheet" />
+    <link href="https://bootswatch.com/@name/bootstrap.css" rel="stylesheet" />
 
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/modernizr")
-        @*@Scripts.Render("~/bundles/inputmask")*@
-        @if (CurrentURL.Contains("Create")) {
-            @Scripts.Render("~/bundles/bootstrap-datepicker");
-        }
-        <meta name="description" content="Aura Inventario" />
-    </head>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @if (CurrentURL.Contains("Create")) {
+        @Scripts.Render("~/bundles/bootstrap-datepicker");
+    }
+    <meta name="description" content="Aura Inventario" />
+</head>
 
-    <body>
-        @if (Session["UserID"] == null) {
-            @Html.Partial("_Login");
-        }
+<body>
+    @if (Session["UserID"] == null) {
+        @Html.Partial("_Login");
+    }
 
-        @Html.Partial("_NavBar")
+    @Html.Partial("_NavBar")
 
-        <div id="cont" class="container-fluid body-content">
-            @RenderBody()
+    <div id="cont" class="container-fluid body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>@typeof(AuraInventarioProto.MvcApplication).Assembly.GetName().Version &nbsp;&copy;&nbsp;@DateTime.Now.Year - Aura Ingeniería.</p>
             <hr />
-            <footer>
-                <p>@ViewContext.GetType().Assembly.GetName().Version  &copy; @DateTime.Now.Year - Aura Ingenieria.</p>
-                <hr />
-                <label for="themec">Tema: </label>
-                <select id="themec" name="themec">
-                    <option value="">Seleccione</option>
-                    <option value="paper">Paper</option>
-                    @*<option value="superhero">Superhero</option>*@
-                    <option value="cerulean">Cerulean</option>
-                    <option value="cosmo">Cosmo</option>
-                    @*<option value="cyborg">Cyborg</option>*@
-                    @*<option value="darkly">Darkly</option>*@
-                    <option value="flatly">Flatly</option>
-                    <option value="journal">Journal</option>
-                    <option value="lumen">Lumen</option>
-                    <option value="readable">Readable</option>
-                    <option value="sandstone">Sandstone</option>
-                    <option value="simplex">Simplex</option>
-                    @*<option value="slate">Slate</option>*@
-                    @*<option value="solar">Solar</option>*@
-                    <option value="spacelab">Spacelab</option>
-                    @*<option value="united">United</option>*@
-                    <option value="yeti">Yeti</option>
-                </select>
-            </footer>
-        </div>
+            <label for="themec">Tema: @name &nbsp;</label>
+            <select id="themec" name="themec">
+                <option value="">Seleccione</option>
+                <option value="paper">Paper</option>
+                <option value="cerulean">Cerulean</option>
+                <option value="cosmo">Cosmo</option>
+                <option value="flatly">Flatly</option>
+                <option value="journal">Journal</option>
+                <option value="lumen">Lumen</option>
+                <option value="readable">Readable</option>
+                <option value="sandstone">Sandstone</option>
+                <option value="simplex">Simplex</option>
+                <option value="spacelab">Spacelab</option>
+                <option value="united">United</option>
+                <option value="yeti">Yeti</option>
+                @*<option value="superhero">Superhero</option>
+                    <option value="cyborg">Cyborg</option>
+                    <option value="darkly">Darkly</option>
+                    <option value="slate">Slate</option>
+                    <option value="solar">Solar</option>*@
+            </select>
+        </footer>
+    </div>
 
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </html>
 
 <script>
-        $('#themec').change(function () {
-            var selectedValue = $('#themec').val();
-            $.ajax({
-                url: '@Url.Action("ThemeChanger", "Home")',
-                data: { selection: selectedValue },
-                cache: false,
-                type: "GET"
-            }).done(function () {
-                location.reload();
-            });
+    $('#themec').change(function () {
+        var selectedValue = $('#themec').val();
+        $.ajax({
+            url: '@Url.Action("ThemeChanger", "Home")',
+            data: { selection: selectedValue },
+            cache: false,
+            type: "GET"
+        }).done(function () {
+            location.reload();
         });
+    });
 </script>

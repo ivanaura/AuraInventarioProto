@@ -20,15 +20,18 @@
 }
 
 .pdf-signature {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    /*margin-top: 50px;
+    margin-bottom: 50px;*/
     border-bottom-width: 100px;
-    padding-bottom: 0px;
-    padding-top: 200px;
+    /*padding-bottom: 0px;
+    padding-top: 200px;*/
     border-top-width: 50px;
     /*margin-left: 100px;*/
     text-align: center;
     color: #000;
+    position:absolute;
+    bottom:15%;
+    right:41%;
 }
 
 .pdf-footer {

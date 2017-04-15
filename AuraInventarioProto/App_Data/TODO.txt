@@ -2,7 +2,7 @@
 
 -Arreglar Inhabilitar
 -Arreglar Excel Import
--Arreglar detalle de mantencion check
+-Arreglar detalle de mantención check
 -Limpieza General
 
 

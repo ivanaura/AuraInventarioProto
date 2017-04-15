@@ -54,9 +54,9 @@
     </dl>
 </div>
 <hr />
-@if (Model.TIPO_MOV == "Asignacion") {
+@if (Model.TIPO_MOV == "Asignación") {
     @Html.ActionLink("Reporte de Asignación", "PDFpageAsign", new { idmov = Model.ID, serial = Model.ID_PC, rut = Model.RUT_USUARIO, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
-} else if (Model.TIPO_MOV == "Devolucion") {
+} else if (Model.TIPO_MOV == "Devolución") {
     @Html.ActionLink("Reporte de Devolución", "PDFpageDevu", new { idmov = Model.ID, serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString(), rutusu = Model.RUT_USUARIO }, new { @class = "btn btn-primary" })
 } else if (Model.TIPO_MOV == "De Baja") {
     @Html.ActionLink("Reporte de Baja", "PDFpageBaja", new { idmov = Model.ID, serial = Model.ID_PC, fechamov = Model.FECHA_MOV.ToShortDateString() }, new { @class = "btn btn-primary" })
